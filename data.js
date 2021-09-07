@@ -177,4 +177,76 @@ data = {
     'Emergency',
     'A&E'
   ]
-}
+};
+
+execData = {
+  'dataIP': [
+    [
+      {
+        '': 'RTT',
+        'Target': '92%',
+        'Updated': '1st Aug',
+        'Latest ': '100',
+        'Previous month': '120',
+        'Previous year': '150',
+        '104 weeks': '200'
+      },
+      {
+        '': 'RTT',
+        'Target': '92%',
+        'Updated': '1st Aug',
+        'Latest ': '100',
+        'Previous month': '120',
+        'Previous year': '150',
+        '104 weeks': '200'
+      },
+      {
+        '': 'RTT',
+        'Target': '92%',
+        'Updated': '1st Aug',
+        'Latest ': '100',
+        'Previous month': '120',
+        'Previous year': '150',
+        '104 weeks': '200'
+      }
+    ],
+    [
+      {
+        '': 'A&E',
+        'Target': '98%',
+        'Updated': '21st Aug',
+        'Latest ': '200',
+        'Previous month': '130',
+        'Previous year': '230',
+        '104 weeks': '234'
+      },
+      {
+        '': 'A&E',
+        'Target': '75%',
+        'Updated': '21st Aug',
+        'Latest ': '2365',
+        'Previous month': '5445',
+        'Previous year': '3466',
+        '104 weeks': '2435'
+      },
+      {
+        '': 'A&E',
+        'Target': '45%',
+        'Updated': '21st Aug',
+        'Latest ': '100',
+        'Previous month': '120',
+        'Previous year': '150',
+        '104 weeks': '200'
+      }
+    ]
+  ],
+  'cols': [
+    '',
+    'Target',
+    'Updated',
+    'Latest ',
+    'Previous month',
+    'Previous year',
+    '104 weeks'
+  ]
+};

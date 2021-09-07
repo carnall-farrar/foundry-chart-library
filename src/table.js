@@ -1,24 +1,27 @@
 const d3 = require('d3');
-import './styles/styles.css';
+import './styles/table.css';
 
 export function tabulate(root, data, columns) { 
-  console.log(root, data, columns);
-  const table = d3.select(root).append('table');
-  const thead = table.append('thead');
-  const tbody = table.append('tbody');
+  const table = d3.select(root).append('table')
+    .attr('class', 'mainTable')
+    .style('border-spacing', '0px');
+  const thead = table.append('thead').attr('class', 'mainTable');
+  const tbody = table.append('tbody').attr('class', 'mainTable');
     
   // append the header row
   thead.append('tr')
     .selectAll('th')
     .data(columns).enter()
     .append('th')
+    .attr('class', 'mainTable')
     .text(function (column) { return column; });
     
   // create a row for each object in the data
   const rows = tbody.selectAll('tr')
     .data(data)
     .enter()
-    .append('tr');
+    .append('tr')
+    .attr('class', 'mainTable');
      
   // create a cell in each row for each column
   rows.selectAll('td')
@@ -30,6 +33,7 @@ export function tabulate(root, data, columns) {
     })
     .enter()
     .append('td')
+    .attr('class', 'main-table-border')
     .html(function (d) { return d.value; });
   
   
