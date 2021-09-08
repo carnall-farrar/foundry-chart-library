@@ -46,7 +46,7 @@ function execTableComponent(root, data, columns, showHeaders, spacing) {
 
 export function createExecTable(root, data, columns) {
   data.forEach((row, index) => {
-    console.log(row, columns);
+    console.log(row, columns, index);
     if (index === 0) {
       return execTableComponent(root, row, columns, true, '0px');
     }

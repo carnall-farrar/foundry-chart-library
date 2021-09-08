@@ -11,12 +11,14 @@
     <div id="mainTable"></div><br>
     <h1>Executive dashboard table structure</h1>
     <p>Showing example data and colours</p>
-    <div id='execTable'></div>
+    <div id='execTable'></div><br>
+    <svg id='timeseries'></svg>
     <script src="./dist/main.js"></script>
     <script src='./data.js'></script>
     <script>
         tabulate("#mainTable", data.dataIP, data.cols)
-        createExecTable("#execTable", execData.dataIP, execData.cols)
+        createExecTable("#execTable", execData.dataIP, execData.columns)
+        timeseriesChart('#timeseries', timeSeries)
     </script>
   </body>
 </html>
