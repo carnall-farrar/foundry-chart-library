@@ -107,6 +107,7 @@ execData = {
     [
       {
         '': 'RTT',
+        'Metric': 'metric 1',
         'Target': '92%',
         'Updated': '1st Aug',
         'Latest ': '100',
@@ -116,6 +117,7 @@ execData = {
       },
       {
         '': 'RTT',
+        'Metric': 'metric 2',
         'Target': '92%',
         'Updated': '1st Aug',
         'Latest ': '100',
@@ -125,6 +127,7 @@ execData = {
       },
       {
         '': 'RTT',
+        'Metric': 'metric 3',
         'Target': '92%',
         'Updated': '1st Aug',
         'Latest ': '100',
@@ -136,6 +139,7 @@ execData = {
     [
       {
         '': 'A&E',
+        'Metric': 'metric 1',
         'Target': '98%',
         'Updated': '21st Aug',
         'Latest ': '200',
@@ -145,6 +149,7 @@ execData = {
       },
       {
         '': 'A&E',
+        'Metric': 'metric 2',
         'Target': '75%',
         'Updated': '21st Aug',
         'Latest ': '2365',
@@ -154,6 +159,7 @@ execData = {
       },
       {
         '': 'A&E',
+        'Metric': 'metric 3',
         'Target': '45%',
         'Updated': '21st Aug',
         'Latest ': '100',
@@ -162,9 +168,10 @@ execData = {
         '104 weeks': '200'
       }
     ]
-  ],
-  'cols': [
-    '',
+  ], 
+  'columns': [
+    '',  
+    'Metric',
     'Target',
     'Updated',
     'Latest ',
