@@ -39,7 +39,9 @@ function execTableComponent(root, data, columns, showHeaders, spacing) {
     .enter()
     .append('td')
     .attr('class', 'exec-table-border')
-    .html(function (d) { return d.value; });
+    // .attr('rowspan', function(d) { return d.column === '' ? 3 : 1 })
+    // .attr('colspam', function(d) { return d.column === '' ? 0 : 1 })
+    .html(function (d) { console.log(d); return d.value; });
     
   return table; 
 }
