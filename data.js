@@ -103,11 +103,14 @@ data = {
 };
 
 execData = {
+  'progs': [
+    'RTT',
+    'A&E'
+  ],
   'dataIP': [
     [
       {
-        '': 'RTT',
-        'Metric': 'metric 1',
+        '': 'metric 1',
         'Target': '92%',
         'Updated': '1st Aug',
         'Latest ': '100',
@@ -116,8 +119,7 @@ execData = {
         '104 weeks': '200'
       },
       {
-        '': 'RTT',
-        'Metric': 'metric 2',
+        '': 'metric 2',
         'Target': '92%',
         'Updated': '1st Aug',
         'Latest ': '100',
@@ -126,8 +128,7 @@ execData = {
         '104 weeks': '200'
       },
       {
-        '': 'RTT',
-        'Metric': 'metric 3',
+        '': 'metric 3',
         'Target': '92%',
         'Updated': '1st Aug',
         'Latest ': '100',
@@ -138,8 +139,7 @@ execData = {
     ],
     [
       {
-        '': 'A&E',
-        'Metric': 'metric 1',
+        '': 'metric 1',
         'Target': '98%',
         'Updated': '21st Aug',
         'Latest ': '200',
@@ -148,8 +148,7 @@ execData = {
         '104 weeks': '234'
       },
       {
-        '': 'A&E',
-        'Metric': 'metric 2',
+        '': 'metric 2',
         'Target': '75%',
         'Updated': '21st Aug',
         'Latest ': '2365',
@@ -158,8 +157,7 @@ execData = {
         '104 weeks': '2435'
       },
       {
-        '': 'A&E',
-        'Metric': 'metric 3',
+        '': 'metric 3',
         'Target': '45%',
         'Updated': '21st Aug',
         'Latest ': '100',
@@ -170,8 +168,7 @@ execData = {
     ]
   ], 
   'columns': [
-    '',  
-    'Metric',
+    '',   
     'Target',
     'Updated',
     'Latest ',

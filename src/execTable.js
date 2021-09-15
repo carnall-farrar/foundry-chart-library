@@ -1,13 +1,19 @@
 const d3 = require('d3');
 import './styles/execTable.css';
 
-function execTableComponent(root, data, columns, showHeaders, spacing) {
+function execTableComponent(root, data, columns, prog, showHeaders, spacing) {
 // param: root = string of the div id
 // param: data = object[] with key:val pairs of col:value
 // param: columns = string[] of columns as strings
+// param: prog = string of the high level programme to label the table
 // param: showHeaders = boolean
 // param: spacing = string for margin between table elements
   const table = d3.select(root).append('table').attr('class', 'exec-table').style('border-spacing', '0px').style('margin-top', spacing);
+  // Add the labels
+  table.append('div')
+    .attr('class', 'programme')
+    .text(prog);
+
   const tbody = table.append('tbody').attr('class', 'exec-table');
     
   // append the header row
@@ -46,12 +52,13 @@ function execTableComponent(root, data, columns, showHeaders, spacing) {
   return table; 
 }
 
-export function createExecTable(root, data, columns) {
+export function createExecTable(root, data, columns, progs) {
   data.forEach((row, index) => {
     console.log(row, columns, index);
+    const programme = progs[index]
     if (index === 0) {
-      return execTableComponent(root, row, columns, true, '0px');
+      return execTableComponent(root, row, columns, programme, true, '0px');
     }
-    return execTableComponent(root, row, columns, false, '10px');
+    return execTableComponent(root, row, columns, programme, false, '10px');
   });
 }
