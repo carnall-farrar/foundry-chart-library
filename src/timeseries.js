@@ -1,71 +1,64 @@
 const d3 = require('d3');
-
-const height = 500;
-const margin = {top: 20, right: 30, bottom: 30, left: 40};
-
-const yAxis = (g, data) => {
-  g.attr('transform', `translate(${margin.left},0)`)
-    .call(d3.axisLeft(y))
-    .call(g => g.select('.domain').remove())
-    .call(g => g.select('.tick:last-of-type text').clone()
-      .attr('x', 3)
-      .attr('text-anchor', 'start')
-      .attr('font-weight', 'bold')
-      .text(data.y));
-};
+import './styles/timeseries.css';
 
 
 export function timeseriesChart (id, data) {
-  const svgWidth = 600, svgHeight = 400;   
-  const margin = { top: 20, right: 20, bottom: 30, left: 50 };   
-  const width = svgWidth - margin.left - margin.right;   
-  const height = svgHeight - margin.top - margin.bottom;
+  // set the dimensions and margins of the graph
+  const width = 500;
+  const height = 250;
+  const margin = 5;
+  const padding = 5;
+  const adj = 30;
+  // we are appending SVG first
+  const svg = d3.select(id).append('svg')
+    .attr('preserveAspectRatio', 'xMinYMin meet')
+    .attr('viewBox', '-'
+            + adj + ' -'
+            + adj + ' '
+            + (width + adj *3) + ' '
+            + (height + adj*3))
+    .style('padding', padding)
+    .style('margin', margin)
+    .classed('svg-content', true);
 
+  const formatData = data.map(row => {
+    const date = row.date.split('T')[0];
+    return {
+      date,
+      value: row.value
+    };
+  });
 
-  const svg = d3.select(id)
-    .attr('width', svgWidth)
-    .attr('height', svgHeight);
+  const timeConv = d3.timeParse('%Y-%m-%d');
+  const xScale = d3.scaleTime().range([0,width]);
+  const yScale = d3.scaleLinear().rangeRound([height, 0]);
+  xScale.domain(d3.extent(formatData, function(d){
+    return timeConv(d.date);
+  }));
 
-  console.log(svg, data)
-  
-  const g = svg.append('g')
-    .attr('transform','translate(' + margin.left + ',' + margin.top + ')'   );
+  yScale.domain([(0), d3.max(formatData, function(d) {
+    return d.value;
+  })
+  ]);
 
-  const x = d3.scaleTime().rangeRound([0, width]);
-  const y = d3.scaleLinear().rangeRound([height, 0]);
+  const yaxis = d3.axisLeft().scale(yScale); 
+  const xaxis = d3.axisBottom().scale(xScale);  
 
-  const line = d3.line()
-    .x(function(d) { return x(d.date)})   
-    .y(function(d) { return y(d.value)});
-  
-  x.domain(d3.extent(data, function(d) { return d.date }));   
-  y.domain(d3.extent(data, function(d) { return d.value }));
+  svg.append('g')
+    .attr('class', 'axis')
+    .attr('transform', 'translate(0,' + height + ')')
+    .call(xaxis);
 
-  g.append('g')   
-    .attr('transform', 'translate(0,' + height + ')')   
-    .call(d3.axisBottom(x))   
-    .select('.domain')   
-    .remove();
+  svg.append('g')
+    .attr('class', 'axis')
+    .call(yaxis);
 
-  g.append('g')   
-    .call(d3.axisLeft(y))   
-    .append('text')   
-    .attr('fill', '#000')   
-    .attr('transform', 'rotate(-90)')   
-    .attr('y', 6)   .attr('dy', '0.71em')   
-    .attr('text-anchor', 'end')   
-    .text('Price ($)');
-
-
-  g.append('path')
+  svg.append('path')
     .datum(data)
-    .attr('fill', 'none')
-    .attr('stroke', 'steelblue')
-    .attr('stroke-linejoin', 'round')
-    .attr('stroke-linecap', 'round')
-    .attr('stroke-width', 1.5)
-    .attr('d', line);
-  
-  return svg;
+    .attr('d', d3.line()
+      .x(function(d) { return xScale(d.date) })
+      .y(function(d) { return yScale(d.value) })
+    );
 
+  return svg;
 }

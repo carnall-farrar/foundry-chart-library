@@ -47,14 +47,13 @@ function execTableComponent(root, data, columns, prog, showHeaders, spacing) {
     .attr('class', 'exec-table-border')
     // .attr('rowspan', function(d) { return d.column === '' ? 3 : 1 })
     // .attr('colspam', function(d) { return d.column === '' ? 0 : 1 })
-    .html(function (d) { console.log(d); return d.value; });
+    .html(function (d) { return d.value; });
     
   return table; 
 }
 
 export function createExecTable(root, data, columns, progs) {
   data.forEach((row, index) => {
-    console.log(row, columns, index);
     const programme = progs[index]
     if (index === 0) {
       return execTableComponent(root, row, columns, programme, true, '0px');
