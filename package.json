@@ -1,5 +1,5 @@
 {
-  "name": "foundry-chart-library",
+  "name": "@carnallfarrar/foundry-chart-library",
   "version": "1.0.0",
   "description": "A d3 chart library for use in the NHS Foundry platform",
   "main": "src/index.js",
