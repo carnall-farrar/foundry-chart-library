@@ -1,8 +1,12 @@
 {
   "name": "foundry-chart-library",
   "version": "1.0.0",
-  "description": "",
+  "description": "A d3 chart library for use in the NHS Foundry platform",
   "main": "src/index.js",
+  "private": false,
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "webpack",
     "start": "python -m SimpleHTTPServer 8000"
