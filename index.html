@@ -6,6 +6,9 @@
     <script src="https://unpkg.com/lodash@4.17.20"></script>
   </head>
   <body>
+    <link href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" rel="stylesheet"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.16.0/d3.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <div id='timeseries'></div><br>
     <div id='barChart'></div><br>
     <h1>Table used across Opred</h1>
@@ -23,7 +26,7 @@
         createExecTable("#execTable", execData.dataIP, execData.columns, execData.progs) 
         timeseriesChart('#timeseries', timeSeries)
         barChart('#barChart', width=1000, height=200, barPadding=1)
-        createSentenceTable("#sentenceTable", sentences.dataIP, sentences.columns) 
+        buildSentenceComponent("#sentenceTable", sentences.dataIP, sentences.columns) 
     </script>
   </body>
 </html>
