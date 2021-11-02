@@ -183,9 +183,9 @@ timeSeries = [{'date': '2009-01-08T00:00:00.000Z','value': 92.7},{'date': '2009-
 
 sentences = {'dataIP': [
   {sentenceId: 'sadlfjweropigj', sentenceNumber: 1, sentenceContent: 'Being a great person in Manchester increases your risk of catching a good vibe by 63%. This puts Manchester in the top 1% of all ICSs and impacts 23% of the population.'},
-  {sentenceId: 'asdfiajdfvoi', sentenceNumber: 2, sentenceContent: 'Being a great person in Manchester increases your risk of catching a good vibe by 63%. This puts Manchester in the top 1% of all ICSs and impacts 23% of the population.'},
-  {sentenceId: 'erognlkasdvnlk', sentenceNumber: 3, sentenceContent: 'Being a great person in Manchester increases your risk of catching a good vibe by 63%. This puts Manchester in the top 1% of all ICSs and impacts 23% of the population.'},
-  {sentenceId: 'asdifojq', sentenceNumber: 4, sentenceContent: 'Being a great person in Manchester increases your risk of catching a good vibe by 63%. This puts Manchester in the top 1% of all ICSs and impacts 23% of the population.'},
+  {sentenceId: 'asdfiajdfvoi', sentenceNumber: 2, sentenceContent: 'Being a terrible person in Newcastle decreases your risk of catching a good vibe by 5003%. This puts Manchester in the top 1% of all ICSs and impacts 23% of the population.'},
+  {sentenceId: 'erognlkasdvnlk', sentenceNumber: 3, sentenceContent: 'Understanding French is great for making friends ok. This puts Manchester in the top 1% of all ICSs and impacts 23% of the population.'},
+  {sentenceId: 'asdifojq', sentenceNumber: 4, sentenceContent: 'Never eat red pineapples. They are bad for you'},
   {sentenceId: 'qerpiogjqep', sentenceNumber: 5, sentenceContent: 'Being a great person in Manchester increases your risk of catching a good vibe by 63%. This puts Manchester in the top 1% of all ICSs and impacts 23% of the population.'},
   {sentenceId: 'adosijdfpo', sentenceNumber: 6, sentenceContent: 'Being a great person in Manchester increases your risk of catching a good vibe by 63%. This puts Manchester in the top 1% of all ICSs and impacts 23% of the population.'},
   {sentenceId: 'asodifjpio', sentenceNumber: 7, sentenceContent: 'Being a great person in Manchester increases your risk of catching a good vibe by 63%. This puts Manchester in the top 1% of all ICSs and impacts 23% of the population.'}

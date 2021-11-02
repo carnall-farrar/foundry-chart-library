@@ -1,97 +1,197 @@
 const d3 = require('d3');
 import './styles/sentenceTable.css';
 
-function createSentenceTable(tbody, data, columns, showHeaders) {
-  // param: root = string of the div id
-  // param: data = object[] with key:val pairs of col:value
-  // param: columns = string[] of columns as strings
-  // param: showHeaders = boolean
-  // param: spacing = string for margin between table elements
-  
-  // create a row for each object in the data
-  const rows = tbody.selectAll('tr')
-    .data(data)
-    .enter()
-    .append('tr')
-    .attr('class', 'sentence-table');
-     
-  // create a cell in each row for each column
-  rows.selectAll('td')
-    .data(function (row) {
-      return columns.map(function (column) {
-  
-        return {column: column, value: row[column]};
-      });
-    })
-    .enter()
-    .append('td')
-    .attr('class', 'sentence-table-border')
-    // .attr('rowspan', function(d) { return d.column === '' ? 3 : 1 })
-    // .attr('colspam', function(d) { return d.column === '' ? 0 : 1 })
-    .html(function (d) { return d.value; });
+function drawSentences(ulId, inputData) {
 
-  return tbody;  
+  const sentences = d3.select(ulId).selectAll('li')
+    .data(inputData);
+
+  sentences.enter()
+    .append('li')
+    .merge(sentences)
+    .html(function(row, index) {
+      const middleSentence = index === 1 ? 'margin-left: 10px' : 'margin-left: 10px';
+      const sentenceNumberStyle = index !== 1 ? 'topOrBottomSentence' : '';
+      const sentenceContentStyle = index !== 1 ? 'topOrBottomSentence' : '';
+      const html = `
+        <div id=${row.sentenceId} class='sentence' style="display:flex; margin-bottom: 10px; margin-top: 10px; ${middleSentence}">
+          <div class="sentence-number ${sentenceNumberStyle}">
+            <span class="sentence-text">${row.sentenceNumber}</span>
+          </div>
+          <div class="sentence-content ${sentenceContentStyle}">
+            <span class="sentence-text">${row.sentenceContent}</span>
+          </div>
+        </div>
+      `;
+      return html;
+    }); 
+
+  d3.selectAll('li')
+    .transition()
+    .duration(2000)
+    .attr('color', 'blue');
+
+  sentences.exit().remove();
+
 }
 
-export function buildSentenceComponent(root, data, columns, showHeaders, spacing) {
-  // const numSentences = data.length;
-  const div = d3.select(root).append('div').attr('class', 'sentence-div');
+function addSentenceClickEvents(data) {
+  const sentences = document.querySelectorAll('.sentence');
+  sentences.forEach((sentence) => {
+    sentence.addEventListener('click', function() {
+      highlightSentence(data, sentence.id);
+    });
+  });
+}
 
-  const numSentences = data.length;
-  const aboveSentences = [];
-  const inputSentences = data.slice(0,3);
-  const belowSentences = numSentences > 3 ? data.slice(3, data.length-1) : [];
+function scrollDown(id, data) { 
+  const dataLen = data.length;
+  const currentSentences = document.querySelectorAll('div.sentence-number.topOrBottomSentence');
+  const firstItem = parseInt(currentSentences[0].textContent);
+  const secondItem = parseInt(currentSentences[1].textContent) + 1;
 
-  const table = div.append('table')
-    .attr('class', 'sentence-table')
-    .style('border-spacing', '0px');
+  const newData = data.slice(firstItem,secondItem);
+  drawSentences(id, newData);
 
-  const tbody = table.append('tbody').attr('class', 'sentence-table');
-    
-  // append the header row
-  if (showHeaders === true) {
-    const thead = table.append('thead');
-    thead.append('tr')
-      .selectAll('th')
-      .data(columns).enter()
-      .append('th')
-      .attr('class', 'sentence-table')
-      .text(function (column) { return column; });
+  if (firstItem > 0) {
+    const arrowUp = document.querySelector('#scroll-up');
+    arrowUp.className = 'fa scroller scroll-up';
+    d3.select('ul').style('padding-top', '0px');
   }
 
-  createSentenceTable(tbody, inputSentences, columns, showHeaders);
+  if (dataLen === secondItem) {
+    const arrowDown = document.querySelector('#scroll-down');
+    arrowDown.className = 'hidden';
+  }
+
+  addSentenceClickEvents(data); // tag new sentences with click events
+}
+
+function scrollUp(id, data) { 
+  const currentSentences = document.querySelectorAll('div.sentence-number.topOrBottomSentence');
+  const firstItem = parseInt(currentSentences[0].textContent) - 2;
+  const secondItem = parseInt(currentSentences[1].textContent) - 1;
+
+  if (secondItem === data.length - 1) {
+    const arrowDown = document.querySelector('#scroll-down');
+    arrowDown.className = 'fa scroller';
+  }
+
+  const newData = data.slice(firstItem,secondItem);
+  console.log({data, newData, firstItem, secondItem});
+  drawSentences(id, newData);
+
+  if (firstItem === 0) {
+    const arrowUp = document.querySelector('#scroll-up');
+    arrowUp.className = 'hidden';
+    d3.select('ul').style('padding-top', '10px');
+  }
+
+  addSentenceClickEvents(data); // tag new sentences with click events
+}
+
+function highlightSentence(data, sentenceId) {
+  const sentence = data.filter((row) => {
+    return row.sentenceId === sentenceId;
+  });
+  drawSentences('#sentence-list', sentence);
+  const arrowDown = document.querySelector('#scroll-down');
+  const arrowUp = document.querySelector('#scroll-up');
+  const goBack = document.querySelector('#go-back');
+  goBack.className = 'fa go-back-icon';
+  arrowDown.className = 'hidden';
+  arrowUp.className = 'hidden';
+  d3.select('ul').style('padding-top', '0px');
+}
+
+function backToSentences(data, sentenceId) {
+  const sentenceNum = data.filter((row) => {
+    return row.sentenceId === sentenceId;
+  })[0].sentenceNumber;
+
+  const top = sentenceNum === 1 ? 
+    0 
+    : sentenceNum === data.length ? sentenceNum - 3
+      : sentenceNum - 2; 
+  const bottom = sentenceNum === data.length ? 
+    sentenceNum 
+    : sentenceNum === 1 ? sentenceNum + 2
+      : sentenceNum + 1; 
+
+  const inputData = data.slice(top, bottom);
+  drawSentences('#sentence-list', inputData);
+  addSentenceClickEvents(inputData); 
+
+  const arrowDown = document.querySelector('#scroll-down');
+  const arrowUp = document.querySelector('#scroll-up');
+  if (sentenceNum === 1) {
+    // show bottom only
+    arrowDown.className = 'fa scroller';
+    d3.select('ul').style('padding-top', '10px');
+  } else if (sentenceNum === data.length ) {
+    // show top only
+    arrowUp.className = 'fa scroller scroll-up';
+  } else {
+    arrowDown.className = 'fa scroller';
+    arrowUp.className = 'fa scroller scroll-up';
+    // show both arrows
+  }
+}
+
+
+export function buildSentenceComponent(root, data) {
   
-  const arrows = div.append('div')
+  // add the 'go back' element which will appear when you have selected a sentence
+  d3.select(root)
+    .append('div')
+    .attr('class', 'hidden')
+    .attr('id', 'go-back')
+    .text('\uf55a')
+    .append('span')
+    .attr('class', 'go-back-text')
+    .text('back to sentences'); 
+
+  // Add the up arrow
+  d3.select(root)
+    .append('div')
+    .attr('class', 'hidden')
+    .attr('id', 'scroll-up')
+    .style('font-size', '50px')
+    .text('\uf106'); 
+  // append ul element
+  d3.select(root)
+    .style('background-color', '#EBF1F5')
+    .append('ul')
+    .attr('id', 'sentence-list');
+
+  const inputData = data.slice(0,3);
+  
+  window.onload = drawSentences('#sentence-list', inputData);
+  addSentenceClickEvents(data); // tag new sentences with click events
+
+  const arrows = d3.select(root).append('div')
     .attr('class', 'arrows');
 
   arrows.append('text')       // Append a text element
     .attr('class', 'fa scroller')  // Give it the font-awesome class
-    .attr('id', 'scroll-up')
-    .style('font-size', '100px')
-    .text('\uf106'); 
-
-  arrows.append('text')       // Append a text element
-    .attr('class', 'fa dot')  // Give it the font-awesome class
-    .style('font-size', '30px')
-    .text('\uf111'); 
-
-  arrows.append('text')       // Append a text element
-    .attr('class', 'fa scroller')  // Give it the font-awesome class
     .attr('id', 'scroll-down')
-    .style('font-size', '100px')
+    .style('font-size', '50px')
     .text('\uf107'); 
 
+  const downArrow = document.querySelector('#scroll-down');
+  downArrow.addEventListener('click', function () {
+    scrollDown('#sentence-list', data);
+  });
 
-  const scrollDown = document.querySelector('#scroll-down');
+  const upArrow = document.querySelector('#scroll-up');
+  upArrow.addEventListener('click', function() {
+    scrollUp('#sentence-list', data);
+  });
 
-  scrollDown.addEventListener('click', function(){
-    aboveSentences.push(inputSentences[0]) // add top item in sentences to above array
-    inputSentences.slice(1);
-    inputSentences.push(belowSentences[0]);
-    belowSentences.slice(1);
-    console.log(inputSentences);
-    const table = document.querySelector('.sentence-table');
-    table.innerHTML='';
-    createSentenceTable(div, inputSentences, columns, showHeaders, spacing);
+  const backArrow = document.querySelector('#go-back');
+  backArrow.addEventListener('click', function() {
+    const sentence = document.querySelector('.sentence');
+    backToSentences(data, sentence.id);
+    backArrow.className = 'hidden';
   });
 }
