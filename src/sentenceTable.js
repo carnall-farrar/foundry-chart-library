@@ -10,21 +10,38 @@ function drawSentences(ulId, inputData) {
     .append('li')
     .merge(sentences)
     .html(function(row, index) {
-      const middleSentence = index === 1 ? 'margin-left: 12px' : '';
+      const middleSentence = index === 1 ? 'margin-left: 10px' : 'margin-left: 10px';
       const sentenceNumberStyle = index !== 1 ? 'topOrBottomSentence' : '';
       const sentenceContentStyle = index !== 1 ? 'topOrBottomSentence' : '';
-      const id = `sentence_${row.sentenceNumber}`;
       const html = `
-        <div id=${id} class='sentence' style="display:flex; margin-bottom: 10px; margin-top: 10px; ${middleSentence}">
-          <div class="sentence-number ${sentenceNumberStyle}">${row.sentenceNumber}</div>
-          <div class="sentence-content ${sentenceContentStyle}">${row.sentenceContent}</div>
+        <div id=${row.sentenceId} class='sentence' style="display:flex; margin-bottom: 10px; margin-top: 10px; ${middleSentence}">
+          <div class="sentence-number ${sentenceNumberStyle}">
+            <span class="sentence-text">${row.sentenceNumber}</span>
+          </div>
+          <div class="sentence-content ${sentenceContentStyle}">
+            <span class="sentence-text">${row.sentenceContent}</span>
+          </div>
         </div>
       `;
       return html;
     }); 
 
+  d3.selectAll('li')
+    .transition()
+    .duration(2000)
+    .attr('color', 'blue');
+
   sentences.exit().remove();
 
+}
+
+function addSentenceClickEvents(data) {
+  const sentences = document.querySelectorAll('.sentence');
+  sentences.forEach((sentence) => {
+    sentence.addEventListener('click', function() {
+      highlightSentence(data, sentence.id);
+    });
+  });
 }
 
 function scrollDown(id, data) { 
@@ -39,12 +56,15 @@ function scrollDown(id, data) {
   if (firstItem > 0) {
     const arrowUp = document.querySelector('#scroll-up');
     arrowUp.className = 'fa scroller scroll-up';
+    d3.select('ul').style('padding-top', '0px');
   }
 
   if (dataLen === secondItem) {
     const arrowDown = document.querySelector('#scroll-down');
     arrowDown.className = 'hidden';
   }
+
+  addSentenceClickEvents(data); // tag new sentences with click events
 }
 
 function scrollUp(id, data) { 
@@ -64,17 +84,81 @@ function scrollUp(id, data) {
   if (firstItem === 0) {
     const arrowUp = document.querySelector('#scroll-up');
     arrowUp.className = 'hidden';
+    d3.select('ul').style('padding-top', '10px');
+  }
+
+  addSentenceClickEvents(data); // tag new sentences with click events
+}
+
+function highlightSentence(data, sentenceId) {
+  const sentence = data.filter((row) => {
+    return row.sentenceId === sentenceId;
+  });
+  drawSentences('#sentence-list', sentence);
+  const arrowDown = document.querySelector('#scroll-down');
+  const arrowUp = document.querySelector('#scroll-up');
+  const goBack = document.querySelector('#go-back');
+  goBack.className = 'fa go-back-icon';
+  arrowDown.className = 'hidden';
+  arrowUp.className = 'hidden';
+  d3.select('ul').style('padding-top', '0px');
+}
+
+function backToSentences(data, sentenceId) {
+  const sentenceNum = data.filter((row) => {
+    return row.sentenceId === sentenceId;
+  })[0].sentenceNumber;
+
+  const top = sentenceNum === 1 ? 
+    0 
+    : sentenceNum === data.length ? sentenceNum - 3
+      : sentenceNum - 2; 
+  const bottom = sentenceNum === data.length ? 
+    sentenceNum 
+    : sentenceNum === 1 ? sentenceNum + 2
+      : sentenceNum + 1; 
+
+  const inputData = data.slice(top, bottom);
+  drawSentences('#sentence-list', inputData);
+  addSentenceClickEvents(inputData); 
+
+  const arrowDown = document.querySelector('#scroll-down');
+  const arrowUp = document.querySelector('#scroll-up');
+  if (sentenceNum === 1) {
+    // show bottom only
+    arrowDown.className = 'fa scroller';
+    d3.select('ul').style('padding-top', '10px');
+  } else if (sentenceNum === data.length ) {
+    // show top only
+    arrowUp.className = 'fa scroller scroll-up';
+  } else {
+    arrowDown.className = 'fa scroller';
+    arrowUp.className = 'fa scroller scroll-up';
+    // show both arrows
   }
 }
 
+
 export function buildSentenceComponent(root, data) {
+  
+  // add the 'go back' element which will appear when you have selected a sentence
+  d3.select(root)
+    .append('div')
+    .attr('class', 'hidden')
+    .attr('id', 'go-back')
+    .text('\uf55a')
+    .append('span')
+    .attr('class', 'go-back-text')
+    .text('back to sentences'); 
+
+  // Add the up arrow
   d3.select(root)
     .append('div')
     .attr('class', 'hidden')
     .attr('id', 'scroll-up')
     .style('font-size', '50px')
     .text('\uf106'); 
-
+  // append ul element
   d3.select(root)
     .style('background-color', '#EBF1F5')
     .append('ul')
@@ -83,6 +167,7 @@ export function buildSentenceComponent(root, data) {
   const inputData = data.slice(0,3);
   
   window.onload = drawSentences('#sentence-list', inputData);
+  addSentenceClickEvents(data); // tag new sentences with click events
 
   const arrows = d3.select(root).append('div')
     .attr('class', 'arrows');
@@ -101,5 +186,12 @@ export function buildSentenceComponent(root, data) {
   const upArrow = document.querySelector('#scroll-up');
   upArrow.addEventListener('click', function() {
     scrollUp('#sentence-list', data);
+  });
+
+  const backArrow = document.querySelector('#go-back');
+  backArrow.addEventListener('click', function() {
+    const sentence = document.querySelector('.sentence');
+    backToSentences(data, sentence.id);
+    backArrow.className = 'hidden';
   });
 }
