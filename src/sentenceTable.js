@@ -105,6 +105,7 @@ function highlightSentence(data, sentenceId) {
   arrowDown.className = 'hidden';
   arrowUp.className = 'hidden';
   d3.select('ul').style('padding-top', '0px');
+  d3.select('ul').style('padding-bottom', '10px');
 }
 
 function backToSentences(data, sentenceId) {
