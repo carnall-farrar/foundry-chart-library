@@ -1,4 +1,5 @@
 const d3 = require('d3');
+import './styles/arrows.css';
 import './styles/sentenceTable.css';
 
 function drawSentences(ulId, inputData) {
@@ -55,13 +56,14 @@ function scrollDown(id, data) {
 
   if (firstItem > 0) {
     const arrowUp = document.querySelector('#scroll-up');
-    arrowUp.className = 'fa scroller scroll-up';
+    arrowUp.className = 'arrow up';
     d3.select('ul').style('padding-top', '0px');
   }
 
   if (dataLen === secondItem) {
     const arrowDown = document.querySelector('#scroll-down');
     arrowDown.className = 'hidden';
+    d3.select('ul').style('padding-bottom', '10px');
   }
 
   addSentenceClickEvents(data); // tag new sentences with click events
@@ -74,7 +76,8 @@ function scrollUp(id, data) {
 
   if (secondItem === data.length - 1) {
     const arrowDown = document.querySelector('#scroll-down');
-    arrowDown.className = 'fa scroller';
+    arrowDown.className = 'arrow down';
+    d3.select('ul').style('padding-bottom', '0px');
   }
 
   const newData = data.slice(firstItem,secondItem);
@@ -98,7 +101,7 @@ function highlightSentence(data, sentenceId) {
   const arrowDown = document.querySelector('#scroll-down');
   const arrowUp = document.querySelector('#scroll-up');
   const goBack = document.querySelector('#go-back');
-  goBack.className = 'fa go-back-icon';
+  goBack.className = 'previous';
   arrowDown.className = 'hidden';
   arrowUp.className = 'hidden';
   d3.select('ul').style('padding-top', '0px');
@@ -124,16 +127,19 @@ function backToSentences(data, sentenceId) {
 
   const arrowDown = document.querySelector('#scroll-down');
   const arrowUp = document.querySelector('#scroll-up');
-  if (sentenceNum === 1) {
+  if (sentenceNum <= 2) {
     // show bottom only
-    arrowDown.className = 'fa scroller';
+    arrowDown.className = 'arrow down';
     d3.select('ul').style('padding-top', '10px');
+    d3.select('ul').style('padding-bottom', '0px');
   } else if (sentenceNum === data.length ) {
     // show top only
-    arrowUp.className = 'fa scroller scroll-up';
+    arrowUp.className = 'arrow up';
+    d3.select('ul').style('padding-bottom', '10px');
   } else {
-    arrowDown.className = 'fa scroller';
-    arrowUp.className = 'fa scroller scroll-up';
+    arrowDown.className = 'arrow down';
+    arrowUp.className = 'arrow up';
+    d3.select('ul').style('padding-bottom', '0px');
     // show both arrows
   }
 }
@@ -143,21 +149,17 @@ export function buildSentenceComponent(root, data) {
   
   // add the 'go back' element which will appear when you have selected a sentence
   d3.select(root)
-    .append('div')
+    .append('a')
     .attr('class', 'hidden')
     .attr('id', 'go-back')
-    .text('\uf55a')
-    .append('span')
-    .attr('class', 'go-back-text')
-    .text('back to sentences'); 
+    .html('&laquo; Back to sentences');
 
   // Add the up arrow
   d3.select(root)
-    .append('div')
+    .append('span')
     .attr('class', 'hidden')
-    .attr('id', 'scroll-up')
-    .style('font-size', '50px')
-    .text('\uf106'); 
+    .attr('id', 'scroll-up');
+  
   // append ul element
   d3.select(root)
     .style('background-color', '#EBF1F5')
@@ -169,14 +171,11 @@ export function buildSentenceComponent(root, data) {
   window.onload = drawSentences('#sentence-list', inputData);
   addSentenceClickEvents(data); // tag new sentences with click events
 
-  const arrows = d3.select(root).append('div')
-    .attr('class', 'arrows');
-
-  arrows.append('text')       // Append a text element
-    .attr('class', 'fa scroller')  // Give it the font-awesome class
-    .attr('id', 'scroll-down')
-    .style('font-size', '50px')
-    .text('\uf107'); 
+  // Add the down arrow
+  d3.select(root)
+    .append('span')
+    .attr('class', 'arrow down')
+    .attr('id', 'scroll-down');
 
   const downArrow = document.querySelector('#scroll-down');
   downArrow.addEventListener('click', function () {

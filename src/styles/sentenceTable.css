@@ -5,7 +5,7 @@ body {
 ul {
     list-style: none;
     padding-left: 10px;
-    padding-bottom: 10px;
+    padding-bottom: 0px;
     padding-top: 10px;
 }
 
@@ -66,40 +66,7 @@ ul {
     opacity: 1;
 }
 
-.arrows {
-    width: 15%;
-    margin-left: 50%;
-    margin-top: -20px;
-}
-
-.scroll-up {
-    margin-left: 50%;
-    margin-top: 5px;
-}
-
-.scroller {
-    color: #137CBD;
-    cursor: pointer;
-}
-
-.scroller:hover {
-    color: #0E5A8A;
-}
 
 .hidden {
     display: none;
-}
-
-.go-back-text {
-    font-size: 13px;
-    color: #0E5A8A;
-    padding-left: 6px;
-}
-
-.go-back-icon {
-    font-size: 15px;
-    margin-left: 8px;
-    margin-top: 9px;
-    color: #0E5A8A;
-    cursor: pointer;
 }
