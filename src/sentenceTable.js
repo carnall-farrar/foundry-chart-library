@@ -11,7 +11,7 @@ function drawSentences(ulId, inputData) {
     .append('li')
     .merge(sentences)
     .html(function(row, index) {
-      const middleSentence = index === 1 ? 'margin-left: 10px' : 'margin-left: 10px';
+      const middleSentence = index === 1 ? 'margin-left: 30px' : 'margin-left: 30px';
       const sentenceNumberStyle = index !== 1 ? 'topOrBottomSentence' : '';
       const sentenceContentStyle = index !== 1 ? 'topOrBottomSentence' : '';
       const html = `
@@ -164,6 +164,9 @@ export function buildSentenceComponent(root, data) {
   // append ul element
   d3.select(root)
     .style('background-color', '#EBF1F5')
+    .style('border', 'thin solid #5C7080')
+    .style('border-radius', '3px')
+    .style('box-shadow', '0 0 2px #738694')
     .append('ul')
     .attr('id', 'sentence-list');
 

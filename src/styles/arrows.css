@@ -44,5 +44,5 @@ a:hover {
 .previous {
     background-color: #2B95D6;
     color: #F5F8FA;
-    border-radius: 5px;
+    border-radius: 0 0 4px;
 }
