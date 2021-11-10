@@ -113,22 +113,25 @@ function backToSentences(data, sentenceId) {
     return row.sentenceId === sentenceId;
   })[0].sentenceNumber;
 
-  const top = sentenceNum === 1 ? 
+  const top = sentenceNum <= 3 ? 
     0 
     : sentenceNum === data.length ? sentenceNum - 3
       : sentenceNum - 2; 
   const bottom = sentenceNum === data.length ? 
     sentenceNum 
-    : sentenceNum === 1 ? sentenceNum + 2
+    : sentenceNum <= 3 ? sentenceNum + 2
       : sentenceNum + 1; 
-
+  
   const inputData = data.slice(top, bottom);
   drawSentences('#sentence-list', inputData);
   addSentenceClickEvents(inputData); 
 
   const arrowDown = document.querySelector('#scroll-down');
   const arrowUp = document.querySelector('#scroll-up');
-  if (sentenceNum <= 2) {
+  if (data.length <= 3) {
+    d3.select('ul').style('padding-top', '10px');
+    d3.select('ul').style('padding-bottom', '10px');
+  } else if (sentenceNum <= 2) {
     // show bottom only
     arrowDown.className = 'arrow down';
     d3.select('ul').style('padding-top', '10px');
@@ -175,12 +178,16 @@ export function buildSentenceComponent(root, data) {
   window.onload = drawSentences('#sentence-list', inputData);
   addSentenceClickEvents(data); // tag new sentences with click events
 
-  // Add the down arrow
+  // Add the down arrow if number of sentences > 3
+  const arrowDownClass = data.length > 3 ? 'arrow down' : 'hidden';
+  const ulPaddingBottom = data.length > 3 ? '0px' : '10px';
   d3.select(root)
     .append('span')
-    .attr('class', 'arrow down')
+    .attr('class', arrowDownClass)
     .attr('id', 'scroll-down');
-
+  
+  d3.select('ul').style('padding-bottom', ulPaddingBottom);
+  
   const downArrow = document.querySelector('#scroll-down');
   downArrow.addEventListener('click', function () {
     scrollDown('#sentence-list', data);
