@@ -151,25 +151,31 @@ function backToSentences(data, sentenceId) {
 
 export function buildSentenceComponent(root, data) {  //  TODO add new arg representing light documentation
   
+  sentences = d3.select(root)
+                .append('div')
+                .style('background-color', '#EBF1F5') // styling root div
+                .style('border', 'thin solid #5C7080')
+                .style('border-radius', '3px')
+                .style('box-shadow', '0 0 2px #738694')
+
+
   // add the 'go back' element which will appear when you have selected a sentence
-  d3.select(root)
-    .append('a')
-    .attr('class', 'hidden')
-    .attr('id', 'go-back')
-    .html('&laquo; Back to sentences');
+  sentences.append('a')
+           .attr('class', 'hidden')
+           .attr('id', 'go-back')
+           .html('&laquo; Back to sentences');
 
   // Add the up arrow
-  d3.select(root)
-    .append('span')
-    .attr('class', 'hidden')
-    .attr('id', 'scroll-up');
+  sentences.append('span')
+           .attr('class', 'hidden')
+           .attr('id', 'scroll-up');
   
   // append ul element
-  d3.select(root)
-    .style('background-color', '#EBF1F5')
-    .style('border', 'thin solid #5C7080')
-    .style('border-radius', '3px')
-    .style('box-shadow', '0 0 2px #738694')
+  sentences  
+    // .style('background-color', '#EBF1F5') // styling root div
+    // .style('border', 'thin solid #5C7080')
+    // .style('border-radius', '3px')
+    // .style('box-shadow', '0 0 2px #738694')
     .append('ul')
     .attr('id', 'sentence-list');
 
@@ -181,10 +187,9 @@ export function buildSentenceComponent(root, data) {  //  TODO add new arg repre
   // Add the down arrow if number of sentences > 3
   const arrowDownClass = data.length > 3 ? 'arrow down' : 'hidden';
   const ulPaddingBottom = data.length > 3 ? '0px' : '10px';
-  d3.select(root)
-    .append('span')
-    .attr('class', arrowDownClass)
-    .attr('id', 'scroll-down');
+  sentences.append('span')
+           .attr('class', arrowDownClass)
+           .attr('id', 'scroll-down');
   
   d3.select('ul').style('padding-bottom', ulPaddingBottom);
   
@@ -204,10 +209,15 @@ export function buildSentenceComponent(root, data) {  //  TODO add new arg repre
     backToSentences(data, sentence.id);
     backArrow.className = 'hidden';
   });
+
+  lightDocumentation(root)
+
 }
 
 
 export function lightDocumentation(root){
-  d3.select(root)
-    .text('hello world')
+  important = d3.select(root)
+                .append('div')
+                .style('padding-top', '25px')
+                .text('My documentation')
 }
