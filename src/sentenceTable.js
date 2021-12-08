@@ -172,10 +172,6 @@ export function buildSentenceComponent(root, data) {  //  TODO add new arg repre
   
   // append ul element
   sentences  
-    // .style('background-color', '#EBF1F5') // styling root div
-    // .style('border', 'thin solid #5C7080')
-    // .style('border-radius', '3px')
-    // .style('box-shadow', '0 0 2px #738694')
     .append('ul')
     .attr('id', 'sentence-list');
 
@@ -214,10 +210,17 @@ export function buildSentenceComponent(root, data) {  //  TODO add new arg repre
 
 }
 
-
+// TODO bug when you click on insight
 export function lightDocumentation(root){
-  important = d3.select(root)
-                .append('div')
-                .style('padding-top', '25px')
-                .text('My documentation')
-}
+
+  docs = d3.select(root).append('div')
+                      .style('padding-top', '25px')
+                      .attr('id', 'docs')
+                      .text('docs div');
+                 
+  // TODO want to create a  second div within this one, which so we can separate the mandatory bullet points from those that will be hidden under 'read more'
+  docs.append('div') // currently doesnt show anything
+      .attr('id', 'important')
+      .text('important documentation');
+
+  }
