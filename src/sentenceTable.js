@@ -149,7 +149,7 @@ function backToSentences(data, sentenceId) {
 }
 
 
-export function buildSentenceComponent(root, data) {
+export function buildSentenceComponent(root, data) {  //  TODO add new arg representing light documentation
   
   // add the 'go back' element which will appear when you have selected a sentence
   d3.select(root)
@@ -204,4 +204,10 @@ export function buildSentenceComponent(root, data) {
     backToSentences(data, sentence.id);
     backArrow.className = 'hidden';
   });
+}
+
+
+export function lightDocumentation(root){
+  d3.select(root)
+    .text('hello world')
 }
