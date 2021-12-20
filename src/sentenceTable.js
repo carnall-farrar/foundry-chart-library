@@ -119,7 +119,7 @@ function backToSentences(data, sentenceId) {
       : sentenceNum - 2; 
   const bottom = sentenceNum === data.length ? 
     sentenceNum 
-    : sentenceNum <= 3 ? sentenceNum + 2
+    : sentenceNum <= 3 ? 3
       : sentenceNum + 1; 
   
   const inputData = data.slice(top, bottom);
