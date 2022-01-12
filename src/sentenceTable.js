@@ -206,9 +206,22 @@ export function buildSentenceComponent(root, data) {  //  TODO add new arg repre
     backArrow.className = 'hidden';
   });
 
-  // lightDocumentation(root)
+   d3.select('#sentenceTable')
+   .append('p')
+        .attr('id', 'my-new-test')
+        .style('padding-top', '200px')
+        .text('hello world');
 
 }
+
+function lowerElement(root){
+    var docs = d3.select(root)
+                .append('div')
+                .attr('id', 'light-docs')
+                .text('hello world');
+    // return docs ?
+}
+
 
 // TODO bug when you click on insight
 export function lightDocumentation(root){
