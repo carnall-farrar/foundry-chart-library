@@ -207,10 +207,21 @@ export function buildSentenceComponent(root, data) {  //  TODO add new arg repre
   });
 
    d3.select('#sentenceTable')
-   .append('p')
-        .attr('id', 'my-new-test')
-        .style('padding-top', '200px')
-        .text('hello world');
+     .append('ul')
+     .attr('id', 'my-new-test')
+     .style('padding-top', '20px')
+     .append('li')
+     .text('- First bullet')
+     .append('li')
+     .text('- Second bullet');
+        
+  d3.select('#sentenceTable')
+     .append('details')
+     .attr('id', 'details')
+     .text('[Content for read more]')
+     .append('summary')
+     .text("Read more")
+
 
 }
 
@@ -223,31 +234,36 @@ function lowerElement(root){
 }
 
 
-// TODO bug when you click on insight
 export function lightDocumentation(root){
 
-
-  var parent = d3.select(root)
+  var docsParent = d3.select(root)
              .append('div')
              .style('border', 'thin solid #5C7080')
 
-  parent.append('div')
+  docsParent.append('div')
         .style('padding-top', '25px')
         .attr('id', 'core-docs')
         .text('Insights are statistically significant.');
   
-  parent.append('button')
-        .style('padding-top', '25px')
-        .attr('id', 'read-more')
-        .text('Read more')
-        .on("click", function(){
-          console.log("hello world");
-          // This works, successfully hides the div. But need to make it visible again if you click a second time!
-          // Something like, if hidden == false then hide, otherwise show?
-          d3.select("#readmore-container").classed("hidden", true);
-        });
+  // parent.append('button')
+  //       .style('padding-top', '25px')
+  //       .attr('id', 'read-more')
+  //       .text('Read more')
+  //       .on("click", function(){
+  //         console.log("hello world");
+  //         // This works, successfully hides the div. But need to make it visible again if you click a second time!
+  //         // Something like, if hidden == false then hide, otherwise show?
+  //         d3.select("#readmore-container").classed("hidden", true);
+  //       });
   
-  var readmore = parent.append('div')
+  var mainText = docsParent.append('ul')
+                   .style('border', 'thin solid #5C7080')
+                   .attr('id', 'main-text')
+                   .append('li')
+                   .text('insights statistically significant');
+                   
+
+  var readmore = docsParent.append('div')
                    .style('padding-top', '25px')
                    .style('border', 'thin solid #5C7080')
                    .attr('id', 'readmore-container');
@@ -255,9 +271,8 @@ export function lightDocumentation(root){
   readmore.append('div')
         .style('padding-top', '25px')
         .attr('id', 'readmore-content')
-        .text('Hidden content');
+        .text('More Hidden content');
 
-  // TODO want to create a  second div within this one, which so we can separate the mandatory bullet points from those that will be hidden under 'read more'
         // command I'm using to run:
         // $ cd /Users/cmonit/cf/nhse_analytics/hiid_actionable/foundry-chart-library
         // $ ../kill_http.sh && yarn build && yarn start
