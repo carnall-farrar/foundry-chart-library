@@ -206,21 +206,46 @@ export function buildSentenceComponent(root, data) {  //  TODO add new arg repre
     backArrow.className = 'hidden';
   });
 
-  lightDocumentation(root)
+  // lightDocumentation(root)
 
 }
 
 // TODO bug when you click on insight
 export function lightDocumentation(root){
 
-  docs = d3.select(root).append('div')
-                      .style('padding-top', '25px')
-                      .attr('id', 'docs')
-                      .text('docs div');
-                 
-  // TODO want to create a  second div within this one, which so we can separate the mandatory bullet points from those that will be hidden under 'read more'
-  docs.append('div') // currently doesnt show anything
-      .attr('id', 'important')
-      .text('important documentation');
 
+  var parent = d3.select(root)
+             .append('div')
+             .style('border', 'thin solid #5C7080')
+
+  parent.append('div')
+        .style('padding-top', '25px')
+        .attr('id', 'core-docs')
+        .text('Insights are statistically significant.');
+  
+  parent.append('button')
+        .style('padding-top', '25px')
+        .attr('id', 'read-more')
+        .text('Read more')
+        .on("click", function(){
+          console.log("hello world");
+          // This works, successfully hides the div. But need to make it visible again if you click a second time!
+          // Something like, if hidden == false then hide, otherwise show?
+          d3.select("#readmore-container").classed("hidden", true);
+        });
+  
+  var readmore = parent.append('div')
+                   .style('padding-top', '25px')
+                   .style('border', 'thin solid #5C7080')
+                   .attr('id', 'readmore-container');
+
+  readmore.append('div')
+        .style('padding-top', '25px')
+        .attr('id', 'readmore-content')
+        .text('Hidden content');
+
+  // TODO want to create a  second div within this one, which so we can separate the mandatory bullet points from those that will be hidden under 'read more'
+        // command I'm using to run:
+        // $ cd /Users/cmonit/cf/nhse_analytics/hiid_actionable/foundry-chart-library
+        // $ ../kill_http.sh && yarn build && yarn start
   }
