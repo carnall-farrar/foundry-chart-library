@@ -9,7 +9,7 @@
   ],
   "scripts": {
     "build": "webpack",
-    "start": "python -m SimpleHTTPServer 8000"
+    "start": "python -m SimpleHTTPServer 8001"
   },
   "repository": {
     "type": "git",

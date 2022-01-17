@@ -201,3 +201,25 @@ sentences = {'dataIP': [
   'sentenceContent'
 ]
 };
+
+accordionData = [
+  {
+    'label': 'Key assumptions',
+    'body': `
+    <ul class="accordion-ul">
+      <li class="accordion-list">Hello there</li>
+      <li class="accordion-list">What a moment</li>
+    </ul>
+    `
+  },
+  {
+    'label': 'More information',
+    'body': `
+    <ul class="accordion-ul">
+      <li class="accordion-list">Hello there</li>
+      <li class="accordion-list">What a moment</li>
+    </ul>
+    `
+  }
+];
+  

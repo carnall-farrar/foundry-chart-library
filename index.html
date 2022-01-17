@@ -20,6 +20,9 @@
     <div id='execTable'></div><br>
     <h3>Sentence table</h3>
     <div id='sentenceTable'></div><br>
+    <div id="accordionRoot"></div>
+    <br>
+    <br>
     <p>Below components in progress</p>
     <div id='barChart'></div><br>
     <div id='timeseries'></div><br>
@@ -34,6 +37,7 @@
         timeseriesChart('#timeseries', timeSeries)
         barChart('#barChart', width=1000, height=200, barPadding=1)
         buildSentenceComponent("#sentenceTable", sentences.dataIP) 
+        addAccordion("#accordionRoot", accordionData)
     </script>
   </body>
 </html>
