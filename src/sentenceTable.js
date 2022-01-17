@@ -1,6 +1,7 @@
 const d3 = require('d3');
 import './styles/arrows.css';
 import './styles/sentenceTable.css';
+import './styles/accordion.css';
 
 function drawSentences(ulId, inputData) {
 
@@ -151,24 +152,24 @@ function backToSentences(data, sentenceId) {
 
 export function buildSentenceComponent(root, data) {  //  TODO add new arg representing light documentation
   
-  sentences = d3.select(root)
-                .append('div')
-                .style('background-color', '#EBF1F5') // styling root div
-                .style('border', 'thin solid #5C7080')
-                .style('border-radius', '3px')
-                .style('box-shadow', '0 0 2px #738694')
+  const sentences = d3.select(root)
+    .append('div')
+    .style('background-color', '#EBF1F5') // styling root div
+    .style('border', 'thin solid #5C7080')
+    .style('border-radius', '3px')
+    .style('box-shadow', '0 0 2px #738694');
 
 
   // add the 'go back' element which will appear when you have selected a sentence
   sentences.append('a')
-           .attr('class', 'hidden')
-           .attr('id', 'go-back')
-           .html('&laquo; Back to sentences');
+    .attr('class', 'hidden')
+    .attr('id', 'go-back')
+    .html('&laquo; Back to sentences');
 
   // Add the up arrow
   sentences.append('span')
-           .attr('class', 'hidden')
-           .attr('id', 'scroll-up');
+    .attr('class', 'hidden')
+    .attr('id', 'scroll-up');
   
   // append ul element
   sentences  
@@ -184,8 +185,8 @@ export function buildSentenceComponent(root, data) {  //  TODO add new arg repre
   const arrowDownClass = data.length > 3 ? 'arrow down' : 'hidden';
   const ulPaddingBottom = data.length > 3 ? '0px' : '10px';
   sentences.append('span')
-           .attr('class', arrowDownClass)
-           .attr('id', 'scroll-down');
+    .attr('class', arrowDownClass)
+    .attr('id', 'scroll-down');
   
   d3.select('ul').style('padding-bottom', ulPaddingBottom);
   
@@ -206,29 +207,38 @@ export function buildSentenceComponent(root, data) {  //  TODO add new arg repre
     backArrow.className = 'hidden';
   });
 
-  buildInformation(d3.select('#sentenceTable'))
-  buildDetailedInformation(d3.select('#sentenceTable'))``
+
   
 }
 
-function buildInformation(root){
-    // Assuming root is sentence component
-  root.append('ul')
-      .attr('id', 'my-new-test')
-      .style('padding-top', '20px')
-      // .html(some_arg) // TODO func should accept element containing the content
-      .append('li')  // TODO and all this should be redundant
-      .text('- First bullet')
-      .append('li')
-      .text('- Second bullet');
-}
+export function addAccordion(root, data) {
+  console.log('hello');
+  d3.select(root)
+    .append('div')
+    .attr('class', 'accordion');
+  console.log({data, root});
+  data.forEach((item, index) => {
+    const containerClass = index === 0 ? 'container active' : 'container';
+    const container = d3.select('.accordion')
+      .append('div')
+      .attr('class', containerClass);
+    console.log({container});
+    container.append('div')
+      .attr('class', 'label')
+      .text(item.label);
 
+    container.append('div')
+      .attr('class', 'content')
+      .html(item.body);
 
-function buildDetailedInformation(root){
-  root.append('details')
-  .attr('id', 'details')
-  // .html(some_arg) // TODO func should accept element containing the content
-  .text('[Content for read more]')
-  .append('summary')
-  .text("Read more")
+    container.append('hr');
+  });
+
+  const accordion = document.getElementsByClassName('container');
+
+  for (let i=0; i<accordion.length; i++) {
+    accordion[i].addEventListener('click', function () {
+      this.classList.toggle('active');
+    });
+  }
 }

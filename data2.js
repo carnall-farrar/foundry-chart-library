@@ -12,5 +12,4 @@ sentencesShort = {
     }
   ] // ,
   // ''   // TODO add another object here which contains the light documentation, but not the features used in the model, as this can be in the insight sentences dataset so it's more easily updated by backend devs
-}
-  
+};
