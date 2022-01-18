@@ -118,9 +118,10 @@ function backToSentences(data, sentenceId) {
     0 
     : sentenceNum === data.length ? sentenceNum - 3
       : sentenceNum - 2; 
+
   const bottom = sentenceNum === data.length ? 
     sentenceNum 
-    : sentenceNum <= 3 ? sentenceNum + 2
+    : sentenceNum <= 3 ? 3
       : sentenceNum + 1; 
   
   const inputData = data.slice(top, bottom);
@@ -132,7 +133,7 @@ function backToSentences(data, sentenceId) {
   if (data.length <= 3) {
     d3.select('ul').style('padding-top', '10px');
     d3.select('ul').style('padding-bottom', '10px');
-  } else if (sentenceNum <= 2) {
+  } else if (sentenceNum <= 3) {
     // show bottom only
     arrowDown.className = 'arrow down';
     d3.select('ul').style('padding-top', '10px');

@@ -1,13 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap');
+
 
 /* Sets the background color of the body to blue. Sets font to Rubik */
-
 body {
-  font-family: 'rubik', sans-serif;
+  font-family: sans-serif;
 }
 
-/* Aligns the heading text to the center. */
- 
+/* Aligns the heading text to the center. */ 
 h1 {
   text-align: center;
 }
@@ -30,7 +28,7 @@ h1 {
   .accordion .label {
     position: relative;
     padding: 10px 0;
-    font-size: 16px;
+    font-size: 12px;
     color: #0E5A8A;
     cursor: pointer;
   }
@@ -52,7 +50,6 @@ h1 {
     position: relative;
     background: white;
     height: 0;
-    font-size: 12px;
     text-align: justify;
     width: 780px;
     overflow: hidden;
@@ -60,12 +57,13 @@ h1 {
   }
 
   .accordion-list {
-    font-size: 14px;
+    font-size: 12px;
     margin-left: 10px;
     list-style-type: disc;
   }
 
   .accordion-ul {
+    margin: 0;
     padding-top: 0px;
     padding-bottom: 5px;
   }
@@ -81,6 +79,7 @@ h1 {
   /* Unhides the content part when active. Sets the height */
 
   .accordion .container.active .content {
+    width: 95%;
     height: inherit;
   }
   

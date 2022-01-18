@@ -207,8 +207,8 @@ accordionData = [
     'label': 'Key assumptions',
     'body': `
     <ul class="accordion-ul">
-      <li class="accordion-list">Hello there</li>
-      <li class="accordion-list">What a moment</li>
+      <li class="accordion-list">Insights are shown only if the impact is statistically significant.</li>
+      <li class="accordion-list">The factors controlled for by this model are: patient's acuity on arrival, the number of attendances in preceding hour, sex, age, time of day, year, day of week and date of attendance. There may be other important factors that the model can't take into account.</li>
     </ul>
     `
   },
@@ -216,8 +216,20 @@ accordionData = [
     'label': 'More information',
     'body': `
     <ul class="accordion-ul">
-      <li class="accordion-list">Hello there</li>
-      <li class="accordion-list">What a moment</li>
+      <li class="accordion-list">The ethnic categories considered are: Asian and Asian British, Black and Black British, mixed ethnicity, ‘other' ethnicities and patients whose ethnicity is not recorded. Each of these is compared to patients whose ethnicity is recorded as White.
+			</li>
+      <li class="accordion-list">
+More deprived patients are those living in areas of the system in the most deprived index of multiple deprivation (IMD) quintile. These patients are compared to the other four quintiles combined.
+			</li>
+		<li class="accordion-list">
+The insights are relevant to the system as a whole and do not take into account access to specific providers.
+		</li>
+		<li class="accordion-list">
+In addition to the statistical significance requirement, insights are shown only if the impact on the odds is greater than 10% compared to the reference group (White or less deprived patients).
+		</li>
+		<li class="accordion-list">
+Note that while all activity associated with providers in the given system are included in the modelling, only patients residing in MSOAs or registered with PCNs within the same system will be displayed on the map.
+		</li>
     </ul>
     `
   }
