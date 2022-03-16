@@ -71,7 +71,34 @@
       addAccordion("#accordionRoot", accordionData);
     </script>
     <script>
-      ReactDOM.render(React.createElement(LikeButton), document.querySelector("#likeButton"));
+      let count = 0
+
+      const reducer = (state, action) => {
+        switch(action.type) {
+          case "Increment":
+            return state + 1;
+          default:
+            return state;
+        }
+      }
+
+
+      const Wrapper = () => {
+        const [state, dispatch] = React.useReducer(reducer, 0);
+
+        React.useEffect(() => {
+          if (!state) {
+            setInterval(() => {
+              dispatch({ type: "Increment" })
+            }, 500)
+          }
+
+        }, [])
+
+        return React.createElement(LikeButton, { count: state })
+      }
+
+      ReactDOM.render(React.createElement(Wrapper), document.querySelector("#likeButton"));
     </script>
   </body>
 </html>
