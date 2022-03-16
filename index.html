@@ -83,7 +83,7 @@
       }
 
 
-      const Wrapper = () => {
+      const Wrapper = (props) => {
         const [state, dispatch] = React.useReducer(reducer, 0);
 
         React.useEffect(() => {
@@ -92,10 +92,14 @@
             }, 500)
         }, [])
 
-        return React.createElement(LikeButton, { count: state })
+        return React.createElement(LikeButton, { count: state, onClick: props.onClick })
       }
 
-      ReactDOM.render(React.createElement(Wrapper), document.querySelector("#likeButton"));
+      const onClick = () => {
+        console.log("I was clicked on")
+      }
+
+      ReactDOM.render(React.createElement(Wrapper, { onClick: onClick }), document.querySelector("#likeButton"));
     </script>
   </body>
 </html>
