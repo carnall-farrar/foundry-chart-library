@@ -87,12 +87,9 @@
         const [state, dispatch] = React.useReducer(reducer, 0);
 
         React.useEffect(() => {
-          if (!state) {
-            setInterval(() => {
+          setInterval(() => {
               dispatch({ type: "Increment" })
             }, 500)
-          }
-
         }, [])
 
         return React.createElement(LikeButton, { count: state })
