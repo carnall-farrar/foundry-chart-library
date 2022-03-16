@@ -1,5 +1,3 @@
-const e = React.createElement;
-
 export class LikeButton extends React.Component {
   constructor(props) {
     super(props);
@@ -22,10 +20,5 @@ export class LikeButton extends React.Component {
         Like
       </button>
     );
-    // return e(
-    //   "button",
-    //   { onClick: () => this.setState({ liked: true }) },
-    //   "Like"
-    // );
   }
 }
