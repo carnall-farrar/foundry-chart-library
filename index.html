@@ -42,14 +42,15 @@
       <div id="timeseries"></div>
       <br />
       <div id="likeButton">TODO new component</div>
+      <div id="reactBarChart"></div>
     </div>
     <script
-      src="https://unpkg.com/react@16/umd/react.development.js"
       crossorigin
+      src="https://unpkg.com/react@17/umd/react.development.js"
     ></script>
     <script
-      src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
       crossorigin
+      src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"
     ></script>
 
     <script src="./dist/main.js"></script>
@@ -72,32 +73,47 @@
     </script>
     <script>
       const reducer = (state, action) => {
-        switch(action.type) {
+        switch (action.type) {
           case "Increment":
             return state + 1;
           default:
             return state;
         }
-      }
-
+      };
 
       const Wrapper = (props) => {
         const [state, dispatch] = React.useReducer(reducer, 0);
 
         React.useEffect(() => {
           setInterval(() => {
-              dispatch({ type: "Increment" })
-            }, 500)
-        }, [])
+            dispatch({ type: "Increment" });
+          }, 500);
+        }, []);
 
-        return React.createElement(LikeButton, { count: state, onClick: props.onClick })
-      }
+        return React.createElement(LikeButton, {
+          count: state,
+          onClick: props.onClick,
+        });
+      };
 
-      const onClick = () => {
-        console.log("I was clicked on")
-      }
+      const onClick1 = () => {
+        console.log("I was clicked on");
+      };
 
-      ReactDOM.render(React.createElement(Wrapper, { onClick: onClick }), document.querySelector("#likeButton"));
+      ReactDOM.render(
+        React.createElement(Wrapper, { onClick: onClick1 }),
+        document.querySelector("#likeButton")
+      );
+
+      ReactDOM.render(
+        React.createElement(BarChart, {
+          width: 200,
+          height: 100,
+          data: [4, 10, 5, 0, 20],
+          barPadding: 1
+        }),
+        document.querySelector("#reactBarChart")
+      );
     </script>
   </body>
 </html>

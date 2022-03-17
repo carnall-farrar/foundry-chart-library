@@ -8,6 +8,7 @@ import {
   addAccordion,
 } from "./sentenceTable";
 import { LikeButton } from "./likebutton";
+import { BarChart } from "./components/BarChart"
 
 global.tabulate = tabulate;
 global.createExecTable = createExecTable;
@@ -17,3 +18,4 @@ global.buildSentenceComponent = buildSentenceComponent;
 global.lightDocumentation = lightDocumentation;
 global.addAccordion = addAccordion;
 global.LikeButton = LikeButton;
+global.BarChart = BarChart;
