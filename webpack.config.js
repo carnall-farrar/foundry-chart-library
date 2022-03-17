@@ -15,8 +15,9 @@ module.exports = {
         use: ['style-loader', 'css-loader']
       },
       {
-        test: /\.m?js$/,
+        test: /\.m?jsx?$/,
         exclude: /(node_modules)/,
+        resolve: { extensions: [".js", ".jsx"] },
         use: {
           loader: 'babel-loader',
           options: {
@@ -25,5 +26,5 @@ module.exports = {
         }
       }
     ]
-  }
+  },
 }
