@@ -193,6 +193,18 @@ scoreCard = {
 benchmark = {
   inputData: [
     {
+      '': 'Data last uptated',
+      'VWA (>/= 104%)': '30.01.2022',
+      'Completed Pathways (>/= 110%)': '30.01.2022',
+      'IS Activity (>/= 130%)': '30.01.2022',
+      'Outpatient Reduction (>/= 85%)': '30.01.2022',
+      'Wait to First Outpatient (TBC) -> not in data': '30.01.2022',
+      '104ww (0)': '30.01.2022',
+      '78ww (0)': '30.01.2022',
+      'Cancer 62 Days (14,266)': '30.01.2022',
+      'Diagnostic Test Activity (120%)': '30.01.2022'
+    },
+    {
       '': 'England',
       'VWA (>/= 104%)': '83%',
       'Completed Pathways (>/= 110%)': '90%',
