@@ -9,7 +9,7 @@
   ],
   "scripts": {
     "build": "webpack",
-    "start": "python -m SimpleHTTPServer 8001"
+    "start": "python -m http.server 8001"
   },
   "repository": {
     "type": "git",
@@ -26,9 +26,13 @@
     "lodash": "^4.17.21"
   },
   "devDependencies": {
+    "@babel/core": "^7.17.7",
+    "@babel/preset-env": "^7.16.11",
+    "@babel/preset-react": "^7.16.7",
+    "babel-loader": "^8.2.3",
     "css-loader": "^6.2.0",
     "style-loader": "^3.2.1",
-    "webpack": "^5.65.0",
+    "webpack": "^5.70.0",
     "webpack-cli": "^4.8.0"
   }
 }

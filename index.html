@@ -6,38 +6,114 @@
     <script src="https://unpkg.com/lodash@4.17.20"></script>
   </head>
   <body>
-    <link href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" rel="stylesheet"/>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.16.0/d3.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link
+      href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.16.0/d3.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-  <div style="width:70%; margin:auto;">
-    <h2>CF data innovation d3 component library</h2><br>
-    <h3>Table used across Opred</h3>
-    <p>Showing example data and colours</p>
-    <div id="mainTable"></div><br>
-    <h3>Executive dashboard table structure</h3>
-    <p>Showing example data and colours</p>
-    <div id='execTable'></div><br>
-    <h3>Sentence table</h3>
-    <div id='sentenceTable'></div><br>
-    <div id="accordionRoot"></div>
-    <br>
-    <br>
-    <p>Below components in progress</p>
-    <div id='barChart'></div><br>
-    <div id='timeseries'></div><br>
-    <div>TODO new component</div>
-  </div>
+    <div style="width: 70%; margin: auto">
+      <h2>CF data innovation d3 component library</h2>
+      <br />
+      <h3>Table used across Opred</h3>
+      <p>Showing example data and colours</p>
+      <div id="mainTable"></div>
+      <br />
+      <div>
+        Score card table
+        <div>filters here....</div>
+        <div id="scorecard-table"></div>
+        <br />
+      </div>
+      <h3>Executive dashboard table structure</h3>
+      <p>Showing example data and colours</p>
+      <div id="execTable"></div>
+      <br />
+      <h3>Sentence table</h3>
+      <div id="sentenceTable"></div>
+      <br />
+      <div id="accordionRoot"></div>
+      <br />
+      <br />
+      <p>Below components in progress</p>
+      <div id="barChart"></div>
+      <br />
+      <div id="timeseries"></div>
+      <br />
+      <div id="likeButton">TODO new component</div>
+      <div id="reactBarChart"></div>
+    </div>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@17/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"
+    ></script>
+
     <script src="./dist/main.js"></script>
-    <script src='./data.js'></script>
-    <script src='./data2.js'></script>
+    <script src="./data.js"></script>
+    <script src="./data2.js"></script>
+
     <script>
-        tabulate("#mainTable", data.dataIP, data.cols)
-        createExecTable("#execTable", execData.dataIP, execData.columns, execData.progs) 
-        timeseriesChart('#timeseries', timeSeries)
-        barChart('#barChart', width=1000, height=200, barPadding=1)
-        buildSentenceComponent("#sentenceTable", sentences.dataIP) 
-        addAccordion("#accordionRoot", accordionData)
+      tabulate("#mainTable", data.dataIP, data.cols);
+      tabulate("#scorecard-table", data.dataIP, data.cols);
+      createExecTable(
+        "#execTable",
+        execData.dataIP,
+        execData.columns,
+        execData.progs
+      );
+      timeseriesChart("#timeseries", timeSeries);
+      barChart("#barChart", (width = 1000), (height = 200), (barPadding = 1));
+      buildSentenceComponent("#sentenceTable", sentences.dataIP);
+      addAccordion("#accordionRoot", accordionData);
+    </script>
+    <script>
+      const reducer = (state, action) => {
+        switch (action.type) {
+          case "Increment":
+            return state + 1;
+          default:
+            return state;
+        }
+      };
+
+      const Wrapper = (props) => {
+        const [state, dispatch] = React.useReducer(reducer, 0);
+
+        React.useEffect(() => {
+          setInterval(() => {
+            dispatch({ type: "Increment" });
+          }, 500);
+        }, []);
+
+        return React.createElement(LikeButton, {
+          count: state,
+          onClick: props.onClick,
+        });
+      };
+
+      const onClick1 = () => {
+        console.log("I was clicked on");
+      };
+
+      ReactDOM.render(
+        React.createElement(Wrapper, { onClick: onClick1 }),
+        document.querySelector("#likeButton")
+      );
+
+      ReactDOM.render(
+        React.createElement(BarChart, {
+          width: 200,
+          height: 100,
+          data: [4, 10, 5, 0, 20],
+          barPadding: 1
+        }),
+        document.querySelector("#reactBarChart")
+      );
     </script>
   </body>
 </html>
