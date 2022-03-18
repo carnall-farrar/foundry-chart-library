@@ -9,6 +9,8 @@ import {
 } from "./sentenceTable";
 import { LikeButton } from "./likebutton";
 import { BarChart } from "./components/BarChart"
+import { TrendLineChart } from "./components/TrendLineChart"
+import { ExecTableComponent } from "./components/ExecTableComponent"
 
 global.tabulate = tabulate;
 global.createExecTable = createExecTable;
@@ -19,3 +21,5 @@ global.lightDocumentation = lightDocumentation;
 global.addAccordion = addAccordion;
 global.LikeButton = LikeButton;
 global.BarChart = BarChart;
+global.TrendLineChart = TrendLineChart;
+global.ExecTableComponent = ExecTableComponent;

@@ -43,6 +43,7 @@
       <br />
       <div id="likeButton">TODO new component</div>
       <div id="reactBarChart"></div>
+      <div id="trendLineChart"></div>
     </div>
     <script
       crossorigin
@@ -52,6 +53,8 @@
       crossorigin
       src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"
     ></script>
+    <script src="https://unpkg.com/prop-types/prop-types.min.js"></script>
+    <script src="https://unpkg.com/recharts/umd/Recharts.js"></script>
 
     <script src="./dist/main.js"></script>
     <script src="./data.js"></script>
@@ -110,9 +113,33 @@
           width: 200,
           height: 100,
           data: [4, 10, 5, 0, 20],
-          barPadding: 1
+          barPadding: 1,
         }),
         document.querySelector("#reactBarChart")
+      );
+
+      ReactDOM.render(
+        React.createElement(TrendLineChart, {
+          width: 300,
+          height: 150,
+          data: [
+            { date: "11/04/2021", value: 100 },
+            { date: "11/11/2021", value: 102 },
+            { date: "11/18/2021", value: 108 },
+            { date: "11/25/2021", value: 116 },
+            { date: "12/02/2021", value: 125 },
+            { date: "12/09/2021", value: 126 },
+          ],
+        }),
+        document.querySelector("#trendLineChart")
+      );
+
+      ReactDOM.render(
+        React.createElement(ExecTableComponent, {
+          data: data.dataIP,
+          columns: data.cols,
+        }),
+        document.querySelector("#trendLineChart")
       );
     </script>
   </body>
