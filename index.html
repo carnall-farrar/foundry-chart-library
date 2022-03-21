@@ -44,6 +44,7 @@
       <div id="likeButton">TODO new component</div>
       <div id="reactBarChart"></div>
       <div id="trendLineChart"></div>
+      <div id="benchmarkComponent"></div>
     </div>
     <script
       crossorigin
@@ -55,10 +56,12 @@
     ></script>
     <script src="https://unpkg.com/prop-types/prop-types.min.js"></script>
     <script src="https://unpkg.com/recharts/umd/Recharts.js"></script>
+    <script src="https://unpkg.com/react-table@7.7.0/dist/react-table.production.min.js"></script>
 
     <script src="./dist/main.js"></script>
     <script src="./data.js"></script>
     <script src="./data2.js"></script>
+    <script src="./newData.js"></script>
 
     <script>
       tabulate("#mainTable", data.dataIP, data.cols);
@@ -135,11 +138,11 @@
       );
 
       ReactDOM.render(
-        React.createElement(ExecTableComponent, {
-          data: data.dataIP,
-          columns: data.cols,
+        React.createElement(BenchmarkComponent, {
+          data: benchmark.inputData,
+          columns: benchmark.metricColumns,
         }),
-        document.querySelector("#trendLineChart")
+        document.querySelector("#benchmarkComponent")
       );
     </script>
   </body>

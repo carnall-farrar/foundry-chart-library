@@ -10,7 +10,7 @@ import {
 import { LikeButton } from "./likebutton";
 import { BarChart } from "./components/BarChart"
 import { TrendLineChart } from "./components/TrendLineChart"
-import { ExecTableComponent } from "./components/ExecTableComponent"
+import { BenchmarkComponent } from "./components/BenchmarkComponent"
 
 global.tabulate = tabulate;
 global.createExecTable = createExecTable;
@@ -22,4 +22,4 @@ global.addAccordion = addAccordion;
 global.LikeButton = LikeButton;
 global.BarChart = BarChart;
 global.TrendLineChart = TrendLineChart;
-global.ExecTableComponent = ExecTableComponent;
+global.BenchmarkComponent = BenchmarkComponent;
