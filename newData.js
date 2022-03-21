@@ -20,6 +20,25 @@ scoreCard = {
       '6 week trend': [0.84, 0.94, 0.90, 0.87, 0.84, 0.80]
     },
     {
+      'Performance Area': 'Activity',
+      'Metric': 'Value Weighted Activity (NHS)',
+      'Data last updated': 'February 10 2022',
+      '22/23 Ambition': '=/> 101%',
+      'April 22': '89%',
+      'May 22': '101%',
+      'June 22': '',
+      'July 22': '',
+      'Aug 22': '',
+      'Sept 22': '',
+      'Oct 22': '',
+      'Nov 22': '',
+      'Dec 22': '',
+      'Jan 22': '',
+      'Feb 22': '',
+      'March 22': '',
+      '6 week trend': [0.84, 0.94, 0.90, 0.87, 0.84, 0.80]
+    },
+    {
       'Performance Area': 'Long Waits',
       'Metric': 'Value Weighted Activity (IS)',
       'Data last updated': 'February 10 2022',
