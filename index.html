@@ -44,6 +44,7 @@
       <div id="likeButton">TODO new component</div>
       <div id="reactBarChart"></div>
       <div id="trendLineChart"></div>
+      <div id="scorecardComponent"></div>
       <div id="benchmarkComponent"></div>
     </div>
     <script
@@ -135,6 +136,14 @@
           ],
         }),
         document.querySelector("#trendLineChart")
+      );
+
+      ReactDOM.render(
+        React.createElement(ScorecardComponent, {
+          data: scoreCard.inputData,
+          columns: scoreCard.columns,
+        }),
+        document.querySelector("#scorecardComponent")
       );
 
       ReactDOM.render(
