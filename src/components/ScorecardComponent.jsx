@@ -1,95 +1,74 @@
 import { TrendLineChart } from "./TrendLineChart";
+
+const StyledTd = window.styled.td`
+  color: red§;
+`;
+
 export const ScorecardComponent = ({
   data,
-  columns: columnNames,
+  columns,
+  onClickCell,
   prog,
   showHeaders,
   spacing,
 }) => {
-  const totalColumns = columnNames.length;
-  const trendColumn = columnNames.at(-1);
-  const headerColumn = columnNames.at(0);
-  //   const groups = data.reduce((acc, val) => ({ ...acc, [val[headerColumn]]: (acc[val[headerColumn]] ?? 0) + 1 }), {})
-
-  const columns = React.useMemo(() => {
-    return [
-      {
-        Header: headerColumn,
-        accessor: headerColumn,
-        enableRowSpan: true,
-      },
-      ...columnNames
-        .slice(1, totalColumns - 1)
-        .map((name) => ({ Header: name, accessor: name })),
-      {
-        Header: trendColumn,
-        accessor: trendColumn, // accessor is the "key" in the data
-        Cell: ({ value }) => (
-          <TrendLineChart
-            data={value.map((val) => ({ value: val }))}
-            width={300}
-            height={150}
-          />
+  const headerSpans = React.useMemo(
+    () =>
+      data
+        .map((d) => d[columns[0]])
+        .reduce(
+          (acc, val, index) => ({
+            ...acc,
+            [val]: {
+              span: (acc[val]?.span ?? 0) + 1,
+              index: acc[val]?.index ?? index,
+            },
+          }),
+          {}
         ),
-      },
-    ];
-  }, [columnNames]);
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-    ReactTable.useTable({ columns, data });
+    [data, columns]
+  );
+
+  const renderRow = (rowData, rowIndex) => {
+    const values = Object.values(rowData);
+    const trendValue = values.at(-1);
+    const headerValue = values.at(0);
+    const rowValues = Object.entries(rowData).slice(1, values.length - 1);
+
+    const { index: headerStartIndex, span } = headerSpans[headerValue];
+    console.log(rowIndex, headerStartIndex, span);
+    return (
+      <>
+        {headerStartIndex === rowIndex && <td rowSpan={span}>{headerValue}</td>}
+        {rowValues.map(([header, cellData]) => (
+          <StyledTd onClick={() => onClickCell(header, cellData)}>
+            {cellData}
+          </StyledTd>
+        ))}
+        <td>
+          <TrendLineChart
+            data={trendValue.map((val) => ({ value: val }))}
+            width={50}
+            height={50}
+          />
+        </td>
+      </>
+    );
+  };
 
   return (
-    <table {...getTableProps()}>
+    <table>
       <thead>
-        {
-          // Loop over the header rows
-          headerGroups.map((headerGroup) => (
-            // Apply the header row props
-            <tr {...headerGroup.getHeaderGroupProps()}>
-              {
-                // Loop over the headers in each row
-                headerGroup.headers.map((column) => (
-                  // Apply the header cell props
-                  <th {...column.getHeaderProps()}>
-                    {
-                      // Render the header
-                      column.render("Header")
-                    }
-                  </th>
-                ))
-              }
-            </tr>
-          ))
-        }
+        <tr>
+          {columns.map((column) => (
+            <th key={column}>{column}</th>
+          ))}
+        </tr>
       </thead>
-      {/* Apply the table body props */}
-      <tbody {...getTableBodyProps()}>
-        {
-          // Loop over the table rows
-          rows.map((row) => {
-            // Prepare the row for display
-            prepareRow(row);
-            return (
-              // Apply the row props
-              <tr {...row.getRowProps()}>
-                {
-                  // Loop over the rows cells
-                  row.cells.map((cell) => {
-                    // Apply the cell props
-                    console.log("CELL", cell);
-                    return (
-                      <td {...cell.getCellProps()} rowSpan={cell.rowSpan}>
-                        {
-                          // Render the cell contents
-                          cell.render("Cell")
-                        }
-                      </td>
-                    );
-                  })
-                }
-              </tr>
-            );
-          })
-        }
+      <tbody>
+        {data.map((datum, index) => (
+          <tr key={index}>{renderRow(datum, index)}</tr>
+        ))}
       </tbody>
     </table>
   );
