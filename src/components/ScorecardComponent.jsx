@@ -1,7 +1,15 @@
 import { TrendLineChart } from "./TrendLineChart";
 
+const StyledTable = window.styled.table`
+  margin-bottom: 50px;
+`;
+
 const StyledTd = window.styled.td`
-  color: red§;
+  background-color: ${(props) => props.bg};
+  border-bottom: ${(props) =>
+    props.shouldHaveBorder ? "1px solid black" : "none"};
+  text-align: center;
+  font-size: 10px;
 `;
 
 export const ScorecardComponent = ({
@@ -36,12 +44,18 @@ export const ScorecardComponent = ({
     const rowValues = Object.entries(rowData).slice(1, values.length - 1);
 
     const { index: headerStartIndex, span } = headerSpans[headerValue];
-    console.log(rowIndex, headerStartIndex, span);
+    const headerEndIndex = headerStartIndex + span - 1;
+    const shouldHaveBorder = rowIndex === headerEndIndex;
+    console.log(rowIndex, headerStartIndex, headerEndIndex, shouldHaveBorder);
     return (
       <>
         {headerStartIndex === rowIndex && <td rowSpan={span}>{headerValue}</td>}
         {rowValues.map(([header, cellData]) => (
-          <StyledTd onClick={() => onClickCell(header, cellData)}>
+          <StyledTd
+            onClick={() => onClickCell(header, rowData["Metric"])}
+            bg="yellow"
+            shouldHaveBorder={shouldHaveBorder}
+          >
             {cellData}
           </StyledTd>
         ))}
@@ -57,7 +71,7 @@ export const ScorecardComponent = ({
   };
 
   return (
-    <table>
+    <StyledTable>
       <thead>
         <tr>
           {columns.map((column) => (
@@ -70,6 +84,6 @@ export const ScorecardComponent = ({
           <tr key={index}>{renderRow(datum, index)}</tr>
         ))}
       </tbody>
-    </table>
+    </StyledTable>
   );
 };
