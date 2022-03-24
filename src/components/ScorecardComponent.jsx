@@ -26,7 +26,11 @@ const DataCell = window.styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0.5rem;
+    padding: 0.2rem;
+    height: 1.3rem;
+    width: 4rem;
+    border-radius: 10px;
+    border: 1px solid transparent;
 `;
 
 const RatingCell = ({ rating }) => {
