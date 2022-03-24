@@ -9,9 +9,16 @@ const StyledTd = window.styled.td`
   border-bottom: ${(props) =>
     props.shouldHaveBorder ? "1px solid black" : "none"};
   text-align: center;
-  font-size: 10px;
   border-collapse: collapse;
   padding: 1rem;
+`;
+
+const RowHeaderContainer = window.styled.div`
+  border: 2px solid black;
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const DataCell = window.styled.div`
@@ -23,9 +30,20 @@ const DataCell = window.styled.div`
 `;
 
 const RatingCell = ({ rating }) => {
+  if (rating && rating.at(-1) !== "%") {
+    return rating;
+  }
   const color = rating ? "red" : "gray";
   return <DataCell bg={color}>{rating || "~"}</DataCell>;
 };
+
+// border-collapse: ${(props) => (props.hasRating ? "collapse" : "none")};
+
+const StyledTh = window.styled.th`
+  background-color: ${(props) => (props.hasRating ? "#666" : "#AAA")};
+  border: 6px solid;
+  border-color: ${(props) => (props.hasRating ? "#666" : "#FFF")};
+`;
 
 export const ScorecardComponent = ({
   data,
@@ -66,7 +84,7 @@ export const ScorecardComponent = ({
       <>
         {headerStartIndex === rowIndex && (
           <StyledTd rowSpan={span} shouldHaveBorder>
-            {headerValue}
+            <RowHeaderContainer>{headerValue}</RowHeaderContainer>
           </StyledTd>
         )}
         {rowValues.map(([header, cellData], colIndex) => (
@@ -96,8 +114,13 @@ export const ScorecardComponent = ({
     <StyledTable>
       <thead>
         <tr>
-          {columns.map((column) => (
-            <th key={column}>{column}</th>
+          {columns.map((column, index) => (
+            <StyledTh
+              key={column}
+              hasRating={index > 3 && index < columns.length - 1}
+            >
+              {column}
+            </StyledTh>
           ))}
         </tr>
       </thead>

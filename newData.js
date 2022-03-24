@@ -43,7 +43,7 @@ scoreCard = {
       'Metric': 'Value Weighted Activity (IS)',
       'Data last updated': 'February 10 2022',
       '22/23 Ambition': '=/> 101%',
-      'April 22': '89%',
+      'April 22': '89',
       'May 22': '101%',
       'June 22': '',
       'July 22': '',
