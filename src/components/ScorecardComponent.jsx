@@ -14,11 +14,13 @@ const StyledTd = window.styled.td`
 `;
 
 const RowHeaderContainer = window.styled.div`
-  border: 2px solid black;
+  font-size: 1rem;  
+  border: 2px solid #003EFF;
   padding: 1rem;
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 5rem;
 `;
 
 const DataCell = window.styled.div`
