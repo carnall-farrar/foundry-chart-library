@@ -6,12 +6,19 @@ export const StyledTable = window.styled.table`
   border-collapse: collapse;
 `;
 
+const StyledTr = window.styled.tr`
+  margin: 0;
+  padding: 0;
+`;
+
 const StyledTd = window.styled.td`
   border-bottom: ${(props) =>
     props.shouldHaveBorder ? "1px solid black" : "none"};
   text-align: center;
   border-collapse: collapse;
-  padding: 1rem;
+  // padding: 1rem;
+  padding: 3px;
+  margin: 0;
 `;
 
 const RowHeaderContainer = window.styled.div`
@@ -31,7 +38,7 @@ const DataCell = window.styled.div`
     justify-content: center;
     padding: 0.2rem;
     height: 1.3rem;
-    width: 4rem;
+    width: 3rem;
     border-radius: 10px;
     border: 1px solid transparent;
 `;
@@ -49,6 +56,9 @@ const RatingCell = ({ rating }) => {
 const StyledTh = window.styled.th`
   background-color: ${(props) => (props.hasRating ? "#666" : "#AAA")};
   // border: 1px solid;
+  margin: 0;
+  // padding: 0;
+  width: ${(props) => (props.hasRating ? "intial" : "5rem")};
   border-color: ${(props) => (props.hasRating ? "#666" : "#FFF")};
 `;
 
@@ -123,7 +133,7 @@ export const ScorecardComponent = ({
   return (
     <StyledTable>
       <thead>
-        <tr>
+        <StyledTr>
           {columns.map((column, index) => (
             <StyledTh
               key={column}
@@ -132,11 +142,11 @@ export const ScorecardComponent = ({
               {column}
             </StyledTh>
           ))}
-        </tr>
+        </StyledTr>
       </thead>
       <tbody>
         {data.map((datum, index) => (
-          <tr key={index}>{renderRow(datum, index)}</tr>
+          <StyledTr key={index}>{renderRow(datum, index)}</StyledTr>
         ))}
       </tbody>
     </StyledTable>
