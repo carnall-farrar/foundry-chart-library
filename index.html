@@ -5,39 +5,157 @@
     <title>CF chart library</title>
     <script src="https://unpkg.com/lodash@4.17.20"></script>
   </head>
-  <body>
-    <link href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" rel="stylesheet"/>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.16.0/d3.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <body style="font-size: 10px">
+    <link
+      href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.16.0/d3.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-  <div style="width:70%; margin:auto;">
-    <h2>CF data innovation d3 component library</h2><br>
-    <h3>Table used across Opred</h3>
-    <p>Showing example data and colours</p>
-    <div id="mainTable"></div><br>
-    <h3>Executive dashboard table structure</h3>
-    <p>Showing example data and colours</p>
-    <div id='execTable'></div><br>
-    <h3>Sentence table</h3>
-    <div id='sentenceTable'></div><br>
-    <div id="accordionRoot"></div>
-    <br>
-    <br>
-    <p>Below components in progress</p>
-    <div id='barChart'></div><br>
-    <div id='timeseries'></div><br>
-    <div>TODO new component</div>
-  </div>
+    <div style="width: 70%; margin: auto">
+      <h2>CF data innovation d3 component library</h2>
+      <br />
+      <h3>Table used across Opred</h3>
+      <p>Showing example data and colours</p>
+      <div id="mainTable"></div>
+      <br />
+      <div>
+        Score card table
+        <div>filters here....</div>
+        <div id="scorecard-table"></div>
+        <br />
+      </div>
+      <h3>Executive dashboard table structure</h3>
+      <p>Showing example data and colours</p>
+      <div id="execTable"></div>
+      <br />
+      <h3>Sentence table</h3>
+      <div id="sentenceTable"></div>
+      <br />
+      <div id="accordionRoot"></div>
+      <br />
+      <br />
+      <p>Below components in progress</p>
+      <div id="barChart"></div>
+      <br />
+      <div id="timeseries"></div>
+      <br />
+      <div id="likeButton">TODO new component</div>
+      <div id="reactBarChart"></div>
+      <div id="trendLineChart"></div>
+      <div id="scorecardComponent"></div>
+      <div id="benchmarkComponent" style="width:1400px;"></div>
+    </div>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@17/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"
+    ></script>
+    <script src="https://unpkg.com/prop-types/prop-types.min.js"></script>
+    <script src="https://unpkg.com/recharts/umd/Recharts.js"></script>
+    <script src="https://unpkg.com/react-table@7.7.0/dist/react-table.production.min.js"></script>
+    <script src="https://unpkg.com/react-is@17.0.2/umd/react-is.production.min.js"></script>
+    <script src="https://unpkg.com/styled-components/dist/styled-components.min.js"></script>
+
     <script src="./dist/main.js"></script>
-    <script src='./data.js'></script>
-    <script src='./data2.js'></script>
+    <script src="./data.js"></script>
+    <script src="./data2.js"></script>
+    <script src="./newData.js"></script>
+
     <script>
-        tabulate("#mainTable", data.dataIP, data.cols)
-        createExecTable("#execTable", execData.dataIP, execData.columns, execData.progs) 
-        timeseriesChart('#timeseries', timeSeries)
-        barChart('#barChart', width=1000, height=200, barPadding=1)
-        buildSentenceComponent("#sentenceTable", sentences.dataIP) 
-        addAccordion("#accordionRoot", accordionData)
+      tabulate("#mainTable", data.dataIP, data.cols);
+      tabulate("#scorecard-table", data.dataIP, data.cols);
+      createExecTable(
+        "#execTable",
+        execData.dataIP,
+        execData.columns,
+        execData.progs
+      );
+      timeseriesChart("#timeseries", timeSeries);
+      barChart("#barChart", (width = 1000), (height = 200), (barPadding = 1));
+      buildSentenceComponent("#sentenceTable", sentences.dataIP);
+      addAccordion("#accordionRoot", accordionData);
+    </script>
+    <script>
+      const reducer = (state, action) => {
+        switch (action.type) {
+          case "Increment":
+            return state + 1;
+          default:
+            return state;
+        }
+      };
+
+      const Wrapper = (props) => {
+        const [state, dispatch] = React.useReducer(reducer, 0);
+
+        React.useEffect(() => {
+          setInterval(() => {
+            dispatch({ type: "Increment" });
+          }, 500);
+        }, []);
+
+        return React.createElement(LikeButton, {
+          count: state,
+          onClick: props.onClick,
+        });
+      };
+
+      const onClick1 = () => {
+        console.log("I was clicked on");
+      };
+
+      ReactDOM.render(
+        React.createElement(Wrapper, { onClick: onClick1 }),
+        document.querySelector("#likeButton")
+      );
+
+      ReactDOM.render(
+        React.createElement(BarChart, {
+          width: 200,
+          height: 100,
+          data: [4, 10, 5, 0, 20],
+          barPadding: 1,
+        }),
+        document.querySelector("#reactBarChart")
+      );
+
+      ReactDOM.render(
+        React.createElement(TrendLineChart, {
+          width: 600,
+          height: 150,
+          data: [
+            { date: "11/04/2021", value: 100 },
+            { date: "11/11/2021", value: 102 },
+            { date: "11/18/2021", value: 108 },
+            { date: "11/25/2021", value: 116 },
+            { date: "12/02/2021", value: 125 },
+            { date: "12/09/2021", value: 126 },
+          ],
+        }),
+        document.querySelector("#trendLineChart")
+      );
+
+      ReactDOM.render(
+        React.createElement(ScorecardComponent, {
+          data: scoreCard.inputData,
+          columns: scoreCard.columns,
+        }),
+        document.querySelector("#scorecardComponent")
+      );
+
+      ReactDOM.render(
+        React.createElement(BenchmarkComponent, {
+          headers: benchmark.headers,
+          records: benchmark.records,
+          metricsMetadata: benchmark.metricsMetadata
+        }),
+        document.querySelector("#benchmarkComponent")
+      );
     </script>
   </body>
 </html>
