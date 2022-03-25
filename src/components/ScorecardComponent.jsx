@@ -1,5 +1,11 @@
 import { TrendLineChart } from "./TrendLineChart";
-import Activity from "../icons/Activity";
+import {
+  Activity,
+  Cancer,
+  LongWaits,
+  OutPatients,
+  Diagnostics,
+} from "../icons";
 
 export const StyledTable = window.styled.table`
   margin-bottom: 50px;
@@ -16,7 +22,6 @@ const StyledTd = window.styled.td`
     props.shouldHaveBorder ? "1px solid black" : "none"};
   text-align: center;
   border-collapse: collapse;
-  // padding: 1rem;
   padding: 3px;
   margin: 0;
 `;
@@ -55,12 +60,18 @@ const RatingCell = ({ rating }) => {
 
 const StyledTh = window.styled.th`
   background-color: ${(props) => (props.hasRating ? "#666" : "#AAA")};
-  // border: 1px solid;
   margin: 0;
-  // padding: 0;
   width: ${(props) => (props.hasRating ? "intial" : "5rem")};
   border-color: ${(props) => (props.hasRating ? "#666" : "#FFF")};
 `;
+
+const performanceIconMap = {
+  Activity: Activity,
+  "Long Waits": LongWaits,
+  Cancer: Cancer,
+  Outpatients: OutPatients,
+  Diagnostics: Diagnostics,
+};
 
 export const ScorecardComponent = ({
   data,
@@ -97,12 +108,14 @@ export const ScorecardComponent = ({
     const headerEndIndex = headerStartIndex + span - 1;
     const shouldHaveBorder = rowIndex === headerEndIndex;
     const ratingStartIndex = 3;
+    const PerformanceIcon = performanceIconMap[headerValue];
+
     return (
       <>
         {headerStartIndex === rowIndex && (
           <StyledTd rowSpan={span} shouldHaveBorder>
             <RowHeaderContainer>
-              <Activity />
+              <PerformanceIcon />
               {headerValue}
             </RowHeaderContainer>
           </StyledTd>
