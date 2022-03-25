@@ -7,6 +7,8 @@ import {
   Diagnostics,
 } from "../icons";
 
+import Colors from "../colors"
+
 export const StyledTable = window.styled.table`
   margin-bottom: 50px;
   border-collapse: collapse;
@@ -37,32 +39,42 @@ const RowHeaderContainer = window.styled.div`
 `;
 
 const DataCell = window.styled.div`
-    background-color: ${(props) => props.bg};
+    background-color: ${(props) =>
+      props.hasRating ? Colors.red_light : Colors.gray_dark};
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 0.2rem;
-    height: 1.3rem;
-    width: 3rem;
-    border-radius: 10px;
-    border: 1px solid transparent;
+    height: 1.2rem;
+    width: 2.5rem;
+    border-radius: 8px;
+    color: ${(props) => (props.hasRating ? Colors.red_dark : Colors.white)};
+    border: 1px solid ${(props) =>
+      props.hasRating ? Colors.red_dark : Colors.gray_dark};
+    cursor: pointer;
 `;
 
 const RatingCell = ({ rating }) => {
   if (rating && rating.at(-1) !== "%") {
     return rating;
   }
-  const color = rating ? "red" : "gray";
-  return <DataCell bg={color}>{rating || "~"}</DataCell>;
+
+  return <DataCell hasRating={!!rating}>{rating || "~"}</DataCell>;
 };
 
 // border-collapse: ${(props) => (props.hasRating ? "collapse" : "none")};
 
 const StyledTh = window.styled.th`
-  background-color: ${(props) => (props.hasRating ? "#666" : "#AAA")};
+  background-color: ${(props) =>
+    props.hasRating ? Colors.gray_dark : Colors.gray_light};
+  color: ${(props) => (props.hasRating ? Colors.white : "inherit")};
   margin: 0;
-  width: ${(props) => (props.hasRating ? "intial" : "5rem")};
-  border-color: ${(props) => (props.hasRating ? "#666" : "#FFF")};
+  border: 6px solid ${(props) =>
+    props.hasRating ? Colors.gray_dark : Colors.white};
+  border-top-color: ${Colors.white};
+  border-bottom-color: ${Colors.white};
+  border-right-width: ${(props) => (props.hasRating ? "0px" : "6px")};
+  white-space: ${(props) => (props.isTrend ? "nowrap" : "inherit")}
 `;
 
 const performanceIconMap = {
@@ -135,7 +147,7 @@ export const ScorecardComponent = ({
         <StyledTd shouldHaveBorder={shouldHaveBorder}>
           <TrendLineChart
             data={trendValue.map((val) => ({ value: val }))}
-            width={50}
+            width={120}
             height={50}
           />
         </StyledTd>
@@ -151,6 +163,7 @@ export const ScorecardComponent = ({
             <StyledTh
               key={column}
               hasRating={index > 3 && index < columns.length - 1}
+              isTrend={index === columns.length - 1}
             >
               {column}
             </StyledTh>
