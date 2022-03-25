@@ -45,7 +45,7 @@
       <div id="reactBarChart"></div>
       <div id="trendLineChart"></div>
       <div id="scorecardComponent"></div>
-      <div id="benchmarkComponent"></div>
+      <div id="benchmarkComponent" style="width:1400px;"></div>
     </div>
     <script
       crossorigin
@@ -150,8 +150,9 @@
 
       ReactDOM.render(
         React.createElement(BenchmarkComponent, {
-          data: benchmark.inputData,
-          columns: benchmark.metricColumns,
+          headers: benchmark.headers,
+          records: benchmark.records,
+          metricsMetadata: benchmark.metricsMetadata
         }),
         document.querySelector("#benchmarkComponent")
       );

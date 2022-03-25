@@ -9,6 +9,7 @@
   ],
   "scripts": {
     "build": "webpack",
+    "build:watch": "webpack --watch",
     "start": "python -m http.server 8001"
   },
   "repository": {

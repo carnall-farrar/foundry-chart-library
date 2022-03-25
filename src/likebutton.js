@@ -5,7 +5,6 @@ export class LikeButton extends React.Component {
   }
 
   render() {
-    console.log(this.props.count);
     if (this.state.liked) {
       return "You liked this.";
     }
