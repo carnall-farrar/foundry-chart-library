@@ -7,7 +7,7 @@ import {
   Diagnostics,
 } from "../icons";
 
-import Colors from "../colors"
+import Colors from "../colors";
 
 export const StyledTable = window.styled.table`
   margin-bottom: 50px;
@@ -52,6 +52,14 @@ const DataCell = window.styled.div`
     border: 1px solid ${(props) =>
       props.hasRating ? Colors.red_dark : Colors.gray_dark};
     cursor: pointer;
+    transition: all 1250ms cubic-bezier(0.19, 1, 0.22, 1);
+    &:hover {
+      border: 1px solid;
+      box-shadow: inset 0 0 20px rgba(255, 255, 255, .5), 0 0 20px rgba(255, 255, 255, .2);
+      outline-color: rgba(255, 255, 255, 0);
+      outline-offset: 15px;
+      text-shadow: 1px 1px 2px #427388; 
+  }
 `;
 
 const RatingCell = ({ rating }) => {
