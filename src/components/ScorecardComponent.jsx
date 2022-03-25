@@ -1,4 +1,5 @@
 import { TrendLineChart } from "./TrendLineChart";
+import Activity from "../icons/Activity";
 
 export const StyledTable = window.styled.table`
   margin-bottom: 50px;
@@ -14,7 +15,7 @@ const StyledTd = window.styled.td`
 `;
 
 const RowHeaderContainer = window.styled.div`
-  font-size: 1rem;  
+  font-size: 0.7rem;  
   border: 2px solid #003EFF;
   padding: 1rem;
   display: flex;
@@ -47,7 +48,7 @@ const RatingCell = ({ rating }) => {
 
 const StyledTh = window.styled.th`
   background-color: ${(props) => (props.hasRating ? "#666" : "#AAA")};
-  border: 6px solid;
+  // border: 1px solid;
   border-color: ${(props) => (props.hasRating ? "#666" : "#FFF")};
 `;
 
@@ -90,7 +91,10 @@ export const ScorecardComponent = ({
       <>
         {headerStartIndex === rowIndex && (
           <StyledTd rowSpan={span} shouldHaveBorder>
-            <RowHeaderContainer>{headerValue}</RowHeaderContainer>
+            <RowHeaderContainer>
+              <Activity />
+              {headerValue}
+            </RowHeaderContainer>
           </StyledTd>
         )}
         {rowValues.map(([header, cellData], colIndex) => (
