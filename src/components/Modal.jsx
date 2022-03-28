@@ -56,8 +56,6 @@ const Title = window.styled.div`
 
 const IconWrapper = window.styled.svg`
   font-size: 20px;
-  font-weight: ${({ theme }) => theme.fonts.weight.bold};
-  fill: ${({ theme }) => theme.colors.black};
   width: 20px;
   height: 100%;
   position: relative;

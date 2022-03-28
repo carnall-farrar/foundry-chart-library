@@ -7,6 +7,7 @@ import {
   Diagnostics,
 } from "../icons";
 import { Modal } from "./Modal";
+import { TimelineSeriesChart } from "./TimelineSeriesChart";
 
 import Colors from "../colors";
 
@@ -153,7 +154,7 @@ export const ScorecardComponent = ({
           }}
           showModal={showModal}
         >
-          Content goes here...
+          <TimelineSeriesChart width={300} height={150} data={[0, 10, 50, 8]} />
         </Modal>
 
         {rowValues.map(([header, cellData], colIndex) => (
