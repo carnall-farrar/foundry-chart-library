@@ -23,7 +23,5 @@ global.lightDocumentation = lightDocumentation;
 global.addAccordion = addAccordion;
 global.LikeButton = LikeButton;
 global.BarChart = BarChart;
-global.TrendLineChart = TrendLineChart;
 global.BenchmarkComponent = BenchmarkComponent;
 global.ScorecardComponent = ScorecardComponent;
-global.ModalContainer = ModalContainer;

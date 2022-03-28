@@ -6,6 +6,7 @@ import {
   OutPatients,
   Diagnostics,
 } from "../icons";
+import { Modal } from "./Modal";
 
 import Colors from "../colors";
 
@@ -97,10 +98,12 @@ export const ScorecardComponent = ({
   data,
   columns,
   onClickCell,
+  // chartData,
   prog,
   showHeaders,
   spacing,
 }) => {
+  const [showModal, setShowModal] = React.useState(false);
   const headerSpans = React.useMemo(
     () =>
       data
@@ -117,6 +120,10 @@ export const ScorecardComponent = ({
         ),
     [data, columns]
   );
+
+  const openModal = () => {
+    setShowModal((prev) => !prev);
+  };
 
   const renderRow = (rowData, rowIndex) => {
     const values = Object.values(rowData);
@@ -140,9 +147,21 @@ export const ScorecardComponent = ({
             </RowHeaderContainer>
           </StyledTd>
         )}
+        <Modal
+          onClose={() => {
+            setShowModal(false);
+          }}
+          showModal={showModal}
+        >
+          Content goes here...
+        </Modal>
+
         {rowValues.map(([header, cellData], colIndex) => (
           <StyledTd
-            onClick={() => onClickCell(header, rowData["Metric"])}
+            onClick={() => {
+              setShowModal(true);
+              onClickCell(header, rowData["Metric"]);
+            }}
             shouldHaveBorder={shouldHaveBorder}
           >
             {colIndex >= ratingStartIndex ? (

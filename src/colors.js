@@ -1,6 +1,6 @@
 export default {
-  red_light: "#E06060",
-  red_dark: "#8B0000",
+  red_light: "#ffd4d4",
+  red_dark: "#b54f4f",
   gray_dark: "#888888",
   gray_light: "#AAAAAA",
   white: "#FFFFFF",

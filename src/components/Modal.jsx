@@ -1,8 +1,4 @@
-import React, { useEffect, useRef } from "react";
-import ReactDOM from "react-dom";
-import styled from "styled-components";
-
-const Background = styled.div`
+const Background = window.styled.div`
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.2);
@@ -16,7 +12,7 @@ const Background = styled.div`
   z-index: 3;
 `;
 
-const ModalWrapper = styled.div`
+const ModalWrapper = window.styled.div`
   width: 550px;
   height: 500px;
   box-shadow: 0 5px 16px rgba(0, 0, 0, 0.2);
@@ -27,9 +23,11 @@ const ModalWrapper = styled.div`
   padding-top: 0px;
   display: initial;
   overflow-y: hidden;
+  justify-content: center;
+  align-items: center;
 `;
 
-const ModalContent = styled.div`
+const ModalContent = window.styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -41,7 +39,7 @@ const ModalContent = styled.div`
   margin-top: 20px;
 `;
 
-const Header = styled.div`
+const Header = window.styled.div`
   display: flex;
   flex-direction: row;
   flex-grow: 1;
@@ -50,13 +48,13 @@ const Header = styled.div`
   align-items: center;
 `;
 
-const Title = styled.div`
+const Title = window.styled.div`
   font-size: 16px;
   font-weight: 600;
   color: #1c1c1c;
 `;
 
-const IconWrapper = styled.svg`
+const IconWrapper = window.styled.svg`
   font-size: 20px;
   font-weight: ${({ theme }) => theme.fonts.weight.bold};
   fill: ${({ theme }) => theme.colors.black};
@@ -66,22 +64,22 @@ const IconWrapper = styled.svg`
   left: 250px;
 `;
 
-const InfoPanelHeaderContainer = styled.div`
+const InfoPanelHeaderContainer = window.styled.div`
   display: flex;
   align-content: center;
   vertical-align: middle;
 `;
 
-const StyledParagraph = styled.div`
+const StyledParagraph = window.styled.div`
   padding-top: 15px;
 `;
 
 const modalRoot = document.getElementById("modal-root");
 
 export const ModalRoot = ({ children }) => {
-  const el = useRef(document.createElement("div"));
+  const el = React.useRef(document.createElement("div"));
 
-  useEffect(() => {
+  React.useEffect(() => {
     modalRoot.appendChild(el.current);
 
     return () => {
@@ -92,7 +90,7 @@ export const ModalRoot = ({ children }) => {
   return ReactDOM.createPortal(children, el.current);
 };
 
-export const Modal = ({ showModal, setShowModal }) => {
+export const Modal = ({ showModal, onClose, children }) => {
   return (
     <>
       {showModal ? (
@@ -106,7 +104,7 @@ export const Modal = ({ showModal, setShowModal }) => {
                   <IconWrapper
                     viewBox="0 0 20 20"
                     xmlns="http://www.w3.org/2000/svg"
-                    onClick={() => setShowModal((prev) => !prev)}
+                    onClick={onClose}
                   >
                     <text x="0" y="18">
                       X
@@ -114,7 +112,7 @@ export const Modal = ({ showModal, setShowModal }) => {
                   </IconWrapper>
                 </Header>
               </InfoPanelHeaderContainer>
-              <ModalContent>This is a modal</ModalContent>
+              <ModalContent>{children}</ModalContent>
             </ModalWrapper>
           </Background>
         </ModalRoot>

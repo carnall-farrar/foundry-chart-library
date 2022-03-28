@@ -46,7 +46,8 @@
       <div id="trendLineChart"></div>
       <div id="scorecardComponent"></div>
       <div id="benchmarkComponent" style="width: 1400px"></div>
-      <div id="modalContainer"></div>
+      <div id="modal"></div>
+      <div id="modal-root"></div>
     </div>
     <script
       crossorigin
@@ -125,21 +126,21 @@
         document.querySelector("#reactBarChart")
       );
 
-      ReactDOM.render(
-        React.createElement(TrendLineChart, {
-          width: 600,
-          height: 150,
-          data: [
-            { date: "11/04/2021", value: 100 },
-            { date: "11/11/2021", value: 102 },
-            { date: "11/18/2021", value: 108 },
-            { date: "11/25/2021", value: 116 },
-            { date: "12/02/2021", value: 125 },
-            { date: "12/09/2021", value: 126 },
-          ],
-        }),
-        document.querySelector("#trendLineChart")
-      );
+      // ReactDOM.render(
+      //   React.createElement(TrendLineChart, {
+      //     width: 600,
+      //     height: 150,
+      //     data: [
+      //       { date: "11/04/2021", value: 100 },
+      //       { date: "11/11/2021", value: 102 },
+      //       { date: "11/18/2021", value: 108 },
+      //       { date: "11/25/2021", value: 116 },
+      //       { date: "12/02/2021", value: 125 },
+      //       { date: "12/09/2021", value: 126 },
+      //     ],
+      //   }),
+      //   document.querySelector("#trendLineChart")
+      // );
 
       ReactDOM.render(
         React.createElement(ScorecardComponent, {
