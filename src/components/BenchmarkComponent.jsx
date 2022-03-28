@@ -98,28 +98,40 @@ const isValuePositive = (value, average, positiveDirection) => {
 
   return true;
 };
-
+ 
 export const BenchmarkComponent = ({
   headers,
   records,
   metricsMetadata,
   onCellClick,
 }) => {
+  if (records.length === 0) {
+    return <div></div>;
+  }
   const [sort, setSort] = React.useState({
     isAsc: true,
     header: Object.values(headers)[0][0].key,
   });
 
-  const sortedRecords = [
-    records[0],
-    ...records.slice(1).sort((a, b) => {
-      if (sort.isAsc) {
-        return a.data[sort.header] < b.data[sort.header] ? 1 : -1;
-      }
+  const fixedRecords = records.filter(
+    (record) => typeof record.fixedPosition === "number"
+  );
 
-      return a.data[sort.header] < b.data[sort.header] ? -1 : 1;
-    }),
-  ];
+  const recordsToSort = records.filter(
+    (record) => typeof record.fixedPosition !== "number"
+  );
+
+  const sortedRecords = recordsToSort.sort((a, b) => {
+    if (sort.isAsc) {
+      return a.data[sort.header] < b.data[sort.header] ? 1 : -1;
+    }
+
+    return a.data[sort.header] < b.data[sort.header] ? -1 : 1;
+  });
+
+  fixedRecords.forEach((record) => {
+    sortedRecords.splice(record.fixedPosition, 0, record);
+  });
 
   return (
     <table>
@@ -193,7 +205,7 @@ export const BenchmarkComponent = ({
               <StyledBodyCell>{record.region}</StyledBodyCell>
               {Object.keys(record.data).map((key, index) => (
                 <StyledBodyCellData
-                  onClick={onCellClick}
+                  onClick={() => onCellClick(record.region, key)}
                   key={`${record.region}${index}`}
                 >
                   <Pill
