@@ -24,7 +24,8 @@ const StyledTd = window.styled.td`
     props.shouldHaveBorder ? "1px solid black" : "none"};
   text-align: center;
   border-collapse: collapse;
-  padding: 3px;
+  padding: ${(props) =>
+    props.isHeader ? "5px" : "3px"};
   margin: 0;
 `;
 
@@ -35,7 +36,7 @@ const RowHeaderContainer = window.styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 5rem;
+  height: ${(props) => props.rowSpan * 2.5}rem;
 `;
 
 const DataCell = window.styled.div`
@@ -134,7 +135,7 @@ export const ScorecardComponent = ({
       <>
         {headerStartIndex === rowIndex && (
           <StyledTd rowSpan={span} shouldHaveBorder>
-            <RowHeaderContainer>
+            <RowHeaderContainer rowSpan={span} isHeader>
               <PerformanceIcon />
               {headerValue}
             </RowHeaderContainer>
