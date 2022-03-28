@@ -117,13 +117,16 @@ const isValuePositive = (value, average, positiveDirection) => {
 
   return true;
 };
-
+ 
 export const BenchmarkComponent = ({
   headers,
   records,
   metricsMetadata,
   onCellClick,
 }) => {
+  if (records.length === 0) {
+    return <div></div>;
+  }
   const [sort, setSort] = React.useState({
     isAsc: true,
     header: Object.values(headers)[0][0].key,
@@ -209,7 +212,7 @@ export const BenchmarkComponent = ({
               <StyledBodyCell>{record.region}</StyledBodyCell>
               {Object.keys(record.data).map((key, index) => (
                 <StyledBodyCellData
-                  onClick={onCellClick}
+                  onClick={() => onCellClick(record.region, key)}
                   key={`${record.region}${index}`}
                 >
                   <Pill
