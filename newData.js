@@ -2,7 +2,7 @@ scoreCard = {
   inputData: [
     {
       "Performance Area": "Activity",
-      Metric: "Value Weighted Activity (NHS)",
+      Metric: "Value Weighted Activity",
       "Data last updated": "February 10 2022",
       "22/23 Ambition": "=/> 101%",
       "April 22": "89%",
@@ -33,7 +33,7 @@ scoreCard = {
     },
     {
       "Performance Area": "Activity",
-      Metric: "Value Weighted Activity (NHS)",
+      Metric: "IS Activity",
       "Data last updated": "February 10 2022",
       "22/23 Ambition": "=/> 101%",
       "April 22": "89%",
@@ -64,7 +64,7 @@ scoreCard = {
     },
     {
       "Performance Area": "Long Waits",
-      Metric: "Value Weighted Activity (IS)",
+      Metric: "78ww",
       "Data last updated": "February 10 2022",
       "22/23 Ambition": "=/> 101%",
       "April 22": "89",
@@ -95,7 +95,7 @@ scoreCard = {
     },
     {
       "Performance Area": "Long Waits",
-      Metric: "Value Weighted Activity (IS)",
+      Metric: "104ww",
       "Data last updated": "February 10 2022",
       "22/23 Ambition": "=/> 101%",
       "April 22": "89%",
@@ -126,7 +126,7 @@ scoreCard = {
     },
     {
       "Performance Area": "Cancer",
-      Metric: "Value Weighted Activity (IS)",
+      Metric: "Cancer 62 Days",
       "Data last updated": "February 10 2022",
       "22/23 Ambition": "=/> 101%",
       "April 22": "89%",
@@ -157,7 +157,7 @@ scoreCard = {
     },
     {
       "Performance Area": "Outpatients",
-      Metric: "Value Weighted Activity (IS)",
+      Metric: "Wait to First Outpatient",
       "Data last updated": "February 10 2022",
       "22/23 Ambition": "=/> 101%",
       "April 22": "89%",
@@ -188,7 +188,7 @@ scoreCard = {
     },
     {
       "Performance Area": "Outpatients",
-      Metric: "Value Weighted Activity (IS)",
+      Metric: "Outpatient Reduction",
       "Data last updated": "February 10 2022",
       "22/23 Ambition": "=/> 101%",
       "April 22": "89%",
@@ -219,7 +219,7 @@ scoreCard = {
     },
     {
       "Performance Area": "Diagnostics",
-      Metric: "Value Weighted Activity (IS)",
+      Metric: "Diagnostic Test Activity",
       "Data last updated": "February 10 2022",
       "22/23 Ambition": "=/> 101%",
       "April 22": "89%",
