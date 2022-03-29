@@ -75,18 +75,19 @@ const RatingCell = ({ rating, metric }) => {
   let tempAmbition = 101;
   let isPositive = rating.replace("%", "") > tempAmbition;
   let result;
-  if (rating && rating.at(-1) !== "%") {
-    return rating;
-  }
+  // if (rating && rating.at(-1) !== "%") {
+  //   return rating;
+  // }
+  
 
   const metricColorMap = {
-    "Value Weighted Activity": "aboveGood", 
+    "Value Weighted Activity": "aboveGood",
     "IS Activity": "aboveGood",
     "Completed pathways": "aboveGood",
     "78ww": "belowGood",
     "104ww": "belowGood",
     "Outpatient Reduction": "aboveGood",
-    "Wait to First Outpatient": "belowGood", 
+    "Wait to First Outpatient": "belowGood",
     "Cancer 62 Days": "belowGood",
     "Diagnostic Test Activity": "aboveGood",
   };
@@ -96,6 +97,10 @@ const RatingCell = ({ rating, metric }) => {
     : metricColorMap[metric] === "belowGood" || !isPositive
     ? (result = false)
     : (result = false);
+
+    // if (rating && rating.at(-1) !== "%") {
+    //   return <DataCell isPositive={result}>{rating}</DataCell>;
+    // }
 
   return (
     <DataCell isPositive={result} hasRating={!!rating}>
