@@ -38,18 +38,6 @@ const RowHeaderContainer = window.styled.div`
   height: ${(props) => props.rowSpan * 2.5}rem;
 `;
 
-let test;
-if ("a" == "a") {
-  test = "test";
-} else {
-  test = "test2";
-}
-if ("a" == "a") {
-  test = "test";
-} else {
-  test = "test2";
-}
-
 const DataCell = window.styled.div`
     background-color: ${(props) =>
       !props.hasRating
@@ -158,7 +146,6 @@ export const ScorecardComponent = ({
     const shouldHaveBorder = rowIndex === headerEndIndex;
     const ratingStartIndex = 3;
     const PerformanceIcon = performanceIconMap[headerValue];
-    
 
     return (
       <>
