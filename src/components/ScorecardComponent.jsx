@@ -89,11 +89,6 @@ const RatingCell = ({ rating }) => {
     return rating;
   }
 
-  console.log(rating, "rating");
-  console.log(120 % -101, "test");
-  // console.log(120% > tempAmbition ? true : false, "ratlogicing");
-  console.log(rating, "typeof  rating");
-
   return (
     <DataCell
       isPositive={rating.replace("%", "") > tempAmbition ? false : true}
