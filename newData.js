@@ -389,38 +389,47 @@ benchmark = {
     VWA: {
       lastUpdated: "",
       goodDirection: 0,
+      unit: "absolute",
     },
     "IS Activity": {
       lastUpdated: "",
       goodDirection: 1,
+      unit: "absolute",
     },
     "Completed pathways": {
       lastUpdated: "",
       goodDirection: 1,
+      unit: "absolute",
     },
     "104ww": {
       lastUpdated: "",
       goodDirection: 1,
+      unit: "absolute",
     },
     "78ww": {
       lastUpdated: "",
       goodDirection: 1,
+      unit: "absolute",
     },
     "Outpatient Reduction": {
       lastUpdated: "",
       goodDirection: 1,
+      unit: "absolute",
     },
     "Wait to First Outpatient": {
       lastUpdated: "",
       goodDirection: 1,
+      unit: "absolute",
     },
     "Cancer 62 Days": {
       lastUpdated: "",
       goodDirection: 1,
+      unit: "absolute",
     },
     "Diagnostic Test Activity": {
       lastUpdated: "",
-      goodDirection: 1,
+      goodDirection: 0,
+      unit: "pourcentage",
     },
   },
   records: [
@@ -435,7 +444,7 @@ benchmark = {
         "Outpatient Reduction": null,
         "Wait to First Outpatient": null,
         "Cancer 62 Days": 1005,
-        "Diagnostic Test Activity": null,
+        "Diagnostic Test Activity": 90,
       },
     },
     {
@@ -450,7 +459,7 @@ benchmark = {
         "Outpatient Reduction": null,
         "Wait to First Outpatient": null,
         "Cancer 62 Days": 20729,
-        "Diagnostic Test Activity": null,
+        "Diagnostic Test Activity": 70,
       },
     },
     {
@@ -464,7 +473,7 @@ benchmark = {
         "Outpatient Reduction": null,
         "Wait to First Outpatient": null,
         "Cancer 62 Days": 593,
-        "Diagnostic Test Activity": null,
+        "Diagnostic Test Activity": 5,
       },
     },
     {
@@ -479,7 +488,7 @@ benchmark = {
         "Outpatient Reduction": null,
         "Wait to First Outpatient": null,
         "Cancer 62 Days": 2600,
-        "Diagnostic Test Activity": null,
+        "Diagnostic Test Activity": 24,
       },
     },
     {
@@ -493,7 +502,7 @@ benchmark = {
         "Outpatient Reduction": null,
         "Wait to First Outpatient": null,
         "Cancer 62 Days": 410,
-        "Diagnostic Test Activity": null,
+        "Diagnostic Test Activity": 32,
       },
     },
     {
@@ -507,7 +516,7 @@ benchmark = {
         "Outpatient Reduction": null,
         "Wait to First Outpatient": null,
         "Cancer 62 Days": 592,
-        "Diagnostic Test Activity": null,
+        "Diagnostic Test Activity": 8,
       },
     },
   ],

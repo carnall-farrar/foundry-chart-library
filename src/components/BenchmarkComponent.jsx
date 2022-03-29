@@ -43,12 +43,12 @@ const StyledPill = window.styled.div`
     filter: brightness(105%);
   }
   background-color: ${(props) => {
-    if (props.goodDirection === 0) {
-      return "#ecf4ff";
-    }
-
     if (props.value === null) {
       return "#e7e7e7";
+    }
+
+    if (props.goodDirection === 0) {
+      return "#ecf4ff";
     }
 
     return props.isPositive && typeof props.value === "number"
@@ -56,12 +56,12 @@ const StyledPill = window.styled.div`
       : "#ffd4d4";
   }};
   border: 1px solid ${(props) => {
-    if (props.goodDirection === 0) {
-      return "#005fb8";
-    }
-
     if (props.value === null) {
       return "#bdbdbd";
+    }
+
+    if (props.goodDirection === 0) {
+      return "#005fb8";
     }
 
     return props.isPositive && typeof props.value === "number"
@@ -69,12 +69,12 @@ const StyledPill = window.styled.div`
       : "#b54f4f";
   }};
   color: ${(props) => {
-    if (props.goodDirection === 0) {
-      return "#005fb8";
-    }
-
     if (props.value === null) {
       return "#bdbdbd";
+    }
+
+    if (props.goodDirection === 0) {
+      return "#005fb8";
     }
 
     return props.isPositive && typeof props.value === "number"
@@ -83,7 +83,17 @@ const StyledPill = window.styled.div`
   }};
 `;
 
-const Pill = ({ value, isPositive, goodDirection }) => {
+const Pill = ({ value, isPositive, goodDirection, unit }) => {
+  let displayValue = value;
+
+  if (typeof value === "number" && unit === "pourcentage") {
+    displayValue = `${value}%`;
+  }
+
+  if (value === null) {
+    displayValue = "~";
+  }
+
   return (
     <div
       style={{
@@ -97,7 +107,7 @@ const Pill = ({ value, isPositive, goodDirection }) => {
         value={value}
         goodDirection={goodDirection}
       >
-        {typeof value === "number" ? value : "~"}
+        {displayValue}
       </StyledPill>
     </div>
   );
@@ -230,6 +240,7 @@ export const BenchmarkComponent = ({
                 >
                   <Pill
                     value={record.data[key]}
+                    unit={metricsMetadata[key].unit}
                     goodDirection={metricsMetadata[key].goodDirection}
                     isPositive={isValuePositive(
                       record.data[key],
