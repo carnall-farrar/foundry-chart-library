@@ -28,9 +28,6 @@ const StyledBodyCell = window.styled.td`
 `;
 
 const StyledBodyCellData = window.styled.td`
-  &:hover {
-    background-color: #eee;
-  }
   cursor: pointer;
   padding: 10px 0px;
   border-bottom: 1px solid #dedede;
@@ -40,7 +37,16 @@ const StyledBodyCellData = window.styled.td`
 const StyledPill = window.styled.div`
   padding: 4px 8px;
   border-radius: 5px;
+  min-width: 30px;
+  &:hover {
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    filter: brightness(105%);
+  }
   background-color: ${(props) => {
+    if (props.goodDirection === 0) {
+      return "#ecf4ff";
+    }
+
     if (props.value === null) {
       return "#e7e7e7";
     }
@@ -50,6 +56,10 @@ const StyledPill = window.styled.div`
       : "#ffd4d4";
   }};
   border: 1px solid ${(props) => {
+    if (props.goodDirection === 0) {
+      return "#005fb8";
+    }
+
     if (props.value === null) {
       return "#bdbdbd";
     }
@@ -59,6 +69,10 @@ const StyledPill = window.styled.div`
       : "#b54f4f";
   }};
   color: ${(props) => {
+    if (props.goodDirection === 0) {
+      return "#005fb8";
+    }
+
     if (props.value === null) {
       return "#bdbdbd";
     }
@@ -69,7 +83,7 @@ const StyledPill = window.styled.div`
   }};
 `;
 
-const Pill = ({ value, isPositive }) => {
+const Pill = ({ value, isPositive, goodDirection }) => {
   return (
     <div
       style={{
@@ -78,7 +92,11 @@ const Pill = ({ value, isPositive }) => {
         alignItems: "center",
       }}
     >
-      <StyledPill isPositive={isPositive} value={value}>
+      <StyledPill
+        isPositive={isPositive}
+        value={value}
+        goodDirection={goodDirection}
+      >
         {typeof value === "number" ? value : "~"}
       </StyledPill>
     </div>
@@ -98,7 +116,7 @@ const isValuePositive = (value, average, positiveDirection) => {
 
   return true;
 };
- 
+
 export const BenchmarkComponent = ({
   headers,
   records,
@@ -151,8 +169,10 @@ export const BenchmarkComponent = ({
             .map((subheader) => {
               return (
                 <StyledSubHeaderCell key={subheader.value}>
-                  <div style={{ display: "flex" }}>
-                    <div style={{ flex: 9 }}>{subheader.value}</div>
+                  <div style={{ display: "flex", alignItems: "center" }}>
+                    <div style={{ flex: 9, maxWidth: 100 }}>
+                      {subheader.value}
+                    </div>
                     <div
                       style={{
                         flex: 3,
@@ -210,6 +230,7 @@ export const BenchmarkComponent = ({
                 >
                   <Pill
                     value={record.data[key]}
+                    goodDirection={metricsMetadata[key].goodDirection}
                     isPositive={isValuePositive(
                       record.data[key],
                       average(
