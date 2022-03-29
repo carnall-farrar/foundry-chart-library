@@ -71,29 +71,34 @@ const DataCell = window.styled.div`
   }
 `;
 
-const RatingCell = ({ rating }) => {
+const RatingCell = ({ rating, metric }) => {
   let tempAmbition = 101;
+  let isPositive = rating.replace("%", "") > tempAmbition;
+  let result;
   if (rating && rating.at(-1) !== "%") {
     return rating;
   }
 
-  // const metricColorMap = {
-  //   "Value Weighted Activity": "aboveGood",
-  //   "IS Activity": "aboveGood",
-  //   "Completed pathways": "aboveGood",
-  //   "78ww": "belowGood",
-  //   "104ww": "belowGood",
-  //   "Outpatient Reduction": "aboveGood",
-  //   "Wait to First Outpatient": "belowGood",
-  //   "Cancer 62 Days": "belowGood",
-  //   "Diagnostic Test Activity": "aboveGood"
-  //   }
+  const metricColorMap = {
+    "Value Weighted Activity": "aboveGood", 
+    "IS Activity": "aboveGood",
+    "Completed pathways": "aboveGood",
+    "78ww": "belowGood",
+    "104ww": "belowGood",
+    "Outpatient Reduction": "aboveGood",
+    "Wait to First Outpatient": "belowGood", 
+    "Cancer 62 Days": "belowGood",
+    "Diagnostic Test Activity": "aboveGood",
+  };
+
+  metricColorMap[metric] === "aboveGood" || isPositive
+    ? (result = true)
+    : metricColorMap[metric] === "belowGood" || !isPositive
+    ? (result = false)
+    : (result = false);
 
   return (
-    <DataCell
-      isPositive={rating.replace("%", "") > tempAmbition ? false : true}
-      hasRating={!!rating}
-    >
+    <DataCell isPositive={result} hasRating={!!rating}>
       {rating || "~"}
     </DataCell>
   );
@@ -175,7 +180,7 @@ export const ScorecardComponent = ({
             shouldHaveBorder={shouldHaveBorder}
           >
             {colIndex >= ratingStartIndex ? (
-              <RatingCell rating={cellData} />
+              <RatingCell rating={cellData} metric={rowValues[0][1]} />
             ) : (
               cellData
             )}
@@ -183,8 +188,11 @@ export const ScorecardComponent = ({
         ))}
         <StyledTd shouldHaveBorder={shouldHaveBorder}>
           <TrendLineChart
-           cellData={trendValue.map((val) => ({ value: val.week }))}
-            data={trendValue.map((val) => ({ value: val.value, date: val.week }))}
+            cellData={trendValue.map((val) => ({ value: val.week }))}
+            data={trendValue.map((val) => ({
+              value: val.value,
+              date: val.week,
+            }))}
             width={120}
             height={50}
           />
