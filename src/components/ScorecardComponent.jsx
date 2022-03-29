@@ -30,7 +30,7 @@ const StyledTd = window.styled.td`
 
 const RowHeaderContainer = window.styled.div`
   font-size: 0.7rem;  
-  border: 2px solid #003EFF;
+  border: 2px solid #2D72D2;
   padding: 1rem;
   display: flex;
   justify-content: center;
