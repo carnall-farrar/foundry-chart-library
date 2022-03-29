@@ -145,21 +145,29 @@ export const BenchmarkComponent = ({
     (record) => typeof record.fixedPosition === "number"
   );
 
+  const nullRecordsForSort = records.filter(
+    (record) => record.data[sort.header] === null
+  );
+
   const recordsToSort = records.filter(
     (record) => typeof record.fixedPosition !== "number"
   );
 
-  const sortedRecords = recordsToSort.sort((a, b) => {
-    if (sort.isAsc) {
-      return a.data[sort.header] < b.data[sort.header] ? 1 : -1;
-    }
+  let sortedRecords = recordsToSort
+    .filter((record) => record.data[sort.header] !== null)
+    .sort((a, b) => {
+      if (sort.isAsc) {
+        return a.data[sort.header] < b.data[sort.header] ? 1 : -1;
+      }
 
-    return a.data[sort.header] < b.data[sort.header] ? -1 : 1;
-  });
+      return a.data[sort.header] < b.data[sort.header] ? -1 : 1;
+    });
 
   fixedRecords.forEach((record) => {
     sortedRecords.splice(record.fixedPosition, 0, record);
   });
+
+  sortedRecords = [...sortedRecords, ...nullRecordsForSort];
 
   return (
     <table>
@@ -233,25 +241,27 @@ export const BenchmarkComponent = ({
           return (
             <StyledBodyRow key={index}>
               <StyledBodyCell>{record.region}</StyledBodyCell>
-              {Object.keys(record.data).map((key, index) => (
-                <StyledBodyCellData
-                  onClick={() => onCellClick(record.region, key)}
-                  key={`${record.region}${index}`}
-                >
-                  <Pill
-                    value={record.data[key]}
-                    unit={metricsMetadata[key].unit}
-                    goodDirection={metricsMetadata[key].goodDirection}
-                    isPositive={isValuePositive(
-                      record.data[key],
-                      average(
-                        sortedRecords.map((r) => r.data[key]).filter(Boolean)
-                      ),
-                      metricsMetadata[key].goodDirection
-                    )}
-                  />
-                </StyledBodyCellData>
-              ))}
+              {Object.values(headers)
+                .flat()
+                .map(({ key }, index) => (
+                  <StyledBodyCellData
+                    onClick={() => onCellClick(record.region, key)}
+                    key={`${record.region}${index}`}
+                  >
+                    <Pill
+                      value={record.data[key]}
+                      unit={metricsMetadata[key].unit}
+                      goodDirection={metricsMetadata[key].goodDirection}
+                      isPositive={isValuePositive(
+                        record.data[key],
+                        average(
+                          sortedRecords.map((r) => r.data[key]).filter(Boolean)
+                        ),
+                        metricsMetadata[key].goodDirection
+                      )}
+                    />
+                  </StyledBodyCellData>
+                ))}
             </StyledBodyRow>
           );
         })}
