@@ -77,6 +77,18 @@ const RatingCell = ({ rating }) => {
     return rating;
   }
 
+  // const metricColorMap = {
+  //   "Value Weighted Activity": "aboveGood",
+  //   "IS Activity": "aboveGood",
+  //   "Completed pathways": "aboveGood",
+  //   "78ww": "belowGood",
+  //   "104ww": "belowGood",
+  //   "Outpatient Reduction": "aboveGood",
+  //   "Wait to First Outpatient": "belowGood",
+  //   "Cancer 62 Days": "belowGood",
+  //   "Diagnostic Test Activity": "aboveGood"
+  //   }
+
   return (
     <DataCell
       isPositive={rating.replace("%", "") > tempAmbition ? false : true}
@@ -171,7 +183,8 @@ export const ScorecardComponent = ({
         ))}
         <StyledTd shouldHaveBorder={shouldHaveBorder}>
           <TrendLineChart
-            data={trendValue.map((val) => ({ value: val }))}
+           cellData={trendValue.map((val) => ({ value: val.week }))}
+            data={trendValue.map((val) => ({ value: val.value, date: val.week }))}
             width={120}
             height={50}
           />
