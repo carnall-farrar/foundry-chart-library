@@ -24,8 +24,7 @@ const StyledTd = window.styled.td`
     props.shouldHaveBorder ? "1px solid black" : "none"};
   text-align: center;
   border-collapse: collapse;
-  padding: ${(props) =>
-    props.isHeader ? "5px" : "3px"};
+  padding: ${(props) => (props.isHeader ? "5px" : "3px")};
   margin: 0;
 `;
 
@@ -39,9 +38,25 @@ const RowHeaderContainer = window.styled.div`
   height: ${(props) => props.rowSpan * 2.5}rem;
 `;
 
+let test;
+if ("a" == "a") {
+  test = "test";
+} else {
+  test = "test2";
+}
+if ("a" == "a") {
+  test = "test";
+} else {
+  test = "test2";
+}
+
 const DataCell = window.styled.div`
     background-color: ${(props) =>
-      props.hasRating ? Colors.red_light : Colors.gray_dark};
+      !props.hasRating
+        ? Colors.gray_light
+        : props.isPositive
+        ? Colors.red_light
+        : Colors.green_light};
     display: flex;
     align-items: center;
     justify-content: center;
@@ -49,9 +64,18 @@ const DataCell = window.styled.div`
     height: 1.2rem;
     width: 2.5rem;
     border-radius: 8px;
-    color: ${(props) => (props.hasRating ? Colors.red_dark : Colors.white)};
+    color: ${(props) =>
+      !props.hasRating
+        ? Colors.white
+        : props.isPositive
+        ? Colors.red_dark
+        : Colors.green_dark};
     border: 1px solid ${(props) =>
-      props.hasRating ? Colors.red_dark : Colors.gray_dark};
+      !props.hasRating
+        ? Colors.gray_dark
+        : props.isPositive
+        ? Colors.red_dark
+        : Colors.green_dark};
     cursor: pointer;
     &:hover {
       box-shadow: 0 5px 15px rgba(0,0,0,0.3);
@@ -60,11 +84,24 @@ const DataCell = window.styled.div`
 `;
 
 const RatingCell = ({ rating }) => {
+  let tempAmbition = 101;
   if (rating && rating.at(-1) !== "%") {
     return rating;
   }
 
-  return <DataCell hasRating={!!rating}>{rating || "~"}</DataCell>;
+  console.log(rating, "rating");
+  console.log(120 % -101, "test");
+  // console.log(120% > tempAmbition ? true : false, "ratlogicing");
+  console.log(rating, "typeof  rating");
+
+  return (
+    <DataCell
+      isPositive={rating.replace("%", "") > tempAmbition ? false : true}
+      hasRating={!!rating}
+    >
+      {rating || "~"}
+    </DataCell>
+  );
 };
 
 // border-collapse: ${(props) => (props.hasRating ? "collapse" : "none")};
@@ -126,6 +163,7 @@ export const ScorecardComponent = ({
     const shouldHaveBorder = rowIndex === headerEndIndex;
     const ratingStartIndex = 3;
     const PerformanceIcon = performanceIconMap[headerValue];
+    
 
     return (
       <>

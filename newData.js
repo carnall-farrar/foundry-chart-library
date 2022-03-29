@@ -132,7 +132,7 @@ scoreCard = {
       "Data last updated": "February 10 2022",
       "22/23 Ambition": "=/> 101%",
       "April 22": "89%",
-      "May 22": "101%",
+      "May 22": "120%",
       "June 22": "",
       "July 22": "",
       "Aug 22": "",
