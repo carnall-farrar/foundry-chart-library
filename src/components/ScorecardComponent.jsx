@@ -71,14 +71,13 @@ const DataCell = window.styled.div`
   }
 `;
 
-const RatingCell = ({ rating, metric }) => {
-  let tempAmbition = 101;
-  let isPositive = rating.replace("%", "") > tempAmbition;
+const RatingCell = ({ rating, metric, ambition }) => {
+  // let tempAmbition = 101;
+  let isPositive = rating.replace("%", "") > ambition;
   let result;
   // if (rating && rating.at(-1) !== "%") {
   //   return rating;
   // }
-  
 
   const metricColorMap = {
     "Value Weighted Activity": "aboveGood",
@@ -92,15 +91,17 @@ const RatingCell = ({ rating, metric }) => {
     "Diagnostic Test Activity": "aboveGood",
   };
 
-  metricColorMap[metric] === "aboveGood" || isPositive
-    ? (result = true)
-    : metricColorMap[metric] === "belowGood" || !isPositive
-    ? (result = false)
-    : (result = false);
+  // metricColorMap[metric] === "aboveGood" || isPositive
+  //   ? (result = true)
+  //   : metricColorMap[metric] === "belowGood" || !isPositive
+  //   ? (result = false)
+  //   : (result = false);
 
-    // if (rating && rating.at(-1) !== "%") {
-    //   return <DataCell isPositive={result}>{rating}</DataCell>;
-    // }
+  result = metricColorMap[metric] === "aboveGood" || isPositive
+
+  // if (rating && rating.at(-1) !== "%") {
+  //   return <DataCell isPositive={result}>{rating}</DataCell>;
+  // }
 
   return (
     <DataCell isPositive={result} hasRating={!!rating}>
@@ -168,6 +169,7 @@ export const ScorecardComponent = ({
     const shouldHaveBorder = rowIndex === headerEndIndex;
     const ratingStartIndex = 3;
     const PerformanceIcon = performanceIconMap[headerValue];
+    const ambitionValue = Number(values.at(3).replaceAll(/[^\d]/g, ""));
 
     return (
       <>
@@ -185,7 +187,11 @@ export const ScorecardComponent = ({
             shouldHaveBorder={shouldHaveBorder}
           >
             {colIndex >= ratingStartIndex ? (
-              <RatingCell rating={cellData} metric={rowValues[0][1]} />
+              <RatingCell
+                rating={cellData}
+                ambition={ambitionValue}
+                metric={rowValues[0][1]}
+              />
             ) : (
               cellData
             )}
