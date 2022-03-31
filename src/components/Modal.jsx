@@ -59,7 +59,7 @@ const IconWrapper = window.styled.svg`
   width: 20px;
   height: 100%;
   position: relative;
-  left: 250px;
+  left: 550px;
 `;
 
 const InfoPanelHeaderContainer = window.styled.div`
