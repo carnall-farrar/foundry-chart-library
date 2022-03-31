@@ -13,7 +13,7 @@ const Background = window.styled.div`
 `;
 
 const ModalWrapper = window.styled.div`
-  width: 550px;
+  width: 800px;
   height: 500px;
   box-shadow: 0 5px 16px rgba(0, 0, 0, 0.2);
   background: #fff;

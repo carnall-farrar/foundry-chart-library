@@ -10,6 +10,7 @@ import { Modal } from "./Modal";
 import { TimelineSeriesChart } from "./TimelineSeriesChart";
 
 import Colors from "../colors";
+import { timeSeries } from "../services/mock-data/timeSeries";
 
 export const StyledTable = window.styled.table`
   margin-bottom: 50px;
@@ -95,6 +96,15 @@ const performanceIconMap = {
   Diagnostics: Diagnostics,
 };
 
+const mockLineChartData = [
+  { name: "a", value1: 10, value2: 30 },
+  { name: "b", value1: 30, value2: 60 },
+  { name: "c", value1: 90, value2: 10 },
+  { name: "d", value1: 20, value2: 90 },
+  { name: "e", value1: 60, value2: 0 },
+  { name: "f", value1: 0, value2: 40 },
+];
+
 export const ScorecardComponent = ({
   data,
   columns,
@@ -154,7 +164,11 @@ export const ScorecardComponent = ({
           }}
           showModal={showModal}
         >
-          <TimelineSeriesChart width={300} height={150} data={[0, 10, 50, 8]} />
+          <TimelineSeriesChart
+            // width={500}
+            height={400}
+            data={timeSeries}
+          />
         </Modal>
 
         {rowValues.map(([header, cellData], colIndex) => (
