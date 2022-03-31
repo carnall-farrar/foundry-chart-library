@@ -141,6 +141,8 @@ export const BenchmarkComponent = ({
     header: Object.values(headers)[0][0].key,
   });
 
+  console.log("sort::", sort);
+
   const fixedRecords = records.filter(
     (record) => typeof record.fixedPosition === "number"
   );
@@ -157,7 +159,7 @@ export const BenchmarkComponent = ({
     .filter((record) => record.data[sort.header] !== null)
     .sort((a, b) => {
       if (sort.isAsc) {
-        return a.data[sort.header] < b.data[sort.header] ? 1 : -1;
+        return a.data[sort.header] > b.data[sort.header] ? 1 : -1;
       }
 
       return a.data[sort.header] < b.data[sort.header] ? -1 : 1;
