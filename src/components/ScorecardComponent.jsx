@@ -24,23 +24,27 @@ const StyledTd = window.styled.td`
     props.shouldHaveBorder ? "1px solid black" : "none"};
   text-align: center;
   border-collapse: collapse;
-  padding: 3px;
+  padding: ${(props) => (props.isHeader ? "5px" : "3px")};
   margin: 0;
 `;
 
 const RowHeaderContainer = window.styled.div`
   font-size: 0.7rem;  
-  border: 2px solid #003EFF;
+  border: 2px solid #2D72D2;
   padding: 1rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 5rem;
+  height: ${(props) => props.rowSpan * 2.5}rem;
 `;
 
 const DataCell = window.styled.div`
     background-color: ${(props) =>
-      props.hasRating ? Colors.red_light : Colors.gray_dark};
+      !props.hasRating
+        ? Colors.gray_light
+        : props.isPositive
+        ? Colors.red_light
+        : Colors.green_light};
     display: flex;
     align-items: center;
     justify-content: center;
@@ -48,26 +52,62 @@ const DataCell = window.styled.div`
     height: 1.2rem;
     width: 2.5rem;
     border-radius: 8px;
-    color: ${(props) => (props.hasRating ? Colors.red_dark : Colors.white)};
+    color: ${(props) =>
+      !props.hasRating
+        ? Colors.white
+        : props.isPositive
+        ? Colors.red_dark
+        : Colors.green_dark};
     border: 1px solid ${(props) =>
-      props.hasRating ? Colors.red_dark : Colors.gray_dark};
+      !props.hasRating
+        ? Colors.gray_dark
+        : props.isPositive
+        ? Colors.red_dark
+        : Colors.green_dark};
     cursor: pointer;
-    transition: all 1250ms cubic-bezier(0.19, 1, 0.22, 1);
     &:hover {
-      border: 1px solid;
-      box-shadow: inset 0 0 20px rgba(255, 255, 255, .5), 0 0 20px rgba(255, 255, 255, .2);
-      outline-color: rgba(255, 255, 255, 0);
-      outline-offset: 15px;
-      text-shadow: 1px 1px 2px #427388; 
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+	    filter: brightness(120%);
   }
 `;
 
-const RatingCell = ({ rating }) => {
-  if (rating && rating.at(-1) !== "%") {
-    return rating;
-  }
+const RatingCell = ({ rating, metric, ambition }) => {
+  // let tempAmbition = 101;
+  let isPositive = rating.replace("%", "") > ambition;
+  let result;
+  // if (rating && rating.at(-1) !== "%") {
+  //   return rating;
+  // }
 
-  return <DataCell hasRating={!!rating}>{rating || "~"}</DataCell>;
+  const metricColorMap = {
+    "Value Weighted Activity": "aboveGood",
+    "IS Activity": "aboveGood",
+    "Completed pathways": "aboveGood",
+    "78ww": "belowGood",
+    "104ww": "belowGood",
+    "Outpatient Reduction": "aboveGood",
+    "Wait to First Outpatient": "belowGood",
+    "Cancer 62 Days": "belowGood",
+    "Diagnostic Test Activity": "aboveGood",
+  };
+
+  // metricColorMap[metric] === "aboveGood" || isPositive
+  //   ? (result = true)
+  //   : metricColorMap[metric] === "belowGood" || !isPositive
+  //   ? (result = false)
+  //   : (result = false);
+
+  result = metricColorMap[metric] === "aboveGood" || isPositive
+
+  // if (rating && rating.at(-1) !== "%") {
+  //   return <DataCell isPositive={result}>{rating}</DataCell>;
+  // }
+
+  return (
+    <DataCell isPositive={result} hasRating={!!rating}>
+      {rating || "~"}
+    </DataCell>
+  );
 };
 
 // border-collapse: ${(props) => (props.hasRating ? "collapse" : "none")};
@@ -129,12 +169,13 @@ export const ScorecardComponent = ({
     const shouldHaveBorder = rowIndex === headerEndIndex;
     const ratingStartIndex = 3;
     const PerformanceIcon = performanceIconMap[headerValue];
+    const ambitionValue = Number(values.at(3).replaceAll(/[^\d]/g, ""));
 
     return (
       <>
         {headerStartIndex === rowIndex && (
           <StyledTd rowSpan={span} shouldHaveBorder>
-            <RowHeaderContainer>
+            <RowHeaderContainer rowSpan={span} isHeader>
               <PerformanceIcon />
               {headerValue}
             </RowHeaderContainer>
@@ -146,7 +187,11 @@ export const ScorecardComponent = ({
             shouldHaveBorder={shouldHaveBorder}
           >
             {colIndex >= ratingStartIndex ? (
-              <RatingCell rating={cellData} />
+              <RatingCell
+                rating={cellData}
+                ambition={ambitionValue}
+                metric={rowValues[0][1]}
+              />
             ) : (
               cellData
             )}
@@ -154,7 +199,11 @@ export const ScorecardComponent = ({
         ))}
         <StyledTd shouldHaveBorder={shouldHaveBorder}>
           <TrendLineChart
-            data={trendValue.map((val) => ({ value: val }))}
+            cellData={trendValue.map((val) => ({ value: val.week }))}
+            data={trendValue.map((val) => ({
+              value: val.value,
+              date: val.week,
+            }))}
             width={120}
             height={50}
           />

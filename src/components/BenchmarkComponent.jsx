@@ -1,3 +1,5 @@
+import { Chevron } from "../icons";
+
 const StyledHeader = window.styled.tr``;
 
 const StyledHeaderCell = window.styled.th`
@@ -26,9 +28,6 @@ const StyledBodyCell = window.styled.td`
 `;
 
 const StyledBodyCellData = window.styled.td`
-  &:hover {
-    background-color: #eee;
-  }
   cursor: pointer;
   padding: 10px 0px;
   border-bottom: 1px solid #dedede;
@@ -38,9 +37,18 @@ const StyledBodyCellData = window.styled.td`
 const StyledPill = window.styled.div`
   padding: 4px 8px;
   border-radius: 5px;
+  min-width: 30px;
+  &:hover {
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    filter: brightness(105%);
+  }
   background-color: ${(props) => {
     if (props.value === null) {
       return "#e7e7e7";
+    }
+
+    if (props.goodDirection === 0) {
+      return "#ecf4ff";
     }
 
     return props.isPositive && typeof props.value === "number"
@@ -52,6 +60,10 @@ const StyledPill = window.styled.div`
       return "#bdbdbd";
     }
 
+    if (props.goodDirection === 0) {
+      return "#005fb8";
+    }
+
     return props.isPositive && typeof props.value === "number"
       ? "#44a278"
       : "#b54f4f";
@@ -61,34 +73,27 @@ const StyledPill = window.styled.div`
       return "#bdbdbd";
     }
 
+    if (props.goodDirection === 0) {
+      return "#005fb8";
+    }
+
     return props.isPositive && typeof props.value === "number"
       ? "#44a278"
       : "#b54f4f";
   }};
 `;
 
-const Chevron = ({ fill, direction }) => {
-  const style = {};
-  if (direction === "up") {
-    style.transform = "rotateX(180deg)";
-  }
-  return (
-    <svg
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      xmlns="http://www.w3.org/2000/svg"
-      style={style}
-    >
-      <path
-        fill={fill}
-        d="M7.41 8.58L12 13.17L16.59 8.58L18 10L12 16L6 10L7.41 8.58Z"
-      />
-    </svg>
-  );
-};
+const Pill = ({ value, isPositive, goodDirection, unit }) => {
+  let displayValue = value;
 
-const Pill = ({ value, isPositive }) => {
+  if (typeof value === "number" && unit === "pourcentage") {
+    displayValue = `${value}%`;
+  }
+
+  if (value === null) {
+    displayValue = "~";
+  }
+
   return (
     <div
       style={{
@@ -97,8 +102,12 @@ const Pill = ({ value, isPositive }) => {
         alignItems: "center",
       }}
     >
-      <StyledPill isPositive={isPositive} value={value}>
-        {typeof value === "number" ? value : "~"}
+      <StyledPill
+        isPositive={isPositive}
+        value={value}
+        goodDirection={goodDirection}
+      >
+        {displayValue}
       </StyledPill>
     </div>
   );
@@ -124,18 +133,41 @@ export const BenchmarkComponent = ({
   metricsMetadata,
   onCellClick,
 }) => {
+  if (records.length === 0) {
+    return <div></div>;
+  }
   const [sort, setSort] = React.useState({
     isAsc: true,
     header: Object.values(headers)[0][0].key,
   });
 
-  const sortedRecords = records.sort((a, b) => {
-    if (sort.isAsc) {
-      return a.data[sort.header] < b.data[sort.header] ? 1 : -1;
-    }
+  const fixedRecords = records.filter(
+    (record) => typeof record.fixedPosition === "number"
+  );
 
-    return a.data[sort.header] < b.data[sort.header] ? -1 : 1;
+  const nullRecordsForSort = records.filter(
+    (record) => record.data[sort.header] === null
+  );
+
+  const recordsToSort = records.filter(
+    (record) => typeof record.fixedPosition !== "number"
+  );
+
+  let sortedRecords = recordsToSort
+    .filter((record) => record.data[sort.header] !== null)
+    .sort((a, b) => {
+      if (sort.isAsc) {
+        return a.data[sort.header] < b.data[sort.header] ? 1 : -1;
+      }
+
+      return a.data[sort.header] < b.data[sort.header] ? -1 : 1;
+    });
+
+  fixedRecords.forEach((record) => {
+    sortedRecords.splice(record.fixedPosition, 0, record);
   });
+
+  sortedRecords = [...sortedRecords, ...nullRecordsForSort];
 
   return (
     <table>
@@ -155,8 +187,10 @@ export const BenchmarkComponent = ({
             .map((subheader) => {
               return (
                 <StyledSubHeaderCell key={subheader.value}>
-                  <div style={{ display: "flex" }}>
-                    <div style={{ flex: 9 }}>{subheader.value}</div>
+                  <div style={{ display: "flex", alignItems: "center" }}>
+                    <div style={{ flex: 9, maxWidth: 100 }}>
+                      {subheader.value}
+                    </div>
                     <div
                       style={{
                         flex: 3,
@@ -207,23 +241,27 @@ export const BenchmarkComponent = ({
           return (
             <StyledBodyRow key={index}>
               <StyledBodyCell>{record.region}</StyledBodyCell>
-              {Object.keys(record.data).map((key, index) => (
-                <StyledBodyCellData
-                  onClick={onCellClick}
-                  key={`${record.region}${index}`}
-                >
-                  <Pill
-                    value={record.data[key]}
-                    isPositive={isValuePositive(
-                      record.data[key],
-                      average(
-                        sortedRecords.map((r) => r.data[key]).filter(Boolean)
-                      ),
-                      metricsMetadata[key].goodDirection
-                    )}
-                  />
-                </StyledBodyCellData>
-              ))}
+              {Object.values(headers)
+                .flat()
+                .map(({ key }, index) => (
+                  <StyledBodyCellData
+                    onClick={() => onCellClick(record.region, key)}
+                    key={`${record.region}${index}`}
+                  >
+                    <Pill
+                      value={record.data[key]}
+                      unit={metricsMetadata[key].unit}
+                      goodDirection={metricsMetadata[key].goodDirection}
+                      isPositive={isValuePositive(
+                        record.data[key],
+                        average(
+                          sortedRecords.map((r) => r.data[key]).filter(Boolean)
+                        ),
+                        metricsMetadata[key].goodDirection
+                      )}
+                    />
+                  </StyledBodyCellData>
+                ))}
             </StyledBodyRow>
           );
         })}

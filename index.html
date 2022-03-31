@@ -45,7 +45,7 @@
       <div id="reactBarChart"></div>
       <div id="trendLineChart"></div>
       <div id="scorecardComponent"></div>
-      <div id="benchmarkComponent" style="width:1400px;"></div>
+      <div id="benchmarkComponent" style="width: 1400px;"></div>
     </div>
     <script
       crossorigin
@@ -60,6 +60,10 @@
     <script src="https://unpkg.com/react-table@7.7.0/dist/react-table.production.min.js"></script>
     <script src="https://unpkg.com/react-is@17.0.2/umd/react-is.production.min.js"></script>
     <script src="https://unpkg.com/styled-components/dist/styled-components.min.js"></script>
+    <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
+    <script>
+      dayjs().format();
+    </script>
 
     <script src="./dist/main.js"></script>
     <script src="./data.js"></script>
@@ -152,7 +156,7 @@
         React.createElement(BenchmarkComponent, {
           headers: benchmark.headers,
           records: benchmark.records,
-          metricsMetadata: benchmark.metricsMetadata
+          metricsMetadata: benchmark.metricsMetadata,
         }),
         document.querySelector("#benchmarkComponent")
       );
