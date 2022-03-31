@@ -32,14 +32,15 @@ const RowHeaderContainer = window.styled.div`
   font-size: 0.7rem;  
   background-color: rgb(0, 95, 184);
   color: white;
-  padding: 1rem;
+  padding: 0.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: ${(props) => props.rowSpan * 2.5}rem;
+  height: ${(props) => props.rowSpan * 2.7}rem;
 `;
 
 const DataCell = window.styled.div`
+    font-size: 0.7rem;  
     background-color: ${(props) =>
       !props.hasRating
         ? Colors.gray_light
@@ -71,6 +72,15 @@ const DataCell = window.styled.div`
 	    filter: brightness(120%);
   }
 `;
+
+const AmbitionCell = ({ date, value }) => {
+  return (
+    <div>
+      {value}
+      {date && <div>{date}</div>}
+    </div>
+  );
+};
 
 const RatingCell = ({ rating, metric, ambition }) => {
   // let tempAmbition = 101;
@@ -163,14 +173,19 @@ export const ScorecardComponent = ({
     const values = Object.values(rowData);
     const trendValue = values.at(-1);
     const headerValue = values.at(0);
+    const ambitionData = values.at(3);
+    const ambitionValue = Number(
+      (ambitionData.value ?? ambitionData).replaceAll(/[^\d]/g, "")
+    );
+
     const rowValues = Object.entries(rowData).slice(1, values.length - 1);
 
     const { index: headerStartIndex, span } = headerSpans[headerValue];
     const headerEndIndex = headerStartIndex + span - 1;
     const shouldHaveBorder = rowIndex === headerEndIndex;
     const ratingStartIndex = 3;
+    const ambitionColumnIndex = 2;
     // const PerformanceIcon = performanceIconMap[headerValue];
-    const ambitionValue = Number(values.at(3).replaceAll(/[^\d]/g, ""));
 
     return (
       <>
@@ -187,14 +202,19 @@ export const ScorecardComponent = ({
             onClick={() => onClickCell(header, rowData["Metric"])}
             shouldHaveBorder={shouldHaveBorder}
           >
-            {colIndex >= ratingStartIndex ? (
+            {colIndex < ambitionColumnIndex && cellData}
+            {colIndex === ambitionColumnIndex && (
+              <AmbitionCell
+                value={cellData.value ?? cellData}
+                date={cellData.date}
+              />
+            )}
+            {colIndex >= ratingStartIndex && (
               <RatingCell
                 rating={cellData}
                 ambition={ambitionValue}
                 metric={rowValues[0][1]}
               />
-            ) : (
-              cellData
             )}
           </StyledTd>
         ))}

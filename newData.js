@@ -66,7 +66,7 @@ scoreCard = {
       "Performance Area": "Long Waits",
       Metric: "78ww",
       "Data last updated": "February 10 2022",
-      "22/23 Ambition": "=/> 101%",
+      "22/23 Ambition": { value: "=/> 101%", date: "February 10 2022" },
       "April 22": "89",
       "May 22": "101%",
       "June 22": "",
@@ -97,7 +97,7 @@ scoreCard = {
       "Performance Area": "Long Waits",
       Metric: "104ww",
       "Data last updated": "February 10 2022",
-      "22/23 Ambition": "=/> 101%",
+      "22/23 Ambition": { value: "=/> 101%", date: "February 10 2022" },
       "April 22": "89%",
       "May 22": "101%",
       "June 22": "",
@@ -338,6 +338,12 @@ scoreCard = {
 
 benchmark = {
   headers: {
+    Diagnostics: [
+      {
+        key: "Diagnostic Test Activity",
+        value: "Total Activity",
+      },
+    ],
     Activity: [
       {
         key: "VWA",
@@ -378,12 +384,7 @@ benchmark = {
         value: "Patients waiting over 62 days",
       },
     ],
-    Diagnostics: [
-      {
-        key: "Diagnostic Test Activity",
-        value: "Total Activity",
-      },
-    ],
+
   },
   metricsMetadata: {
     VWA: {
