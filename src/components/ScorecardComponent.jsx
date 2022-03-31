@@ -30,7 +30,8 @@ const StyledTd = window.styled.td`
 
 const RowHeaderContainer = window.styled.div`
   font-size: 0.7rem;  
-  border: 2px solid #2D72D2;
+  background-color: rgb(0, 95, 184);
+  color: white;
   padding: 1rem;
   display: flex;
   justify-content: center;
@@ -97,7 +98,7 @@ const RatingCell = ({ rating, metric, ambition }) => {
   //   ? (result = false)
   //   : (result = false);
 
-  result = metricColorMap[metric] === "aboveGood" || isPositive
+  result = metricColorMap[metric] === "aboveGood" || isPositive;
 
   // if (rating && rating.at(-1) !== "%") {
   //   return <DataCell isPositive={result}>{rating}</DataCell>;
@@ -168,7 +169,7 @@ export const ScorecardComponent = ({
     const headerEndIndex = headerStartIndex + span - 1;
     const shouldHaveBorder = rowIndex === headerEndIndex;
     const ratingStartIndex = 3;
-    const PerformanceIcon = performanceIconMap[headerValue];
+    // const PerformanceIcon = performanceIconMap[headerValue];
     const ambitionValue = Number(values.at(3).replaceAll(/[^\d]/g, ""));
 
     return (
@@ -176,7 +177,7 @@ export const ScorecardComponent = ({
         {headerStartIndex === rowIndex && (
           <StyledTd rowSpan={span} shouldHaveBorder>
             <RowHeaderContainer rowSpan={span} isHeader>
-              <PerformanceIcon />
+              {/* <PerformanceIcon /> */}
               {headerValue}
             </RowHeaderContainer>
           </StyledTd>
