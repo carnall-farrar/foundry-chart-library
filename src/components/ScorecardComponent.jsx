@@ -1,4 +1,5 @@
 import { TrendLineChart } from "./TrendLineChart";
+import { TrendBarChart } from "./TrendBarChart";
 import {
   Activity,
   Cancer,
@@ -219,7 +220,16 @@ export const ScorecardComponent = ({
           </StyledTd>
         ))}
         <StyledTd shouldHaveBorder={shouldHaveBorder}>
-          <TrendLineChart
+          {/* <TrendLineChart
+            cellData={trendValue.map((val) => ({ value: val.week }))}
+            data={trendValue.map((val) => ({
+              value: val.value,
+              date: val.week,
+            }))}
+            width={120}
+            height={50}
+          /> */}
+          <TrendBarChart
             cellData={trendValue.map((val) => ({ value: val.week }))}
             data={trendValue.map((val) => ({
               value: val.value,
