@@ -128,7 +128,7 @@ scoreCard = {
       "Performance Area": "Cancer",
       Metric: "Cancer 62 Days",
       "Data last updated": "February 10 2022",
-      "22/23 Ambition": "=/> 101%",
+      "22/23 Ambition": { value: "=/> 101%", date: "February 10 2022" },
       "April 22": "89%",
       "May 22": "101%",
       "June 22": "",
