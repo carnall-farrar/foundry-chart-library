@@ -127,6 +127,14 @@ const isValuePositive = (value, average, positiveDirection) => {
   return true;
 };
 
+const ChevronContainer = window.styled.div`
+                        flex: 3;
+                        display: flex;
+                        justifyContent: center;
+                        alignItems: center;
+                        cursor: pointer;
+`;
+
 export const BenchmarkComponent = ({
   headers,
   records,
@@ -138,7 +146,8 @@ export const BenchmarkComponent = ({
   }
   const [sort, setSort] = React.useState({
     isAsc: true,
-    header: Object.values(headers)[0][0].key,
+    // header: Object.values(headers)[0][0].key,
+    header: "",
   });
 
   console.log("sort::", sort);
@@ -158,11 +167,16 @@ export const BenchmarkComponent = ({
   let sortedRecords = recordsToSort
     .filter((record) => record.data[sort.header] !== null)
     .sort((a, b) => {
+      const [aItem, bItem] =
+        sort.header === ""
+          ? [a.region, b.region]
+          : [a.data[sort.header], b.data[sort.header]];
+      console.log(aItem, bItem, aItem > bItem);
       if (sort.isAsc) {
-        return a.data[sort.header] > b.data[sort.header] ? 1 : -1;
+        return aItem > bItem ? 1 : -1;
       }
 
-      return a.data[sort.header] < b.data[sort.header] ? -1 : 1;
+      return aItem > bItem ? -1 : 1;
     });
 
   fixedRecords.forEach((record) => {
@@ -175,7 +189,30 @@ export const BenchmarkComponent = ({
     <table>
       <thead>
         <StyledHeader>
-          <th colSpan={1} style={{ width: 80 }} />
+          <th colSpan={1} style={{ width: 80 }}>
+            <ChevronContainer
+              onClick={() => {
+                if (sort.header === "") {
+                  setSort({
+                    isAsc: !sort.isAsc,
+                    header: "",
+                  });
+                } else {
+                  setSort({
+                    isAsc: sort.isAsc,
+                    header: "",
+                  });
+                }
+              }}
+            >
+              <Chevron
+                fill="#666"
+                direction={
+                  sort.header === "" ? (sort.isAsc ? "up" : "down") : "down"
+                }
+              />
+            </ChevronContainer>
+          </th>
           {Object.keys(headers).map((header) => (
             <StyledHeaderCell key={header} colSpan={headers[header].length}>
               {header}
@@ -193,14 +230,7 @@ export const BenchmarkComponent = ({
                     <div style={{ flex: 9, maxWidth: 100 }}>
                       {subheader.value}
                     </div>
-                    <div
-                      style={{
-                        flex: 3,
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        cursor: "pointer",
-                      }}
+                    <ChevronContainer
                       onClick={() => {
                         if (subheader.key === sort.header) {
                           setSort({
@@ -225,7 +255,7 @@ export const BenchmarkComponent = ({
                             : "down"
                         }
                       />
-                    </div>
+                    </ChevronContainer>
                   </div>
                 </StyledSubHeaderCell>
               );
