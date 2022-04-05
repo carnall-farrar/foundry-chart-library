@@ -147,7 +147,7 @@ export const BenchmarkComponent = ({
   const [sort, setSort] = React.useState({
     isAsc: true,
     // header: Object.values(headers)[0][0].key,
-    header: "",
+    header: "Locations",
   });
 
   console.log("sort::", sort);
@@ -168,7 +168,7 @@ export const BenchmarkComponent = ({
     .filter((record) => record.data[sort.header] !== null)
     .sort((a, b) => {
       const [aItem, bItem] =
-        sort.header === ""
+        sort.header === "Locations"
           ? [a.region, b.region]
           : [a.data[sort.header], b.data[sort.header]];
       console.log(aItem, bItem, aItem > bItem);
@@ -185,34 +185,21 @@ export const BenchmarkComponent = ({
 
   sortedRecords = [...sortedRecords, ...nullRecordsForSort];
 
+  const headersWithLocation = {
+    Locations: [
+      {
+        key: "Locations",
+        value: "Locations",
+      },
+    ],
+    ...headers,
+  };
+
   return (
     <table>
       <thead>
         <StyledHeader>
-          <th colSpan={1} style={{ width: 80 }}>
-            <ChevronContainer
-              onClick={() => {
-                if (sort.header === "") {
-                  setSort({
-                    isAsc: !sort.isAsc,
-                    header: "",
-                  });
-                } else {
-                  setSort({
-                    isAsc: sort.isAsc,
-                    header: "",
-                  });
-                }
-              }}
-            >
-              <Chevron
-                fill="#666"
-                direction={
-                  sort.header === "" ? (sort.isAsc ? "up" : "down") : "down"
-                }
-              />
-            </ChevronContainer>
-          </th>
+          <th colSpan={1} style={{ width: 80 }} />
           {Object.keys(headers).map((header) => (
             <StyledHeaderCell key={header} colSpan={headers[header].length}>
               {header}
@@ -220,8 +207,7 @@ export const BenchmarkComponent = ({
           ))}
         </StyledHeader>
         <StyledSubHeader>
-          <th style={{ width: 80 }} />
-          {Object.values(headers)
+          {Object.values(headersWithLocation)
             .flat()
             .map((subheader) => {
               return (
