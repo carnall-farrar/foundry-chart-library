@@ -83,7 +83,7 @@ const AmbitionCell = ({ date, value }) => {
   );
 };
 
-const RatingCell = ({ rating, metric, ambition }) => {
+const RatingCell = ({ rating, metric, ambition, metricColorMap }) => {
   // let tempAmbition = 101;
   let isPositive = rating.replace("%", "") > ambition;
   let result;
@@ -91,17 +91,17 @@ const RatingCell = ({ rating, metric, ambition }) => {
   //   return rating;
   // }
 
-  const metricColorMap = {
-    "Value Weighted Activity": "aboveGood",
-    "IS Activity": "aboveGood",
-    "Completed pathways": "aboveGood",
-    "78ww": "belowGood",
-    "104ww": "belowGood",
-    "Outpatient Reduction": "aboveGood",
-    "Wait to First Outpatient": "belowGood",
-    "Cancer 62 Days": "belowGood",
-    "Diagnostic Test Activity": "aboveGood",
-  };
+  // const metricColorMap = {
+  //   "Value Weighted Activity": "aboveGood",
+  //   "IS Activity": "aboveGood",
+  //   "Completed pathways": "aboveGood",
+  //   "78ww": "belowGood",
+  //   "104ww": "belowGood",
+  //   "Outpatient Reduction": "aboveGood",
+  //   "Wait to First Outpatient": "belowGood",
+  //   "Cancer 62 Days": "belowGood",
+  //   "Diagnostic Test Activity": "aboveGood",
+  // };
 
   // metricColorMap[metric] === "aboveGood" || isPositive
   //   ? (result = true)
@@ -109,7 +109,7 @@ const RatingCell = ({ rating, metric, ambition }) => {
   //   ? (result = false)
   //   : (result = false);
 
-  result = metricColorMap[metric] === "aboveGood" || isPositive;
+  result = metricColorMap[metric] === "aboveGood" ? !isPositive : isPositive;
 
   // if (rating && rating.at(-1) !== "%") {
   //   return <DataCell isPositive={result}>{rating}</DataCell>;
@@ -149,6 +149,7 @@ export const ScorecardComponent = ({
   data,
   columns,
   onClickCell,
+  metricColorMap,
   prog,
   showHeaders,
   spacing,
@@ -215,6 +216,7 @@ export const ScorecardComponent = ({
                 rating={cellData}
                 ambition={ambitionValue}
                 metric={rowValues[0][1]}
+                metricColorMap={metricColorMap}
               />
             )}
           </StyledTd>
@@ -230,11 +232,12 @@ export const ScorecardComponent = ({
             height={50}
           /> */}
           <TrendBarChart
-            cellData={trendValue.map((val) => ({ value: val.week }))}
+            // cellData={trendValue.map((val) => ({ value: val.week }))}
             data={trendValue.map((val) => ({
               value: val.value,
               date: val.week,
             }))}
+            ambition={ambitionValue}
             width={120}
             height={50}
           />
