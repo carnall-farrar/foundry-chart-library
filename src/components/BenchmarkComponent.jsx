@@ -150,18 +150,16 @@ export const BenchmarkComponent = ({
     header: "Locations",
   });
 
-  console.log("sort::", sort);
-
-  const fixedRecords = records.filter(
-    (record) => typeof record.fixedPosition === "number"
-  );
-
-  const nullRecordsForSort = records.filter(
-    (record) => record.data[sort.header] === null
-  );
+  const fixedRecords = records
+    .filter((record) => typeof record.fixedPosition === "number")
+    .sort((rec1, rec2) => rec1.fixedPosition - rec2.fixedPosition);
 
   const recordsToSort = records.filter(
     (record) => typeof record.fixedPosition !== "number"
+  );
+
+  const nullRecordsForSort = recordsToSort.filter(
+    (record) => record.data[sort.header] === null
   );
 
   let sortedRecords = recordsToSort
