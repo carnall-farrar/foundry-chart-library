@@ -40,7 +40,7 @@ scoreCard = {
       "Jan 22": "",
       "Feb 22": "",
       "March 22": "",
-      "6 week trend": [
+      "Latest 6 Period chart": [
         { week: "2021-02-07Z", value: 0 },
         { week: "2022-03-07Z", value: 0 },
         { week: "2022-04-07Z", value: 0 },
@@ -71,7 +71,7 @@ scoreCard = {
       "Jan 22": "",
       "Feb 22": "",
       "March 22": "",
-      "6 week trend": [
+      "Latest 6 Period chart": [
         { week: "2021-02-07Z", value: 4216 },
         { week: "2022-03-07Z", value: 5500 },
         { week: "2022-04-07Z", value: 2712 },
@@ -102,7 +102,7 @@ scoreCard = {
       "Jan 22": "",
       "Feb 22": "",
       "March 22": "",
-      "6 week trend": [
+      "Latest 6 Period chart": [
         { week: "2021-02-07Z", value: 4216 },
         { week: "2022-03-07Z", value: 5500 },
         { week: "2022-04-07Z", value: 2712 },
@@ -133,7 +133,7 @@ scoreCard = {
       "Jan 22": "",
       "Feb 22": "",
       "March 22": "",
-      "6 week trend": [
+      "Latest 6 Period chart": [
         { week: "2021-02-07Z", value: 4216 },
         { week: "2022-03-07Z", value: 5500 },
         { week: "2022-04-07Z", value: 2712 },
@@ -164,7 +164,7 @@ scoreCard = {
       "Jan 22": "",
       "Feb 22": "",
       "March 22": "",
-      "6 week trend": [
+      "Latest 6 Period chart": [
         { week: "2021-02-07Z", value: 4216 },
         { week: "2022-03-07Z", value: 5500 },
         { week: "2022-04-07Z", value: 2712 },
@@ -195,7 +195,7 @@ scoreCard = {
       "Jan 22": "",
       "Feb 22": "",
       "March 22": "",
-      "6 week trend": [
+      "Latest 6 Period chart": [
         { week: "2021-02-07Z", value: 4216 },
         { week: "2022-03-07Z", value: 5500 },
         { week: "2022-04-07Z", value: 2712 },
@@ -226,7 +226,7 @@ scoreCard = {
       "Jan 22": "",
       "Feb 22": "",
       "March 22": "",
-      "6 week trend": [
+      "Latest 6 Period chart": [
         { week: "2021-02-07Z", value: 4216 },
         { week: "2022-03-07Z", value: 5500 },
         { week: "2022-04-07Z", value: 2712 },
@@ -257,7 +257,7 @@ scoreCard = {
       "Jan 22": "",
       "Feb 22": "",
       "March 22": "",
-      "6 week trend": [
+      "Latest 6 Period chart": [
         { week: "2021-02-07Z", value: 4216 },
         { week: "2022-03-07Z", value: 5500 },
         { week: "2022-04-07Z", value: 2712 },
@@ -289,7 +289,7 @@ scoreCard = {
     "Jan 22",
     "Feb 22",
     "March 22",
-    "6 week trend",
+    "Latest 6 Period chart",
   ],
 };
 
