@@ -83,10 +83,17 @@ const AmbitionCell = ({ date, value }) => {
   );
 };
 
-const RatingCell = ({ rating, metric, ambition, metricColorMap }) => {
+const RatingCell = ({
+  rating,
+  metric,
+  ambition,
+  metricColorMap,
+  // metricUnitMap,
+}) => {
   // let tempAmbition = 101;
   let isPositive = rating.replace("%", "") > ambition;
   let result;
+  let result2;
   // if (rating && rating.at(-1) !== "%") {
   //   return rating;
   // }
@@ -150,6 +157,7 @@ export const ScorecardComponent = ({
   columns,
   onClickCell,
   metricColorMap,
+  metricUnitMap,
   prog,
   showHeaders,
   spacing,
@@ -181,6 +189,7 @@ export const ScorecardComponent = ({
     );
 
     const rowValues = Object.entries(rowData).slice(1, values.length - 1);
+    const metric = rowValues[0][1];
 
     const { index: headerStartIndex, span } = headerSpans[headerValue];
     const headerEndIndex = headerStartIndex + span - 1;
@@ -215,7 +224,7 @@ export const ScorecardComponent = ({
               <RatingCell
                 rating={cellData}
                 ambition={ambitionValue}
-                metric={rowValues[0][1]}
+                metric={metric}
                 metricColorMap={metricColorMap}
               />
             )}
@@ -237,6 +246,7 @@ export const ScorecardComponent = ({
               value: val.value,
               date: val.week,
             }))}
+            isPercentage={metricUnitMap[metric] === "percentage"}
             ambition={ambitionValue}
             width={120}
             height={50}

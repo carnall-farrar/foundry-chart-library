@@ -10,7 +10,14 @@ border: 1px solid #555555;
 }
 `;
 
-export const TrendBarChart = ({ data, ambition, width, height, cellData }) => {
+export const TrendBarChart = ({
+  data,
+  isPercentage,
+  ambition,
+  width,
+  height,
+  cellData,
+}) => {
   const dateFormatter = (item) => dayjs(item).format("MMM D, YYYY");
   const filteredData = data.map((i) =>
     i.value === 0 || null ? { ...i, value: null } : i
@@ -19,10 +26,12 @@ export const TrendBarChart = ({ data, ambition, width, height, cellData }) => {
   const CustomTooltip = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
       const week = dayjs(payload[0].payload.date).format("MMM D, YYYY");
+      const value = payload[0].value;
       return (
         <TooltipContent>
           <p className="label">{week}</p>
-          <p>{`${Math.round((payload[0].value * 100) / ambition) * 100}% `}</p>
+          {/* <p>{`${Math.round((payload[0].value * 100) / ambition) * 100}% `}</p> */}
+          <p>{isPercentage ? `${value}%` : value.toLocaleString()}</p>
           {/* <p className="intro">{getIntroOfPage(label)}</p> */}
         </TooltipContent>
       );
