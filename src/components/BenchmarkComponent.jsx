@@ -53,7 +53,7 @@ const StyledPill = window.styled.div`
 
     return props.isPositive && typeof props.value === "number"
       ? "#a1e2c4"
-      : "#ffd4d4";
+      : "#FA999C";
   }};
   border: 1px solid ${(props) => {
     if (props.value === null) {
@@ -66,7 +66,7 @@ const StyledPill = window.styled.div`
 
     return props.isPositive && typeof props.value === "number"
       ? "#44a278"
-      : "#b54f4f";
+      : "#AC2F33";
   }};
   color: ${(props) => {
     if (props.value === null) {

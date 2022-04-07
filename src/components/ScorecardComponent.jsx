@@ -22,7 +22,7 @@ const StyledTr = window.styled.tr`
 
 const StyledTd = window.styled.td`
   border-bottom: ${(props) =>
-    props.shouldHaveBorder ? "1px solid black" : "none"};
+    props.shouldHaveBorder ? "1px solid #dedede" : "none"};
   text-align: center;
   border-collapse: collapse;
   padding: ${(props) => (props.isHeader ? "5px" : "3px")};
@@ -51,10 +51,11 @@ const DataCell = window.styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0.2rem;
-    height: 1.2rem;
+    // padding: 0.2rem;
+    padding: 4px 8px;
+    // height: 1.2rem;
     width: 2.5rem;
-    border-radius: 8px;
+    border-radius: 5px;
     color: ${(props) =>
       !props.hasRating
         ? Colors.white
@@ -83,32 +84,13 @@ const AmbitionCell = ({ date, value }) => {
   );
 };
 
-const RatingCell = ({
-  rating,
-  metric,
-  ambition,
-  metricColorMap,
-  // metricUnitMap,
-}) => {
-  // let tempAmbition = 101;
+const RatingCell = ({ rating, metric, ambition, metricColorMap }) => {
   let isPositive = rating.replace("%", "") > ambition;
   let result;
   let result2;
   // if (rating && rating.at(-1) !== "%") {
   //   return rating;
   // }
-
-  // const metricColorMap = {
-  //   "Value Weighted Activity": "aboveGood",
-  //   "IS Activity": "aboveGood",
-  //   "Completed pathways": "aboveGood",
-  //   "78ww": "belowGood",
-  //   "104ww": "belowGood",
-  //   "Outpatient Reduction": "aboveGood",
-  //   "Wait to First Outpatient": "belowGood",
-  //   "Cancer 62 Days": "belowGood",
-  //   "Diagnostic Test Activity": "aboveGood",
-  // };
 
   // metricColorMap[metric] === "aboveGood" || isPositive
   //   ? (result = true)
@@ -183,6 +165,7 @@ export const ScorecardComponent = ({
     const values = Object.values(rowData);
     const trendValue = values.at(-1);
     const headerValue = values.at(0);
+    // const metricValue = values.at(1);
     const ambitionData = values.at(3);
     const ambitionValue = Number(
       (ambitionData.value ?? ambitionData).replaceAll(/[^\d]/g, "")
@@ -206,6 +189,7 @@ export const ScorecardComponent = ({
               {/* <PerformanceIcon /> */}
               {headerValue}
             </RowHeaderContainer>
+            {/* <MetricHeaderContainer>{metricValue}</MetricHeaderContainer> */}
           </StyledTd>
         )}
         {rowValues.map(([header, cellData], colIndex) => (
@@ -265,6 +249,7 @@ export const ScorecardComponent = ({
               key={column}
               hasRating={index > 3 && index < columns.length - 1}
               isTrend={index === columns.length - 1}
+              // isMetric={index === columns.length - 1}
             >
               {column}
             </StyledTh>
