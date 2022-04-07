@@ -40,6 +40,17 @@ const RowHeaderContainer = window.styled.div`
   height: ${(props) => props.rowSpan * 2.7}rem;
 `;
 
+const MetricHeaderContainer = window.styled.div`
+  font-size: 0.7rem;  
+  background-color: ${(props) => (props.isMetric ? Colors.gray_light : "")};
+  color: black;
+  padding: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: ${(props) => props.rowSpan * 2.7}rem;
+`;
+
 const DataCell = window.styled.div`
     font-size: 0.7rem;  
     background-color: ${(props) =>
@@ -58,7 +69,7 @@ const DataCell = window.styled.div`
     border-radius: 5px;
     color: ${(props) =>
       !props.hasRating
-        ? Colors.white
+        ? Colors.gray_dark
         : props.isPositive
         ? Colors.red_dark
         : Colors.green_dark};
@@ -113,17 +124,21 @@ const RatingCell = ({ rating, metric, ambition, metricColorMap }) => {
 
 // border-collapse: ${(props) => (props.hasRating ? "collapse" : "none")};
 
+// background-color: ${(props) =>
+//   props.hasRating ? Colors.gray_dark : Colors.gray_light};
+// border: 6px solid ${(props) =>
+// props.hasRating ? Colors.gray_dark : Colors.white};
+//   color: ${(props) => (props.hasRating ? Colors.white : "inherit")};
+
 const StyledTh = window.styled.th`
-  background-color: ${(props) =>
-    props.hasRating ? Colors.gray_dark : Colors.gray_light};
+  background-color: ${Colors.gray_light};
   color: ${(props) => (props.hasRating ? Colors.white : "inherit")};
   margin: 0;
-  border: 6px solid ${(props) =>
-    props.hasRating ? Colors.gray_dark : Colors.white};
+  border: 6px solid ${Colors.white};
   border-top-color: ${Colors.white};
   border-bottom-color: ${Colors.white};
   border-right-width: ${(props) => (props.hasRating ? "0px" : "6px")};
-  white-space: ${(props) => (props.isTrend ? "nowrap" : "inherit")}
+  white-space: ${(props) => (props.isDate ? "nowrap" : "inherit")}
 `;
 
 const performanceIconMap = {
@@ -165,7 +180,7 @@ export const ScorecardComponent = ({
     const values = Object.values(rowData);
     const trendValue = values.at(-1);
     const headerValue = values.at(0);
-    // const metricValue = values.at(1);
+    const metricValue = values.at(1);
     const ambitionData = values.at(3);
     const ambitionValue = Number(
       (ambitionData.value ?? ambitionData).replaceAll(/[^\d]/g, "")
@@ -179,6 +194,9 @@ export const ScorecardComponent = ({
     const shouldHaveBorder = rowIndex === headerEndIndex;
     const ratingStartIndex = 3;
     const ambitionColumnIndex = 2;
+    console.log(rowValues);
+    const isMetric = rowValues[0][0]; // === "metric" ? true : false;
+    console.log(rowValues[0][0], "ismetric");
     // const PerformanceIcon = performanceIconMap[headerValue];
 
     return (
@@ -189,7 +207,6 @@ export const ScorecardComponent = ({
               {/* <PerformanceIcon /> */}
               {headerValue}
             </RowHeaderContainer>
-            {/* <MetricHeaderContainer>{metricValue}</MetricHeaderContainer> */}
           </StyledTd>
         )}
         {rowValues.map(([header, cellData], colIndex) => (
@@ -197,7 +214,12 @@ export const ScorecardComponent = ({
             onClick={() => onClickCell(header, rowData["Metric"])}
             shouldHaveBorder={shouldHaveBorder}
           >
-            {colIndex < ambitionColumnIndex && cellData}
+            <MetricHeaderContainer
+              isMetric={header === isMetric ? true : false}
+            >
+              {colIndex < ambitionColumnIndex && cellData}
+            </MetricHeaderContainer>
+
             {colIndex === ambitionColumnIndex && (
               <AmbitionCell
                 value={cellData.value ?? cellData}
@@ -244,16 +266,31 @@ export const ScorecardComponent = ({
     <StyledTable>
       <thead>
         <StyledTr>
-          {columns.map((column, index) => (
+          {columns.map((column, index) => {
+            return (
+              <StyledTh
+                key={column}
+                hasRating={index > 3 && index < columns.length - 1}
+                isTrend={index === columns.length - 1}
+                isDate={index > 2}
+                isMetric={index === 1}
+              >
+                {/* <MetricHeaderContainer isMetric={index === 1}> */}
+                {column}
+                {/* </MetricHeaderContainer> */}
+              </StyledTh>
+            );
+          })}
+          {/* {columns.map((column, index) => (
             <StyledTh
               key={column}
               hasRating={index > 3 && index < columns.length - 1}
               isTrend={index === columns.length - 1}
-              // isMetric={index === columns.length - 1}
+              isMetric={index === columns.length - 1}
             >
               {column}
             </StyledTh>
-          ))}
+          ))} */}
         </StyledTr>
       </thead>
       <tbody>
