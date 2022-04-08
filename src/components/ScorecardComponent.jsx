@@ -147,25 +147,18 @@ const RatingCell = ({
   return <DataCell ratingResult={ratingResult}>{rating || "~"}</DataCell>;
 };
 
-// border-collapse: ${(props) => (props.hasRating ? "collapse" : "none")};
-
-// background-color: ${(props) =>
-//   props.hasRating ? Colors.gray_dark : Colors.gray_light};
-// border: 6px solid ${(props) =>
-// props.hasRating ? Colors.gray_dark : Colors.white};
-//   color: ${(props) => (props.hasRating ? Colors.white : "inherit")};
-
 const StyledTh = window.styled.th`
   // border-collapse: ${(props) => (props.hasRating ? "collapse" : "none")};
   background-color: ${Colors.gray_light};
   color: black;
   margin: 0;
-  border: 6px solid 6px solid ${(props) =>
-    props.hasRating ? Colors.gray_dark : Colors.white};
+  border: 6px solid ${(props) =>
+    props.hasRating ? Colors.gray_light : Colors.white};
   border-top-color: ${Colors.white};
   border-bottom-color: ${Colors.white};
   border-right-width: ${(props) => (props.hasRating ? "0px" : "6px")};
-  white-space: ${(props) => (props.isDate ? "nowrap" : "inherit")}
+  white-space: ${(props) => (props.isDate ? "nowrap" : "inherit")};
+  font-weight: 200;
 `;
 
 const performanceIconMap = {
@@ -213,17 +206,15 @@ export const ScorecardComponent = ({
       (ambitionData.value ?? ambitionData).replaceAll(/[^\d]/g, "")
     );
 
-    const rowValues = Object.entries(rowData).slice(1, values.length - 1);
-    const metric = rowValues[0][1];
+    const rowEntries = Object.entries(rowData).slice(1, values.length - 1);
+    const metric = rowEntries[0][1];
 
     const { index: headerStartIndex, span } = headerSpans[headerValue];
     const headerEndIndex = headerStartIndex + span - 1;
     const shouldHaveBorder = rowIndex === headerEndIndex;
     const ratingStartIndex = 3;
     const ambitionColumnIndex = 2;
-    console.log(rowValues);
-    const isMetric = rowValues[0][0]; // === "metric" ? true : false;
-    console.log(rowValues[0][0], "ismetric");
+    const isMetric = rowEntries[0][0]; // === "metric" ? true : false;
 
     return (
       <>
@@ -234,7 +225,7 @@ export const ScorecardComponent = ({
             </RowHeaderContainer>
           </StyledTd>
         )}
-        {rowValues.map(([header, cellData], colIndex) => (
+        {rowEntries.map(([header, cellData], colIndex) => (
           <StyledTd
             onClick={() => onClickCell(header, rowData["Metric"])}
             shouldHaveBorder={shouldHaveBorder}
@@ -255,7 +246,7 @@ export const ScorecardComponent = ({
               <RatingCell
                 rating={cellData}
                 previousMonthRating={
-                  colIndex > ratingStartIndex && rowValues[colIndex]
+                  colIndex > ratingStartIndex && rowEntries[colIndex - 1][1]
                 }
                 ambition={ambitionValue}
                 metric={metric}
