@@ -1,4 +1,3 @@
-import { TrendLineChart } from "./TrendLineChart";
 import { TrendBarChart } from "./TrendBarChart";
 import {
   Activity,
@@ -51,14 +50,30 @@ const MetricHeaderContainer = window.styled.div`
   height: ${(props) => props.rowSpan * 2.7}rem;
 `;
 
+const RatingResult = {
+  none: "none",
+  good: "good",
+  improving: "improving",
+  bad: "bad",
+};
+
+const RatingCellBgColorMap = {
+  [RatingResult.none]: Colors.gray_light,
+  [RatingResult.good]: Colors.green_light,
+  [RatingResult.improving]: Colors.amber_light,
+  [RatingResult.bad]: Colors.red_light,
+};
+const RatingCellColorMap = {
+  [RatingResult.none]: Colors.gray_dark,
+  [RatingResult.good]: Colors.green_dark,
+  [RatingResult.improving]: Colors.amber_dark,
+  [RatingResult.bad]: Colors.red_dark,
+};
+
 const DataCell = window.styled.div`
     font-size: 0.7rem;  
-    background-color: ${(props) =>
-      !props.hasRating
-        ? Colors.gray_light
-        : props.isPositive
-        ? Colors.red_light
-        : Colors.green_light};
+    background-color: ${({ ratingResult }) =>
+      RatingCellBgColorMap[ratingResult]};
     display: flex;
     align-items: center;
     justify-content: center;
@@ -67,18 +82,9 @@ const DataCell = window.styled.div`
     // height: 1.2rem;
     width: 2.5rem;
     border-radius: 5px;
-    color: ${(props) =>
-      !props.hasRating
-        ? Colors.gray_dark
-        : props.isPositive
-        ? Colors.red_dark
-        : Colors.green_dark};
-    border: 1px solid ${(props) =>
-      !props.hasRating
-        ? Colors.gray_dark
-        : props.isPositive
-        ? Colors.red_dark
-        : Colors.green_dark};
+    color:  ${({ ratingResult }) => RatingCellColorMap[ratingResult]};
+    border: 1px solid  ${({ ratingResult }) =>
+      RatingCellColorMap[ratingResult]};
     cursor: pointer;
     &:hover {
       box-shadow: 0 5px 15px rgba(0,0,0,0.3);
@@ -95,31 +101,50 @@ const AmbitionCell = ({ date, value }) => {
   );
 };
 
-const RatingCell = ({ rating, metric, ambition, metricColorMap }) => {
-  let isPositive = rating.replace("%", "") > ambition;
-  let result;
-  let result2;
-  // if (rating && rating.at(-1) !== "%") {
-  //   return rating;
-  // }
+const getRatingResult = (
+  rating,
+  previousMonthRating,
+  isGreaterThanAmbition,
+  isAboveGood
+) => {
+  if (!rating) {
+    return RatingResult.none;
+  }
+  if (isAboveGood) {
+    if (isGreaterThanAmbition) {
+      return RatingResult.good;
+    } else {
+      return previousMonthRating && rating > previousMonthRating
+        ? RatingResult.improving
+        : RatingResult.bad;
+    }
+  }
+  // below good
+  if (isGreaterThanAmbition) {
+    return previousMonthRating && rating < previousMonthRating
+      ? RatingResult.improving
+      : RatingResult.bad;
+  } else {
+    return RatingResult.good;
+  }
+};
 
-  // metricColorMap[metric] === "aboveGood" || isPositive
-  //   ? (result = true)
-  //   : metricColorMap[metric] === "belowGood" || !isPositive
-  //   ? (result = false)
-  //   : (result = false);
-
-  result = metricColorMap[metric] === "aboveGood" ? !isPositive : isPositive;
-
-  // if (rating && rating.at(-1) !== "%") {
-  //   return <DataCell isPositive={result}>{rating}</DataCell>;
-  // }
-
-  return (
-    <DataCell isPositive={result} hasRating={!!rating}>
-      {rating || "~"}
-    </DataCell>
+const RatingCell = ({
+  rating,
+  previousMonthRating,
+  metric,
+  ambition,
+  metricColorMap,
+}) => {
+  const isGreaterThanAmbition = rating.replace("%", "") > ambition;
+  const isAboveGood = metricColorMap[metric] === "aboveGood";
+  const ratingResult = getRatingResult(
+    rating,
+    previousMonthRating,
+    isGreaterThanAmbition,
+    isAboveGood
   );
+  return <DataCell ratingResult={ratingResult}>{rating || "~"}</DataCell>;
 };
 
 // border-collapse: ${(props) => (props.hasRating ? "collapse" : "none")};
@@ -131,10 +156,12 @@ const RatingCell = ({ rating, metric, ambition, metricColorMap }) => {
 //   color: ${(props) => (props.hasRating ? Colors.white : "inherit")};
 
 const StyledTh = window.styled.th`
+  // border-collapse: ${(props) => (props.hasRating ? "collapse" : "none")};
   background-color: ${Colors.gray_light};
-  color: ${(props) => (props.hasRating ? Colors.white : "inherit")};
+  color: black;
   margin: 0;
-  border: 6px solid ${Colors.white};
+  border: 6px solid 6px solid ${(props) =>
+    props.hasRating ? Colors.gray_dark : Colors.white};
   border-top-color: ${Colors.white};
   border-bottom-color: ${Colors.white};
   border-right-width: ${(props) => (props.hasRating ? "0px" : "6px")};
@@ -197,14 +224,12 @@ export const ScorecardComponent = ({
     console.log(rowValues);
     const isMetric = rowValues[0][0]; // === "metric" ? true : false;
     console.log(rowValues[0][0], "ismetric");
-    // const PerformanceIcon = performanceIconMap[headerValue];
 
     return (
       <>
         {headerStartIndex === rowIndex && (
           <StyledTd rowSpan={span} shouldHaveBorder>
             <RowHeaderContainer rowSpan={span} isHeader>
-              {/* <PerformanceIcon /> */}
               {headerValue}
             </RowHeaderContainer>
           </StyledTd>
@@ -229,6 +254,9 @@ export const ScorecardComponent = ({
             {colIndex >= ratingStartIndex && (
               <RatingCell
                 rating={cellData}
+                previousMonthRating={
+                  colIndex > ratingStartIndex && rowValues[colIndex]
+                }
                 ambition={ambitionValue}
                 metric={metric}
                 metricColorMap={metricColorMap}
@@ -237,17 +265,7 @@ export const ScorecardComponent = ({
           </StyledTd>
         ))}
         <StyledTd shouldHaveBorder={shouldHaveBorder}>
-          {/* <TrendLineChart
-            cellData={trendValue.map((val) => ({ value: val.week }))}
-            data={trendValue.map((val) => ({
-              value: val.value,
-              date: val.week,
-            }))}
-            width={120}
-            height={50}
-          /> */}
           <TrendBarChart
-            // cellData={trendValue.map((val) => ({ value: val.week }))}
             data={trendValue.map((val) => ({
               value: val.value,
               date: val.week,
@@ -275,22 +293,10 @@ export const ScorecardComponent = ({
                 isDate={index > 2}
                 isMetric={index === 1}
               >
-                {/* <MetricHeaderContainer isMetric={index === 1}> */}
                 {column}
-                {/* </MetricHeaderContainer> */}
               </StyledTh>
             );
           })}
-          {/* {columns.map((column, index) => (
-            <StyledTh
-              key={column}
-              hasRating={index > 3 && index < columns.length - 1}
-              isTrend={index === columns.length - 1}
-              isMetric={index === columns.length - 1}
-            >
-              {column}
-            </StyledTh>
-          ))} */}
         </StyledTr>
       </thead>
       <tbody>

@@ -7,7 +7,7 @@ scoreCard = {
     "104ww": "belowGood",
     "Outpatient Reduction": "aboveGood",
     "Wait to First Outpatient": "belowGood",
-    "Cancer 62 Days": "aboveGood",
+    "Cancer 62 Days": "belowGood",
     "Diagnostic Test Activity": "aboveGood",
   },
   metricUnitMap: {
