@@ -94,7 +94,7 @@ const RatingCell = ({
   previousMonthRating,
   ambition,
   isAboveGood,
-  isPercent,
+  isPercentage,
 }) => {
   const isGreaterThanAmbition = rating > ambition;
   const ratingResult = getRatingResult(
@@ -103,9 +103,11 @@ const RatingCell = ({
     isGreaterThanAmbition,
     isAboveGood
   );
+  let value = isPercentage ? `${rating}%` : `${rating.toLocaleString()}`;
   return (
     <DataCell ratingResult={ratingResult}>
-      {!!rating ? `${rating}${isPercent ? "%" : ""}` : "~"}
+      {/* {!!rating ? `${rating}${isPercentage ? "%" : ""}` : "~"} */}
+      {!!rating ? value : "~"}
     </DataCell>
   );
 };
