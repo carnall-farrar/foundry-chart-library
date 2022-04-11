@@ -6,8 +6,17 @@ import {
   OutPatients,
   Diagnostics,
 } from "../icons";
+import {
+  RatingResult,
+  getRatingResult,
+  RatingCellBgColorMap,
+  RatingCellColorMap,
+} from "../utils";
 
 import Colors from "../colors";
+
+const cellHeight = 2.8;
+const rowSpacing = 0.1;
 
 export const StyledTable = window.styled.table`
   margin-bottom: 50px;
@@ -24,7 +33,7 @@ const StyledTd = window.styled.td`
     props.shouldHaveBorder ? "1px solid #dedede" : "none"};
   text-align: center;
   border-collapse: collapse;
-  padding: ${(props) => (props.isHeader ? "5px" : "3px")};
+  // padding: ${(props) => (props.isHeader ? "5px" : "3px")};
   margin: 0;
 `;
 
@@ -32,43 +41,24 @@ const RowHeaderContainer = window.styled.div`
   font-size: 0.7rem;  
   background-color: rgb(0, 95, 184);
   color: white;
-  padding: 0.5rem;
+  // padding: 0.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: ${(props) => props.rowSpan * 2.7}rem;
+  height: ${(props) => props.rowSpan * (cellHeight + rowSpacing)}rem;
 `;
 
 const MetricHeaderContainer = window.styled.div`
   font-size: 0.7rem;  
   background-color: ${(props) => (props.isMetric ? Colors.gray_light : "")};
   color: black;
-  padding: 0.5rem;
+  // padding: 0.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: ${(props) => props.rowSpan * 2.7}rem;
+  height: ${cellHeight}rem;
+  white-space: ${(props) => (props.nowrap ? "nowrap" : "initial")};
 `;
-
-const RatingResult = {
-  none: "none",
-  good: "good",
-  improving: "improving",
-  bad: "bad",
-};
-
-const RatingCellBgColorMap = {
-  [RatingResult.none]: Colors.gray_light,
-  [RatingResult.good]: Colors.green_light,
-  [RatingResult.improving]: Colors.amber_light,
-  [RatingResult.bad]: Colors.red_light,
-};
-const RatingCellColorMap = {
-  [RatingResult.none]: Colors.gray_dark,
-  [RatingResult.good]: Colors.green_dark,
-  [RatingResult.improving]: Colors.amber_dark,
-  [RatingResult.bad]: Colors.red_dark,
-};
 
 const DataCell = window.styled.div`
     font-size: 0.7rem;  
@@ -77,9 +67,7 @@ const DataCell = window.styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    // padding: 0.2rem;
     padding: 4px 8px;
-    // height: 1.2rem;
     width: 2.5rem;
     border-radius: 5px;
     color:  ${({ ratingResult }) => RatingCellColorMap[ratingResult]};
@@ -101,54 +89,28 @@ const AmbitionCell = ({ date, value }) => {
   );
 };
 
-const getRatingResult = (
-  rating,
-  previousMonthRating,
-  isGreaterThanAmbition,
-  isAboveGood
-) => {
-  if (!rating) {
-    return RatingResult.none;
-  }
-  if (isAboveGood) {
-    if (isGreaterThanAmbition) {
-      return RatingResult.good;
-    } else {
-      return previousMonthRating && rating > previousMonthRating
-        ? RatingResult.improving
-        : RatingResult.bad;
-    }
-  }
-  // below good
-  if (isGreaterThanAmbition) {
-    return previousMonthRating && rating < previousMonthRating
-      ? RatingResult.improving
-      : RatingResult.bad;
-  } else {
-    return RatingResult.good;
-  }
-};
-
 const RatingCell = ({
   rating,
   previousMonthRating,
-  metric,
   ambition,
-  metricColorMap,
+  isAboveGood,
+  isPercent,
 }) => {
-  const isGreaterThanAmbition = rating.replace("%", "") > ambition;
-  const isAboveGood = metricColorMap[metric] === "aboveGood";
+  const isGreaterThanAmbition = rating > ambition;
   const ratingResult = getRatingResult(
     rating,
     previousMonthRating,
     isGreaterThanAmbition,
     isAboveGood
   );
-  return <DataCell ratingResult={ratingResult}>{rating || "~"}</DataCell>;
+  return (
+    <DataCell ratingResult={ratingResult}>
+      {!!rating ? `${rating}${isPercent ? "%" : ""}` : "~"}
+    </DataCell>
+  );
 };
 
 const StyledTh = window.styled.th`
-  // border-collapse: ${(props) => (props.hasRating ? "collapse" : "none")};
   background-color: ${Colors.gray_light};
   color: black;
   margin: 0;
@@ -159,6 +121,7 @@ const StyledTh = window.styled.th`
   border-right-width: ${(props) => (props.hasRating ? "0px" : "6px")};
   white-space: ${(props) => (props.isDate ? "nowrap" : "inherit")};
   font-weight: 200;
+  min-width: 2.7rem;
 `;
 
 const performanceIconMap = {
@@ -213,9 +176,10 @@ export const ScorecardComponent = ({
     const headerEndIndex = headerStartIndex + span - 1;
     const shouldHaveBorder = rowIndex === headerEndIndex;
     const ratingStartIndex = 3;
+    const datecolumnIndex = 1;
     const ambitionColumnIndex = 2;
     const isMetric = rowEntries[0][0]; // === "metric" ? true : false;
-
+    const isAboveGood = metric && metricColorMap[metric] === "aboveGood";
     return (
       <>
         {headerStartIndex === rowIndex && (
@@ -230,11 +194,14 @@ export const ScorecardComponent = ({
             onClick={() => onClickCell(header, rowData["Metric"])}
             shouldHaveBorder={shouldHaveBorder}
           >
-            <MetricHeaderContainer
-              isMetric={header === isMetric ? true : false}
-            >
-              {colIndex < ambitionColumnIndex && cellData}
-            </MetricHeaderContainer>
+            {colIndex < ambitionColumnIndex && (
+              <MetricHeaderContainer
+                isMetric={header === isMetric ? true : false}
+                nowrap={colIndex === datecolumnIndex}
+              >
+                {colIndex < ambitionColumnIndex && cellData}
+              </MetricHeaderContainer>
+            )}
 
             {colIndex === ambitionColumnIndex && (
               <AmbitionCell
@@ -242,15 +209,18 @@ export const ScorecardComponent = ({
                 date={cellData.date}
               />
             )}
+
             {colIndex >= ratingStartIndex && (
               <RatingCell
-                rating={cellData}
+                rating={Number(cellData.replace("%", ""))}
                 previousMonthRating={
-                  colIndex > ratingStartIndex && rowEntries[colIndex - 1][1]
+                  colIndex > ratingStartIndex
+                    ? Number(rowEntries[colIndex - 1][1].replace("%", ""))
+                    : undefined
                 }
                 ambition={ambitionValue}
-                metric={metric}
-                metricColorMap={metricColorMap}
+                isAboveGood={isAboveGood}
+                isPercentage={metricUnitMap[metric] === "percentage"}
               />
             )}
           </StyledTd>
@@ -263,6 +233,7 @@ export const ScorecardComponent = ({
             }))}
             isPercentage={metricUnitMap[metric] === "percentage"}
             ambition={ambitionValue}
+            isAboveGood={isAboveGood}
             width={120}
             height={50}
           />
