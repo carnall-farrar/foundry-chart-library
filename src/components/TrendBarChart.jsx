@@ -1,4 +1,5 @@
 const { BarChart, Tooltip, Bar, Cell } = Recharts;
+import { RatingResult, getRatingResult, RatingCellBgColorMap } from "../utils";
 
 const TooltipContent = window.styled.div`
 background: white;
@@ -17,6 +18,7 @@ export const TrendBarChart = ({
   width,
   height,
   cellData,
+  isAboveGood,
 }) => {
   const dateFormatter = (item) => dayjs(item).format("MMM D, YYYY");
   const filteredData = data.map((i) =>
@@ -59,9 +61,18 @@ export const TrendBarChart = ({
         // labelFormatter={(date) => dayjs(data[date].date).format("MMM D, YYYY")}
       />
       <Bar dataKey="value">
-        {data.map((entry, index) => (
-          <Cell fill={entry.value > 0 ? "#FA999C" : "#C1E1C1"} />
-        ))}
+        {data.map((entry, index) => {
+          const currentValue = entry.value;
+          const previousValue = index > 0 && data[index - 1].value;
+          const isGreaterThanAmbition = currentValue > ambition;
+          const ratingResult = getRatingResult(
+            currentValue,
+            previousValue,
+            isGreaterThanAmbition,
+            isAboveGood
+          );
+          return <Cell fill={RatingCellBgColorMap[ratingResult]} />;
+        })}
       </Bar>
     </BarChart>
   );
