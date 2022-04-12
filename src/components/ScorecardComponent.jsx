@@ -15,8 +15,8 @@ import {
 
 import Colors from "../colors";
 
-const cellHeight = 2.8;
-const rowSpacing = 0.1;
+const cellHeight = 3.2;
+const rowSpacing = 0.4;
 
 export const StyledTable = window.styled.table`
   margin-bottom: 50px;
@@ -38,10 +38,12 @@ const StyledTd = window.styled.td`
 `;
 
 const RowHeaderContainer = window.styled.div`
-  font-size: 0.7rem;  
+  font-size: 0.65rem;  
+  margin-left: 3px;
+  margin-right: 3px;
   background-color: rgb(0, 95, 184);
   color: white;
-  // padding: 0.5rem;
+  
   display: flex;
   justify-content: center;
   align-items: center;
@@ -49,10 +51,13 @@ const RowHeaderContainer = window.styled.div`
 `;
 
 const MetricHeaderContainer = window.styled.div`
-  font-size: 0.7rem;  
+  font-size: 0.65rem;  
+  margin-left: 3px;
+  margin-right: 3px;
   background-color: ${(props) => (props.isMetric ? Colors.gray_light : "")};
   color: black;
-  // padding: 0.5rem;
+  padding-left: 3px;
+  padding-right: 3px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -61,14 +66,15 @@ const MetricHeaderContainer = window.styled.div`
 `;
 
 const DataCell = window.styled.div`
-    font-size: 0.7rem;  
+    margin: auto;
+    font-size: 0.65rem;  
     background-color: ${({ ratingResult }) =>
       RatingCellBgColorMap[ratingResult]};
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 4px 8px;
-    width: 2.5rem;
+    padding: 3px 6px;
+    width: 2rem;
     border-radius: 5px;
     color:  ${({ ratingResult }) => RatingCellColorMap[ratingResult]};
     border: 1px solid  ${({ ratingResult }) =>
@@ -123,7 +129,7 @@ const StyledTh = window.styled.th`
   border-right-width: ${(props) => (props.hasRating ? "0px" : "6px")};
   white-space: ${(props) => (props.isDate ? "nowrap" : "inherit")};
   font-weight: 200;
-  min-width: 2.7rem;
+  min-width: 2.1rem;
 `;
 
 const performanceIconMap = {
@@ -236,7 +242,7 @@ export const ScorecardComponent = ({
             isPercentage={metricUnitMap[metric] === "percentage"}
             ambition={ambitionValue}
             isAboveGood={isAboveGood}
-            width={120}
+            width={130}
             height={50}
           />
         </StyledTd>
