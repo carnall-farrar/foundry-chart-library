@@ -38,7 +38,7 @@ const StyledTd = window.styled.td`
 `;
 
 const RowHeaderContainer = window.styled.div`
-  font-size: 0.65rem;  
+  // font-size: 0.65rem;  
   margin-left: 3px;
   margin-right: 3px;
   background-color: rgb(0, 95, 184);
@@ -48,10 +48,12 @@ const RowHeaderContainer = window.styled.div`
   justify-content: center;
   align-items: center;
   height: ${(props) => props.rowSpan * (cellHeight + rowSpacing)}rem;
+  font-weight: bold;
+  font-size: 12px;
 `;
 
 const MetricHeaderContainer = window.styled.div`
-  font-size: 0.65rem;  
+  // font-size: 0.65rem;  
   margin-left: 3px;
   margin-right: 3px;
   background-color: ${(props) => (props.isMetric ? Colors.gray_light : "")};
@@ -67,7 +69,7 @@ const MetricHeaderContainer = window.styled.div`
 
 const DataCell = window.styled.div`
     margin: auto;
-    font-size: 0.65rem;  
+    // font-size: 0.65rem;  
     background-color: ${({ ratingResult }) =>
       RatingCellBgColorMap[ratingResult]};
     display: flex;
