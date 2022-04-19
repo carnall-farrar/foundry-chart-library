@@ -53,11 +53,10 @@ const RowHeaderContainer = window.styled.div`
 `;
 
 const MetricHeaderContainer = window.styled.div`
-  // font-size: 0.65rem;  
   margin-left: 3px;
   margin-right: 3px;
   background-color: ${(props) => (props.isMetric ? Colors.gray_light : "")};
-  color: black;
+  color: ${(props) => (props.isMetric ? "#333" : "inherit")};
   padding-left: 3px;
   padding-right: 3px;
   display: flex;
@@ -65,6 +64,7 @@ const MetricHeaderContainer = window.styled.div`
   align-items: center;
   height: ${cellHeight}rem;
   white-space: ${(props) => (props.nowrap ? "nowrap" : "initial")};
+  font-size: ${(props) => (props.isMetric ? "12px" : "inherit")}
 `;
 
 const DataCell = window.styled.div`
@@ -122,7 +122,7 @@ const RatingCell = ({
 
 const StyledTh = window.styled.th`
   background-color: ${Colors.gray_light};
-  color: black;
+  color: #333;
   margin: 0;
   border: 6px solid ${(props) =>
     props.hasRating ? Colors.gray_light : Colors.white};
