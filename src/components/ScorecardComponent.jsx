@@ -38,7 +38,6 @@ const StyledTd = window.styled.td`
 `;
 
 const RowHeaderContainer = window.styled.div`
-  // font-size: 0.65rem;  
   margin-left: 3px;
   margin-right: 3px;
   background-color: rgb(0, 95, 184);
@@ -64,12 +63,12 @@ const MetricHeaderContainer = window.styled.div`
   align-items: center;
   height: ${cellHeight}rem;
   white-space: ${(props) => (props.nowrap ? "nowrap" : "initial")};
-  font-size: ${(props) => (props.isMetric ? "12px" : "inherit")}
+  // font-size: ${(props) => (props.isMetric ? "12px" : "inherit")}
+  font-size: 12px;
 `;
 
 const DataCell = window.styled.div`
     margin: auto;
-    // font-size: 0.65rem;  
     background-color: ${({ ratingResult }) =>
       RatingCellBgColorMap[ratingResult]};
     display: flex;
@@ -80,7 +79,7 @@ const DataCell = window.styled.div`
     border-radius: 5px;
     color:  ${({ ratingResult }) => RatingCellColorMap[ratingResult]};
     border: 1px solid  ${({ ratingResult }) =>
-      RatingCellColorMap[ratingResult]};
+      RatingCellBgColorMap[ratingResult]};
     cursor: pointer;
     &:hover {
       box-shadow: 0 5px 15px rgba(0,0,0,0.3);
@@ -146,6 +145,7 @@ export const ScorecardComponent = ({
   data,
   columns,
   onClickCell,
+  onHoverCell,
   metricColorMap,
   metricUnitMap,
   prog,
@@ -202,6 +202,7 @@ export const ScorecardComponent = ({
         {rowEntries.map(([header, cellData], colIndex) => (
           <StyledTd
             onClick={() => onClickCell(header, rowData["Metric"])}
+            onHoverCell={() => onHoverCell(header, rowData["Metric"])}
             shouldHaveBorder={shouldHaveBorder}
           >
             {colIndex < ambitionColumnIndex && (

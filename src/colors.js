@@ -5,7 +5,8 @@ export default {
   amber_dark: "#ED8B00",
   gray_dark: "#bdbdbd",
   gray_light: "#e7e7e7",
-  white: "#FFFFFF",
   green_light: "#66a390",
   green_dark: "#006747",
+  white: "#FFFFFF",
+  black: "#000",
 };

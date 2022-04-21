@@ -8,17 +8,17 @@ export const RatingResult = {
 };
 
 export const RatingCellBgColorMap = {
-  [RatingResult.none]: Colors.gray_light,
-  [RatingResult.good]: Colors.green_light,
-  [RatingResult.improving]: Colors.amber_light,
-  [RatingResult.bad]: Colors.red_light,
-};
-
-export const RatingCellColorMap = {
   [RatingResult.none]: Colors.gray_dark,
   [RatingResult.good]: Colors.green_dark,
   [RatingResult.improving]: Colors.amber_dark,
   [RatingResult.bad]: Colors.red_dark,
+};
+
+export const RatingCellColorMap = {
+  [RatingResult.none]: Colors.black,
+  [RatingResult.good]: Colors.white,
+  [RatingResult.improving]: Colors.black,
+  [RatingResult.bad]: Colors.black,
 };
 
 export const getRatingResult = (
