@@ -359,197 +359,197 @@ scoreCard = {
 //   },
 // };
 
-benchmark = {
-  headers: {
-    Diagnostics: [
-      {
-        key: "Diagnostic Test Activity",
-        value: "Total Activity",
-      },
-    ],
-    Activity: [
-      {
-        key: "VWA",
-        value: "Value Weighted Activity",
-      },
-      {
-        key: "IS Activity",
-        value: "IS Activity",
-      },
-      {
-        key: "Completed pathways",
-        value: "Completed pathways",
-      },
-    ],
-    "Long Waits": [
-      {
-        key: "78ww",
-        value: "78ww",
-      },
-      {
-        key: "104ww",
-        value: "104ww",
-      },
-    ],
-    "Outpatient Transformation": [
-      {
-        key: "Outpatient Reduction",
-        value: "Outpatient Reduction",
-      },
-      {
-        key: "Wait to First Outpatient",
-        value: "Wait to First Outpatient",
-      },
-    ],
-    Cancer: [
-      {
-        key: "Cancer 62 Days",
-        value: "Patients waiting over 62 days",
-      },
-    ],
-  },
-  metricsMetadata: {
-    VWA: {
-      lastUpdated: "",
-      goodDirection: 0,
-      unit: "absolute",
-    },
-    "IS Activity": {
-      lastUpdated: "",
-      goodDirection: 1,
-      unit: "absolute",
-    },
-    "Completed pathways": {
-      lastUpdated: "",
-      goodDirection: 1,
-      unit: "absolute",
-    },
-    "104ww": {
-      lastUpdated: "",
-      goodDirection: 1,
-      unit: "absolute",
-    },
-    "78ww": {
-      lastUpdated: "",
-      goodDirection: 1,
-      unit: "absolute",
-    },
-    "Outpatient Reduction": {
-      lastUpdated: "",
-      goodDirection: 1,
-      unit: "absolute",
-    },
-    "Wait to First Outpatient": {
-      lastUpdated: "",
-      goodDirection: 1,
-      unit: "absolute",
-    },
-    "Cancer 62 Days": {
-      lastUpdated: "",
-      goodDirection: 1,
-      unit: "absolute",
-    },
-    "Diagnostic Test Activity": {
-      lastUpdated: "",
-      goodDirection: 0,
-      unit: "pourcentage",
-    },
-  },
-  records: [
-    {
-      region: "Cumbria and North East",
-      fixedPosition: 1,
-      data: {
-        VWA: null,
-        "IS Activity": null,
-        "Completed pathways": null,
-        "104ww": 374,
-        "78ww": 990,
-        "Outpatient Reduction": null,
-        "Wait to First Outpatient": null,
-        "Cancer 62 Days": 1005,
-        "Diagnostic Test Activity": 90,
-      },
-    },
-    {
-      region: "England",
-      fixedPosition: 0,
-      data: {
-        VWA: null,
-        "IS Activity": null,
-        "Completed pathways": null,
-        "104ww": 36816,
-        "78ww": 60904,
-        "Outpatient Reduction": null,
-        "Wait to First Outpatient": null,
-        "Cancer 62 Days": 20729,
-        "Diagnostic Test Activity": 70,
-      },
-    },
-    {
-      region: "Humber, Coast and Vale",
-      fixedPosition: 1,
-      data: {
-        VWA: null,
-        "IS Activity": null,
-        "Completed pathways": null,
-        "104ww": 1550,
-        "78ww": 2154,
-        "Outpatient Reduction": null,
-        "Wait to First Outpatient": null,
-        "Cancer 62 Days": 593,
-        "Diagnostic Test Activity": 5,
-      },
-    },
-    {
-      region: "East of england",
-      fixedPosition: 1,
-      data: {
-        VWA: null,
-        "IS Activity": null,
-        "Completed pathways": null,
-        "104ww": 3452,
-        "78ww": 5356,
-        "Outpatient Reduction": null,
-        "Wait to First Outpatient": null,
-        "Cancer 62 Days": 2600,
-        "Diagnostic Test Activity": 24,
-      },
-    },
-    {
-      region: "South Yorkshire and Bassetlaw",
-      fixedPosition: 1,
+// benchmark = {
+//   headers: {
+//     Diagnostics: [
+//       {
+//         key: "Diagnostic Test Activity",
+//         value: "Total Activity",
+//       },
+//     ],
+//     Activity: [
+//       {
+//         key: "VWA",
+//         value: "Value Weighted Activity",
+//       },
+//       {
+//         key: "IS Activity",
+//         value: "IS Activity",
+//       },
+//       {
+//         key: "Completed pathways",
+//         value: "Completed pathways",
+//       },
+//     ],
+//     "Long Waits": [
+//       {
+//         key: "78ww",
+//         value: "78ww",
+//       },
+//       {
+//         key: "104ww",
+//         value: "104ww",
+//       },
+//     ],
+//     "Outpatient Transformation": [
+//       {
+//         key: "Outpatient Reduction",
+//         value: "Outpatient Reduction",
+//       },
+//       {
+//         key: "Wait to First Outpatient",
+//         value: "Wait to First Outpatient",
+//       },
+//     ],
+//     Cancer: [
+//       {
+//         key: "Cancer 62 Days",
+//         value: "Patients waiting over 62 days",
+//       },
+//     ],
+//   },
+//   metricsMetadata: {
+//     VWA: {
+//       lastUpdated: "",
+//       goodDirection: 0,
+//       unit: "absolute",
+//     },
+//     "IS Activity": {
+//       lastUpdated: "",
+//       goodDirection: 1,
+//       unit: "absolute",
+//     },
+//     "Completed pathways": {
+//       lastUpdated: "",
+//       goodDirection: 1,
+//       unit: "absolute",
+//     },
+//     "104ww": {
+//       lastUpdated: "",
+//       goodDirection: 1,
+//       unit: "absolute",
+//     },
+//     "78ww": {
+//       lastUpdated: "",
+//       goodDirection: 1,
+//       unit: "absolute",
+//     },
+//     "Outpatient Reduction": {
+//       lastUpdated: "",
+//       goodDirection: 1,
+//       unit: "absolute",
+//     },
+//     "Wait to First Outpatient": {
+//       lastUpdated: "",
+//       goodDirection: 1,
+//       unit: "absolute",
+//     },
+//     "Cancer 62 Days": {
+//       lastUpdated: "",
+//       goodDirection: 1,
+//       unit: "absolute",
+//     },
+//     "Diagnostic Test Activity": {
+//       lastUpdated: "",
+//       goodDirection: 0,
+//       unit: "pourcentage",
+//     },
+//   },
+//   records: [
+//     {
+//       region: "Cumbria and North East",
+//       fixedPosition: 1,
+//       data: {
+//         VWA: null,
+//         "IS Activity": null,
+//         "Completed pathways": null,
+//         "104ww": 374,
+//         "78ww": 990,
+//         "Outpatient Reduction": null,
+//         "Wait to First Outpatient": null,
+//         "Cancer 62 Days": 1005,
+//         "Diagnostic Test Activity": 90,
+//       },
+//     },
+//     {
+//       region: "England",
+//       fixedPosition: 0,
+//       data: {
+//         VWA: null,
+//         "IS Activity": null,
+//         "Completed pathways": null,
+//         "104ww": 36816,
+//         "78ww": 60904,
+//         "Outpatient Reduction": null,
+//         "Wait to First Outpatient": null,
+//         "Cancer 62 Days": 20729,
+//         "Diagnostic Test Activity": 70,
+//       },
+//     },
+//     {
+//       region: "Humber, Coast and Vale",
+//       fixedPosition: 1,
+//       data: {
+//         VWA: null,
+//         "IS Activity": null,
+//         "Completed pathways": null,
+//         "104ww": 1550,
+//         "78ww": 2154,
+//         "Outpatient Reduction": null,
+//         "Wait to First Outpatient": null,
+//         "Cancer 62 Days": 593,
+//         "Diagnostic Test Activity": 5,
+//       },
+//     },
+//     {
+//       region: "East of england",
+//       fixedPosition: 1,
+//       data: {
+//         VWA: null,
+//         "IS Activity": null,
+//         "Completed pathways": null,
+//         "104ww": 3452,
+//         "78ww": 5356,
+//         "Outpatient Reduction": null,
+//         "Wait to First Outpatient": null,
+//         "Cancer 62 Days": 2600,
+//         "Diagnostic Test Activity": 24,
+//       },
+//     },
+//     {
+//       region: "South Yorkshire and Bassetlaw",
+//       fixedPosition: 1,
 
-      data: {
-        VWA: null,
-        "IS Activity": null,
-        "Completed pathways": null,
-        "104ww": 168,
-        "78ww": 386,
-        "Outpatient Reduction": null,
-        "Wait to First Outpatient": null,
-        "Cancer 62 Days": 410,
-        "Diagnostic Test Activity": 32,
-      },
-    },
-    {
-      region: "West Yorkshire and Harrogate (Health and Care Partnership)",
-      fixedPosition: 1,
+//       data: {
+//         VWA: null,
+//         "IS Activity": null,
+//         "Completed pathways": null,
+//         "104ww": 168,
+//         "78ww": 386,
+//         "Outpatient Reduction": null,
+//         "Wait to First Outpatient": null,
+//         "Cancer 62 Days": 410,
+//         "Diagnostic Test Activity": 32,
+//       },
+//     },
+//     {
+//       region: "West Yorkshire and Harrogate (Health and Care Partnership)",
+//       fixedPosition: 1,
 
-      data: {
-        VWA: null,
-        "IS Activity": null,
-        "Completed pathways": null,
-        "104ww": 1360,
-        "78ww": 1826,
-        "Outpatient Reduction": null,
-        "Wait to First Outpatient": null,
-        "Cancer 62 Days": 592,
-        "Diagnostic Test Activity": 8,
-      },
-    },
-  ],
-};
+//       data: {
+//         VWA: null,
+//         "IS Activity": null,
+//         "Completed pathways": null,
+//         "104ww": 1360,
+//         "78ww": 1826,
+//         "Outpatient Reduction": null,
+//         "Wait to First Outpatient": null,
+//         "Cancer 62 Days": 592,
+//         "Diagnostic Test Activity": 8,
+//       },
+//     },
+//   ],
+// };
 
 benchmark2 = {
   headers: {
@@ -568,10 +568,6 @@ benchmark2 = {
       },
     ],
     "Long Waits": [
-      {
-        key: "52ww",
-        value: "52ww",
-      },
       {
         key: "78ww",
         value: "78ww",
@@ -609,51 +605,73 @@ benchmark2 = {
       lastUpdated: "2022-03-28",
       goodDirection: 0,
       unit: "pourcentage",
+      ambition: { value: 101, date: "February 10 2022" },
+      isAboveGood: true,
+      previousMonthValue: 0,
     },
     "IS Activity": {
       lastUpdated: "",
       goodDirection: 0,
       unit: "pourcentage",
+      ambition: { value: 101, date: "February 10 2022" },
+      isAboveGood: true,
+      previousMonthValue: 0,
     },
     "Completed pathways": {
       lastUpdated: "2022-03-28",
       goodDirection: 0,
       unit: "pourcentage",
+      ambition: { value: "0", date: "February 10 2022" },
+      isAboveGood: true,
+      previousMonthValue: 0,
     },
     "104ww": {
       lastUpdated: "2022-03-28",
       goodDirection: 0,
       unit: "absolute",
+      ambition: { value: 101, date: "February 10 2022" },
+      isAboveGood: true,
+      previousMonthValue: 0,
     },
     "78ww": {
       lastUpdated: "2022-03-28",
       goodDirection: 0,
       unit: "absolute",
-    },
-    "52ww": {
-      lastUpdated: "2022-03-28",
-      goodDirection: 0,
-      unit: "absolute",
+      ambition: { value: 0, date: "February 10 2022" },
+      isAboveGood: true,
+      previousMonthValue: 0,
     },
     "Outpatient Reduction": {
       lastUpdated: "",
       goodDirection: 0,
       unit: "pourcentage",
+      ambition: { value: 101, date: "February 10 2022" },
+      isAboveGood: true,
+      previousMonthValue: 0,
     },
     "Wait to First Outpatient": {
       lastUpdated: "",
       goodDirection: 0,
       unit: "pourcentage",
+      ambition: { value: 101, date: "February 10 2022" },
+      isAboveGood: false,
+      previousMonthValue: 0,
     },
     "Cancer 62 Days": {
       lastUpdated: "2022-03-28",
       goodDirection: 0,
       unit: "absolute",
+      ambition: { value: 101, date: "February 10 2022" },
+      isAboveGood: false,
+      previousMonthValue: 0,
     },
     "Diagnostic Test Activity": {
       lastUpdated: "",
       goodDirection: 0,
       unit: "pourcentage",
+      ambition: { value: 101, date: "February 10 2022" },
+      isAboveGood: true,
+      previousMonthValue: 0,
     },
   },
   records: [
