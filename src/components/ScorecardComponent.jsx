@@ -67,7 +67,7 @@ const MetricHeaderContainer = window.styled.div`
   font-size: 12px;
 `;
 
-const DataCell = window.styled.div`
+export const DataCell = window.styled.div`
     margin: auto;
     background-color: ${({ ratingResult }) =>
       RatingCellBgColorMap[ratingResult]};

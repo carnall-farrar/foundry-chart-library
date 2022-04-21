@@ -1,5 +1,6 @@
 import { Chevron } from "../icons";
-
+import { getRatingResult } from "../utils";
+import { DataCell } from "./ScorecardComponent";
 const StyledHeader = window.styled.tr``;
 
 const StyledHeaderCell = window.styled.th`
@@ -47,9 +48,9 @@ const StyledPill = window.styled.div`
       return "#e7e7e7";
     }
 
-    if (props.goodDirection === 0) {
-      return "#ecf4ff";
-    }
+    // if (props.goodDirection === 0) {
+    //   return "#ecf4ff";
+    // }
 
     return props.isPositive && typeof props.value === "number"
       ? "#a1e2c4"
@@ -73,9 +74,9 @@ const StyledPill = window.styled.div`
       return "#bdbdbd";
     }
 
-    if (props.goodDirection === 0) {
-      return "#005fb8";
-    }
+    // if (props.goodDirection === 0) {
+    //   return "#005fb8";
+    // }
 
     return props.isPositive && typeof props.value === "number"
       ? "#44a278"
@@ -169,7 +170,6 @@ export const BenchmarkComponent = ({
         sort.header === "Locations"
           ? [a.region, b.region]
           : [a.data[sort.header], b.data[sort.header]];
-      console.log(aItem, bItem, aItem > bItem);
       if (sort.isAsc) {
         return aItem > bItem ? 1 : -1;
       }
@@ -253,34 +253,61 @@ export const BenchmarkComponent = ({
             <StyledBodyCell key={index}>{metadata.lastUpdated}</StyledBodyCell>
           ))}
         </StyledBodyRow>
-        {sortedRecords.map((record, index) => {
-          return (
-            <StyledBodyRow key={index}>
-              <StyledBodyCell>{record.region}</StyledBodyCell>
-              {Object.values(headers)
-                .flat()
-                .map(({ key }, index) => (
+        {sortedRecords.map((record, index) => (
+          <StyledBodyRow key={index}>
+            <StyledBodyCell>{record.region}</StyledBodyCell>
+            {Object.values(headers)
+              .flat()
+              .map(({ key }, index) => {
+                const value = record.data[key];
+                const metaData = metricsMetadata[key];
+                const ambition = metaData.ambition.value;
+                const isGreaterThanAmbition = value > ambition;
+                const ratingResult = getRatingResult(
+                  value,
+                  metaData.previousMonthValue,
+                  isGreaterThanAmbition,
+                  metaData.isAboveGood
+                );
+                let displayValue = value;
+
+                if (
+                  typeof value === "number" &&
+                  metaData.unit === "pourcentage"
+                ) {
+                  displayValue = `${value}%`;
+                }
+
+                if (value === null) {
+                  displayValue = "~";
+                }
+
+                return (
                   <StyledBodyCellData
                     onClick={() => onCellClick(record.region, key)}
                     key={`${record.region}${index}`}
                   >
-                    <Pill
-                      value={record.data[key]}
-                      unit={metricsMetadata[key].unit}
-                      goodDirection={metricsMetadata[key].goodDirection}
-                      isPositive={isValuePositive(
-                        record.data[key],
-                        average(
-                          sortedRecords.map((r) => r.data[key]).filter(Boolean)
-                        ),
-                        metricsMetadata[key].goodDirection
-                      )}
-                    />
+                    <DataCell ratingResult={ratingResult}>
+                      {displayValue}
+                    </DataCell>
+                    {/* <Pill
+                        value={value}
+                        unit={metricsMetadata[key].unit}
+                        // goodDirection={metricsMetadata[key].goodDirection}
+                        // isPositive={isValuePositive(
+                        //   record.data[key],
+                        //   average(
+                        //     sortedRecords.map((r) => r.data[key]).filter(Boolean)
+                        //   ),
+                        //   metricsMetadata[key].goodDirection
+                        // )}
+                        // ambition={metricsMetadata[key].ambition.value}
+                      /> */}
                   </StyledBodyCellData>
-                ))}
-            </StyledBodyRow>
-          );
-        })}
+                );
+              })}
+          </StyledBodyRow>
+        ))}
       </tbody>
     </table>
   );
