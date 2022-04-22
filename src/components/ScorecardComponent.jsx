@@ -65,7 +65,26 @@ const MetricHeaderContainer = window.styled.div`
   white-space: ${(props) => (props.nowrap ? "nowrap" : "initial")};
   // font-size: ${(props) => (props.isMetric ? "12px" : "inherit")}
   font-size: 12px;
+  position: relative;
+  :hover {
+    > div {
+      display: block;
+    }
+  }
 `;
+
+const MetricTooltip = window.styled.div`
+    position: absolute;
+    top: ${cellHeight}rem;
+    display: none;
+    background-color: #333;
+    opacity: 0.8;
+    border-radius: 4px;
+    color: white;
+    z-index: 1;
+`;
+
+// color:  ${({ ratingResult }) => RatingCellColorMap[ratingResult]};
 
 export const DataCell = window.styled.div`
     margin: auto;
@@ -77,7 +96,7 @@ export const DataCell = window.styled.div`
     padding: 3px 6px;
     width: 2rem;
     border-radius: 5px;
-    color:  ${({ ratingResult }) => RatingCellColorMap[ratingResult]};
+    color:  white;
     border: 1px solid  ${({ ratingResult }) =>
       RatingCellBgColorMap[ratingResult]};
     cursor: pointer;
@@ -148,6 +167,7 @@ export const ScorecardComponent = ({
   onHoverCell,
   metricColorMap,
   metricUnitMap,
+  metricTooltipData,
   prog,
   showHeaders,
   spacing,
@@ -202,16 +222,24 @@ export const ScorecardComponent = ({
         {rowEntries.map(([header, cellData], colIndex) => (
           <StyledTd
             onClick={() => onClickCell(header, rowData["Metric"])}
-            onHoverCell={() => onHoverCell(header, rowData["Metric"])}
+            // onHoverCell={() => onHoverCell(header, rowData["Metric"])}
             shouldHaveBorder={shouldHaveBorder}
           >
             {colIndex < ambitionColumnIndex && (
-              <MetricHeaderContainer
-                isMetric={header === isMetric ? true : false}
-                nowrap={colIndex === datecolumnIndex}
-              >
-                {colIndex < ambitionColumnIndex && cellData}
-              </MetricHeaderContainer>
+              <>
+                <MetricHeaderContainer
+                  isMetric={header === isMetric ? true : false}
+                  nowrap={colIndex === datecolumnIndex}
+                  onHoverCell={() => onHoverCell(header, rowData["Metric"])}
+                >
+                  {colIndex < ambitionColumnIndex && cellData}
+                  {colIndex === 0 && (
+                    <MetricTooltip className="tooltip">
+                      {metricTooltipData[cellData]?.["Metric Title"]}
+                    </MetricTooltip>
+                  )}
+                </MetricHeaderContainer>
+              </>
             )}
 
             {colIndex === ambitionColumnIndex && (
