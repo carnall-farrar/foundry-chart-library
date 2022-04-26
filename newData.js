@@ -1,4 +1,54 @@
 scoreCard = {
+  metricTooltipData: {
+    "Value Weighted Activity": {
+      "Metric Title": "Value Weighted Activity Title",
+      "Reporting Grain": "Monthly",
+      Source: "",
+      "Published data": "",
+    },
+    "Completed Pathways": {
+      "Metric Title": "Completed pathways title",
+      "Reporting Grain": "Weekly",
+      Source: "",
+      "Published data": "",
+    },
+    "IS Activity": {
+      "Metric Title": "IS Activity title",
+      "Reporting Grain": "Weekly",
+      Source: "",
+      "Published data": "",
+    },
+    "78ww": {
+      "Metric Title": "78ww title",
+      "Reporting Grain": "Weekly",
+      Source: "",
+      "Published data": "",
+    },
+    "104ww": {
+      "Metric Title": "104ww title",
+      "Reporting Grain": "Weekly",
+      Source: "",
+      "Published data": "",
+    },
+    "Outpatient Reduction": {
+      "Metric Title": "Outpateint reduction title",
+      "Reporting Grain": "Weekly",
+      Source: "",
+      "Published data": "",
+    },
+    "Cancer 62 Days": {
+      "Metric Title": "Cancer 62 days title",
+      "Reporting Grain": "Weekly",
+      Source: "",
+      "Published data": "",
+    },
+    "Diagnostic Test Activity": {
+      "Metric Title": "Diagnostic test activity title",
+      "Reporting Grain": "Weekly",
+      Source: "",
+      "Published data": "",
+    },
+  },
   metricColorMap: {
     "Value Weighted Activity": "aboveGood",
     "IS Activity": "aboveGood",
@@ -798,4 +848,54 @@ benchmark2 = {
       },
     },
   ],
+};
+tooltip = {
+  "Value Weighted Activity": {
+    "Metric Title": "",
+    reporting_grain: "Monthly",
+    source: "",
+    published_data: "",
+  },
+  "Completed Pathways": {
+    metric_title: "",
+    reporting_grain: "Weekly",
+    source: "",
+    published_data: "",
+  },
+  "IS Activity": {
+    metric_title: "",
+    reporting_grain: "Weekly",
+    source: "",
+    published_data: "",
+  },
+  "78ww": {
+    metric_title: "",
+    reporting_grain: "Weekly",
+    source: "",
+    published_data: "",
+  },
+  "104ww": {
+    metric_title: "",
+    reporting_grain: "Weekly",
+    source: "",
+    published_data: "",
+  },
+  "Outpatient Reduction": {
+    metric_title: "",
+    reporting_grain: "Weekly",
+    source: "",
+    published_data: "",
+  },
+  "Cancer 62 Days": {
+    metric_title: "",
+    reporting_grain: "Weekly",
+    source: "",
+    published_data: "",
+  },
+  "Diagnostic Test Activity": {
+    metric_title: "",
+    reporting_grain: "Weekly",
+    source: "",
+    published_data: "",
+  },
 };
