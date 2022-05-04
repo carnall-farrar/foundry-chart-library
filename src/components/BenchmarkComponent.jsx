@@ -1,6 +1,7 @@
 import { Chevron } from "../icons";
 import { getRatingResult } from "../utils";
 import { DataCell } from "./ScorecardComponent";
+import { LoadingDots } from "./LoadingDots";
 const StyledHeader = window.styled.tr``;
 
 const StyledHeaderCell = window.styled.th`
@@ -143,7 +144,7 @@ export const BenchmarkComponent = ({
   onCellClick,
 }) => {
   if (records.length === 0) {
-    return <div></div>;
+    return <LoadingDots />;
   }
   const [sort, setSort] = React.useState({
     isAsc: true,

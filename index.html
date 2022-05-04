@@ -46,6 +46,7 @@
       <div id="trendLineChart"></div>
       <div id="scorecardComponent"></div>
       <div id="benchmarkComponent" style="width: 1400px"></div>
+      <div id="loading"></div>
     </div>
     <script
       crossorigin
@@ -166,10 +167,16 @@
       ReactDOM.render(
         React.createElement(BenchmarkComponent, {
           headers: benchmark2.headers,
-          records: benchmark2.records,
+          records: [],
+          // records: benchmark2.records,
           metricsMetadata: benchmark2.metricsMetadata,
         }),
         document.querySelector("#benchmarkComponent")
+      );
+      ReactDOM.render(
+        React.createElement(LoadingDots, {
+        }),
+        document.querySelector("#loading")
       );
     </script>
   </body>
