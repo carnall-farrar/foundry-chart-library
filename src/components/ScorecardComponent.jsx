@@ -12,6 +12,7 @@ import {
   RatingCellBgColorMap,
   RatingCellColorMap,
 } from "../utils";
+import { LoadingDots } from "./LoadingDots";
 
 import Colors from "../colors";
 
@@ -172,6 +173,9 @@ export const ScorecardComponent = ({
   showHeaders,
   spacing,
 }) => {
+  if (data.length === 0) {
+    return <LoadingDots />
+  }
   const headerSpans = React.useMemo(
     () =>
       data

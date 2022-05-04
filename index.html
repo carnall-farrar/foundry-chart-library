@@ -148,6 +148,7 @@
       ReactDOM.render(
         React.createElement(ScorecardComponent, {
           data: scoreCard.inputData,
+          // data: [],
           columns: scoreCard.columns,
           metricColorMap: scoreCard.metricColorMap,
           metricUnitMap: scoreCard.metricUnitMap,
@@ -167,16 +168,11 @@
       ReactDOM.render(
         React.createElement(BenchmarkComponent, {
           headers: benchmark2.headers,
-          records: [],
-          // records: benchmark2.records,
+          // records: [],
+          records: benchmark2.records,
           metricsMetadata: benchmark2.metricsMetadata,
         }),
         document.querySelector("#benchmarkComponent")
-      );
-      ReactDOM.render(
-        React.createElement(LoadingDots, {
-        }),
-        document.querySelector("#loading")
       );
     </script>
   </body>
