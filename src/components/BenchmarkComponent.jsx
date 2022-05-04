@@ -1,5 +1,6 @@
 import { Chevron } from "../icons";
-
+import { getRatingResult } from "../utils";
+import { DataCell } from "./ScorecardComponent";
 const StyledHeader = window.styled.tr``;
 
 const StyledHeaderCell = window.styled.th`
@@ -47,13 +48,13 @@ const StyledPill = window.styled.div`
       return "#e7e7e7";
     }
 
-    if (props.goodDirection === 0) {
-      return "#ecf4ff";
-    }
+    // if (props.goodDirection === 0) {
+    //   return "#ecf4ff";
+    // }
 
     return props.isPositive && typeof props.value === "number"
       ? "#a1e2c4"
-      : "#ffd4d4";
+      : "#FA999C";
   }};
   border: 1px solid ${(props) => {
     if (props.value === null) {
@@ -66,16 +67,16 @@ const StyledPill = window.styled.div`
 
     return props.isPositive && typeof props.value === "number"
       ? "#44a278"
-      : "#b54f4f";
+      : "#AC2F33";
   }};
   color: ${(props) => {
     if (props.value === null) {
       return "#bdbdbd";
     }
 
-    if (props.goodDirection === 0) {
-      return "#005fb8";
-    }
+    // if (props.goodDirection === 0) {
+    //   return "#005fb8";
+    // }
 
     return props.isPositive && typeof props.value === "number"
       ? "#44a278"
@@ -127,6 +128,14 @@ const isValuePositive = (value, average, positiveDirection) => {
   return true;
 };
 
+const ChevronContainer = window.styled.div`
+                        flex: 3;
+                        display: flex;
+                        justifyContent: center;
+                        alignItems: center;
+                        cursor: pointer;
+`;
+
 export const BenchmarkComponent = ({
   headers,
   records,
@@ -138,29 +147,34 @@ export const BenchmarkComponent = ({
   }
   const [sort, setSort] = React.useState({
     isAsc: true,
-    header: Object.values(headers)[0][0].key,
+    // header: Object.values(headers)[0][0].key,
+    header: "Locations",
   });
 
-  const fixedRecords = records.filter(
-    (record) => typeof record.fixedPosition === "number"
-  );
-
-  const nullRecordsForSort = records.filter(
-    (record) => record.data[sort.header] === null
-  );
+  const fixedRecords = records
+    .filter((record) => typeof record.fixedPosition === "number")
+    .sort((rec1, rec2) => rec1.fixedPosition - rec2.fixedPosition);
 
   const recordsToSort = records.filter(
     (record) => typeof record.fixedPosition !== "number"
   );
 
+  const nullRecordsForSort = recordsToSort.filter(
+    (record) => record.data[sort.header] === null
+  );
+
   let sortedRecords = recordsToSort
     .filter((record) => record.data[sort.header] !== null)
     .sort((a, b) => {
+      const [aItem, bItem] =
+        sort.header === "Locations"
+          ? [a.region, b.region]
+          : [a.data[sort.header], b.data[sort.header]];
       if (sort.isAsc) {
-        return a.data[sort.header] < b.data[sort.header] ? 1 : -1;
+        return aItem > bItem ? 1 : -1;
       }
 
-      return a.data[sort.header] < b.data[sort.header] ? -1 : 1;
+      return aItem > bItem ? -1 : 1;
     });
 
   fixedRecords.forEach((record) => {
@@ -168,6 +182,16 @@ export const BenchmarkComponent = ({
   });
 
   sortedRecords = [...sortedRecords, ...nullRecordsForSort];
+
+  const headersWithLocation = {
+    Locations: [
+      {
+        key: "Locations",
+        value: "Locations",
+      },
+    ],
+    ...headers,
+  };
 
   return (
     <table>
@@ -181,8 +205,7 @@ export const BenchmarkComponent = ({
           ))}
         </StyledHeader>
         <StyledSubHeader>
-          <th style={{ width: 80 }} />
-          {Object.values(headers)
+          {Object.values(headersWithLocation)
             .flat()
             .map((subheader) => {
               return (
@@ -191,14 +214,7 @@ export const BenchmarkComponent = ({
                     <div style={{ flex: 9, maxWidth: 100 }}>
                       {subheader.value}
                     </div>
-                    <div
-                      style={{
-                        flex: 3,
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        cursor: "pointer",
-                      }}
+                    <ChevronContainer
                       onClick={() => {
                         if (subheader.key === sort.header) {
                           setSort({
@@ -223,7 +239,7 @@ export const BenchmarkComponent = ({
                             : "down"
                         }
                       />
-                    </div>
+                    </ChevronContainer>
                   </div>
                 </StyledSubHeaderCell>
               );
@@ -237,34 +253,61 @@ export const BenchmarkComponent = ({
             <StyledBodyCell key={index}>{metadata.lastUpdated}</StyledBodyCell>
           ))}
         </StyledBodyRow>
-        {sortedRecords.map((record, index) => {
-          return (
-            <StyledBodyRow key={index}>
-              <StyledBodyCell>{record.region}</StyledBodyCell>
-              {Object.values(headers)
-                .flat()
-                .map(({ key }, index) => (
+        {sortedRecords.map((record, index) => (
+          <StyledBodyRow key={index}>
+            <StyledBodyCell>{record.region}</StyledBodyCell>
+            {Object.values(headers)
+              .flat()
+              .map(({ key }, index) => {
+                const value = record.data[key];
+                const metaData = metricsMetadata[key];
+                const ambition = metaData.ambition.value;
+                const isGreaterThanAmbition = value > ambition;
+                const ratingResult = getRatingResult(
+                  value,
+                  metaData.previousMonthValue,
+                  isGreaterThanAmbition,
+                  metaData.isAboveGood
+                );
+                let displayValue = value;
+
+                if (
+                  typeof value === "number" &&
+                  metaData.unit === "pourcentage"
+                ) {
+                  displayValue = `${value}%`;
+                }
+
+                if (value === null) {
+                  displayValue = "~";
+                }
+
+                return (
                   <StyledBodyCellData
                     onClick={() => onCellClick(record.region, key)}
                     key={`${record.region}${index}`}
                   >
-                    <Pill
-                      value={record.data[key]}
-                      unit={metricsMetadata[key].unit}
-                      goodDirection={metricsMetadata[key].goodDirection}
-                      isPositive={isValuePositive(
-                        record.data[key],
-                        average(
-                          sortedRecords.map((r) => r.data[key]).filter(Boolean)
-                        ),
-                        metricsMetadata[key].goodDirection
-                      )}
-                    />
+                    <DataCell ratingResult={ratingResult}>
+                      {displayValue}
+                    </DataCell>
+                    {/* <Pill
+                        value={value}
+                        unit={metricsMetadata[key].unit}
+                        // goodDirection={metricsMetadata[key].goodDirection}
+                        // isPositive={isValuePositive(
+                        //   record.data[key],
+                        //   average(
+                        //     sortedRecords.map((r) => r.data[key]).filter(Boolean)
+                        //   ),
+                        //   metricsMetadata[key].goodDirection
+                        // )}
+                        // ambition={metricsMetadata[key].ambition.value}
+                      /> */}
                   </StyledBodyCellData>
-                ))}
-            </StyledBodyRow>
-          );
-        })}
+                );
+              })}
+          </StyledBodyRow>
+        ))}
       </tbody>
     </table>
   );

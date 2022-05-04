@@ -1,48 +1,47 @@
 .arrow {
-    border: solid #0E5A8A;
-    border-width: 0 7px 7px 0;
-    display: inline-block;
-    padding: 7px;
-    margin-left: 50%;
-    cursor: pointer;
-  }
-  
-  .right {
-    transform: rotate(-45deg);
-    -webkit-transform: rotate(-45deg);
-  }
-  
-  .left {
-    transform: rotate(135deg);
-    -webkit-transform: rotate(135deg);
-  }
-  
-  .up {
-    transform: rotate(-135deg);
-    -webkit-transform: rotate(-135deg);
-    margin-top: 10px;
-  }
-  
-  .down {
-    transform: rotate(45deg);
-    -webkit-transform: rotate(45deg);
-    margin-bottom: 10px;
-  }
+  border: solid #0e5a8a;
+  border-width: 0 7px 7px 0;
+  display: inline-block;
+  padding: 7px;
+  margin-left: 50%;
+  cursor: pointer;
+}
+
+.right {
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+}
+
+.left {
+  transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
+}
+
+.up {
+  transform: rotate(-135deg);
+  -webkit-transform: rotate(-135deg);
+  margin-top: 10px;
+}
+
+.down {
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  margin-bottom: 10px;
+}
 
 a {
-    text-decoration: none;
-    display: inline-block;
-    padding: 5px 10px;
-    
+  text-decoration: none;
+  display: inline-block;
+  padding: 5px 10px;
 }
 
 a:hover {
-    background-color: #106BA3;
-    cursor:pointer;
+  background-color: #106ba3;
+  cursor: pointer;
 }
 
 .previous {
-    background-color: #2B95D6;
-    color: #F5F8FA;
-    border-radius: 0 0 4px;
+  background-color: #2b95d6;
+  color: #f5f8fa;
+  border-radius: 0 0 4px;
 }

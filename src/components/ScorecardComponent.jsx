@@ -1,4 +1,4 @@
-import { TrendLineChart } from "./TrendLineChart";
+import { TrendBarChart } from "./TrendBarChart";
 import {
   Activity,
   Cancer,
@@ -6,8 +6,17 @@ import {
   OutPatients,
   Diagnostics,
 } from "../icons";
+import {
+  RatingResult,
+  getRatingResult,
+  RatingCellBgColorMap,
+  RatingCellColorMap,
+} from "../utils";
 
 import Colors from "../colors";
+
+const cellHeight = 3.2;
+const rowSpacing = 0.4;
 
 export const StyledTable = window.styled.table`
   margin-bottom: 50px;
@@ -21,49 +30,75 @@ const StyledTr = window.styled.tr`
 
 const StyledTd = window.styled.td`
   border-bottom: ${(props) =>
-    props.shouldHaveBorder ? "1px solid black" : "none"};
+    props.shouldHaveBorder ? "1px solid #dedede" : "none"};
   text-align: center;
   border-collapse: collapse;
-  padding: ${(props) => (props.isHeader ? "5px" : "3px")};
+  // padding: ${(props) => (props.isHeader ? "5px" : "3px")};
   margin: 0;
 `;
 
 const RowHeaderContainer = window.styled.div`
-  font-size: 0.7rem;  
-  border: 2px solid #2D72D2;
-  padding: 1rem;
+  margin-left: 3px;
+  margin-right: 3px;
+  background-color: rgb(0, 95, 184);
+  color: white;
+  
   display: flex;
   justify-content: center;
   align-items: center;
-  height: ${(props) => props.rowSpan * 2.5}rem;
+  height: ${(props) => props.rowSpan * (cellHeight + rowSpacing)}rem;
+  font-weight: bold;
+  font-size: 12px;
 `;
 
-const DataCell = window.styled.div`
-    background-color: ${(props) =>
-      !props.hasRating
-        ? Colors.gray_light
-        : props.isPositive
-        ? Colors.red_light
-        : Colors.green_light};
+const MetricHeaderContainer = window.styled.div`
+  margin-left: 3px;
+  margin-right: 3px;
+  background-color: ${(props) => (props.isMetric ? Colors.gray_light : "")};
+  color: ${(props) => (props.isMetric ? "#333" : "inherit")};
+  padding-left: 3px;
+  padding-right: 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: ${cellHeight}rem;
+  white-space: ${(props) => (props.nowrap ? "nowrap" : "initial")};
+  // font-size: ${(props) => (props.isMetric ? "12px" : "inherit")}
+  font-size: 12px;
+  position: relative;
+  :hover {
+    > div {
+      display: block;
+    }
+  }
+`;
+
+const MetricTooltip = window.styled.div`
+    position: absolute;
+    top: ${cellHeight}rem;
+    display: none;
+    background-color: #333;
+    opacity: 0.8;
+    border-radius: 4px;
+    color: white;
+    z-index: 1;
+`;
+
+// color:  ${({ ratingResult }) => RatingCellColorMap[ratingResult]};
+
+export const DataCell = window.styled.div`
+    margin: auto;
+    background-color: ${({ ratingResult }) =>
+      RatingCellBgColorMap[ratingResult]};
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0.2rem;
-    height: 1.2rem;
-    width: 2.5rem;
-    border-radius: 8px;
-    color: ${(props) =>
-      !props.hasRating
-        ? Colors.white
-        : props.isPositive
-        ? Colors.red_dark
-        : Colors.green_dark};
-    border: 1px solid ${(props) =>
-      !props.hasRating
-        ? Colors.gray_dark
-        : props.isPositive
-        ? Colors.red_dark
-        : Colors.green_dark};
+    padding: 3px 6px;
+    width: 2rem;
+    border-radius: 5px;
+    color:  white;
+    border: 1px solid  ${({ ratingResult }) =>
+      RatingCellBgColorMap[ratingResult]};
     cursor: pointer;
     &:hover {
       box-shadow: 0 5px 15px rgba(0,0,0,0.3);
@@ -71,58 +106,50 @@ const DataCell = window.styled.div`
   }
 `;
 
-const RatingCell = ({ rating, metric, ambition }) => {
-  // let tempAmbition = 101;
-  let isPositive = rating.replace("%", "") > ambition;
-  let result;
-  // if (rating && rating.at(-1) !== "%") {
-  //   return rating;
-  // }
-
-  const metricColorMap = {
-    "Value Weighted Activity": "aboveGood",
-    "IS Activity": "aboveGood",
-    "Completed pathways": "aboveGood",
-    "78ww": "belowGood",
-    "104ww": "belowGood",
-    "Outpatient Reduction": "aboveGood",
-    "Wait to First Outpatient": "belowGood",
-    "Cancer 62 Days": "belowGood",
-    "Diagnostic Test Activity": "aboveGood",
-  };
-
-  // metricColorMap[metric] === "aboveGood" || isPositive
-  //   ? (result = true)
-  //   : metricColorMap[metric] === "belowGood" || !isPositive
-  //   ? (result = false)
-  //   : (result = false);
-
-  result = metricColorMap[metric] === "aboveGood" || isPositive
-
-  // if (rating && rating.at(-1) !== "%") {
-  //   return <DataCell isPositive={result}>{rating}</DataCell>;
-  // }
-
+const AmbitionCell = ({ date, value }) => {
   return (
-    <DataCell isPositive={result} hasRating={!!rating}>
-      {rating || "~"}
+    <div>
+      {value}
+      {date && <div>{date}</div>}
+    </div>
+  );
+};
+
+const RatingCell = ({
+  rating,
+  previousMonthRating,
+  ambition,
+  isAboveGood,
+  isPercentage,
+}) => {
+  const isGreaterThanAmbition = rating > ambition;
+  const ratingResult = getRatingResult(
+    rating,
+    previousMonthRating,
+    isGreaterThanAmbition,
+    isAboveGood
+  );
+  let value = isPercentage ? `${rating}%` : `${rating.toLocaleString()}`;
+  return (
+    <DataCell ratingResult={ratingResult}>
+      {/* {!!rating ? `${rating}${isPercentage ? "%" : ""}` : "~"} */}
+      {!!rating ? value : "~"}
     </DataCell>
   );
 };
 
-// border-collapse: ${(props) => (props.hasRating ? "collapse" : "none")};
-
 const StyledTh = window.styled.th`
-  background-color: ${(props) =>
-    props.hasRating ? Colors.gray_dark : Colors.gray_light};
-  color: ${(props) => (props.hasRating ? Colors.white : "inherit")};
+  background-color: ${Colors.gray_light};
+  color: #333;
   margin: 0;
   border: 6px solid ${(props) =>
-    props.hasRating ? Colors.gray_dark : Colors.white};
+    props.hasRating ? Colors.gray_light : Colors.white};
   border-top-color: ${Colors.white};
   border-bottom-color: ${Colors.white};
   border-right-width: ${(props) => (props.hasRating ? "0px" : "6px")};
-  white-space: ${(props) => (props.isTrend ? "nowrap" : "inherit")}
+  white-space: ${(props) => (props.isDate ? "nowrap" : "inherit")};
+  font-weight: 200;
+  min-width: 2.1rem;
 `;
 
 const performanceIconMap = {
@@ -137,6 +164,10 @@ export const ScorecardComponent = ({
   data,
   columns,
   onClickCell,
+  onHoverCell,
+  metricColorMap,
+  metricUnitMap,
+  metricTooltipData,
   prog,
   showHeaders,
   spacing,
@@ -162,49 +193,87 @@ export const ScorecardComponent = ({
     const values = Object.values(rowData);
     const trendValue = values.at(-1);
     const headerValue = values.at(0);
-    const rowValues = Object.entries(rowData).slice(1, values.length - 1);
+    const metricValue = values.at(1);
+    const ambitionData = values.at(3);
+    const ambitionValue = Number(
+      (ambitionData.value ?? ambitionData).replaceAll(/[^\d]/g, "")
+    );
+
+    const rowEntries = Object.entries(rowData).slice(1, values.length - 1);
+    const metric = rowEntries[0][1];
 
     const { index: headerStartIndex, span } = headerSpans[headerValue];
     const headerEndIndex = headerStartIndex + span - 1;
     const shouldHaveBorder = rowIndex === headerEndIndex;
     const ratingStartIndex = 3;
-    const PerformanceIcon = performanceIconMap[headerValue];
-    const ambitionValue = Number(values.at(3).replaceAll(/[^\d]/g, ""));
-
+    const datecolumnIndex = 1;
+    const ambitionColumnIndex = 2;
+    const isMetric = rowEntries[0][0]; // === "metric" ? true : false;
+    const isAboveGood = metric && metricColorMap[metric] === "aboveGood";
     return (
       <>
         {headerStartIndex === rowIndex && (
           <StyledTd rowSpan={span} shouldHaveBorder>
             <RowHeaderContainer rowSpan={span} isHeader>
-              <PerformanceIcon />
               {headerValue}
             </RowHeaderContainer>
           </StyledTd>
         )}
-        {rowValues.map(([header, cellData], colIndex) => (
+        {rowEntries.map(([header, cellData], colIndex) => (
           <StyledTd
             onClick={() => onClickCell(header, rowData["Metric"])}
+            // onHoverCell={() => onHoverCell(header, rowData["Metric"])}
             shouldHaveBorder={shouldHaveBorder}
           >
-            {colIndex >= ratingStartIndex ? (
-              <RatingCell
-                rating={cellData}
-                ambition={ambitionValue}
-                metric={rowValues[0][1]}
+            {colIndex < ambitionColumnIndex && (
+              <>
+                <MetricHeaderContainer
+                  isMetric={header === isMetric ? true : false}
+                  nowrap={colIndex === datecolumnIndex}
+                  onHoverCell={() => onHoverCell(header, rowData["Metric"])}
+                >
+                  {colIndex < ambitionColumnIndex && cellData}
+                  {colIndex === 0 && (
+                    <MetricTooltip className="tooltip">
+                      {metricTooltipData[cellData]?.["Metric Title"]}
+                    </MetricTooltip>
+                  )}
+                </MetricHeaderContainer>
+              </>
+            )}
+
+            {colIndex === ambitionColumnIndex && (
+              <AmbitionCell
+                value={cellData.value ?? cellData}
+                date={cellData.date}
               />
-            ) : (
-              cellData
+            )}
+
+            {colIndex >= ratingStartIndex && (
+              <RatingCell
+                rating={Number(cellData.replace("%", ""))}
+                previousMonthRating={
+                  colIndex > ratingStartIndex
+                    ? Number(rowEntries[colIndex - 1][1].replace("%", ""))
+                    : undefined
+                }
+                ambition={ambitionValue}
+                isAboveGood={isAboveGood}
+                isPercentage={metricUnitMap[metric] === "percentage"}
+              />
             )}
           </StyledTd>
         ))}
         <StyledTd shouldHaveBorder={shouldHaveBorder}>
-          <TrendLineChart
-            cellData={trendValue.map((val) => ({ value: val.week }))}
+          <TrendBarChart
             data={trendValue.map((val) => ({
               value: val.value,
               date: val.week,
             }))}
-            width={120}
+            isPercentage={metricUnitMap[metric] === "percentage"}
+            ambition={ambitionValue}
+            isAboveGood={isAboveGood}
+            width={130}
             height={50}
           />
         </StyledTd>
@@ -216,15 +285,19 @@ export const ScorecardComponent = ({
     <StyledTable>
       <thead>
         <StyledTr>
-          {columns.map((column, index) => (
-            <StyledTh
-              key={column}
-              hasRating={index > 3 && index < columns.length - 1}
-              isTrend={index === columns.length - 1}
-            >
-              {column}
-            </StyledTh>
-          ))}
+          {columns.map((column, index) => {
+            return (
+              <StyledTh
+                key={column}
+                hasRating={index > 3 && index < columns.length - 1}
+                isTrend={index === columns.length - 1}
+                isDate={index > 2}
+                isMetric={index === 1}
+              >
+                {column}
+              </StyledTh>
+            );
+          })}
         </StyledTr>
       </thead>
       <tbody>

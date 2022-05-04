@@ -5,7 +5,7 @@
     <title>CF chart library</title>
     <script src="https://unpkg.com/lodash@4.17.20"></script>
   </head>
-  <body style="font-size: 10px">
+  <body style="font-size: 12px">
     <link
       href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
       rel="stylesheet"
@@ -13,7 +13,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.16.0/d3.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-    <div style="width: 70%; margin: auto">
+    <div style="width: 70%; margin: auto; font-family: open sans">
       <h2>CF data innovation d3 component library</h2>
       <br />
       <h3>Table used across Opred</h3>
@@ -45,7 +45,7 @@
       <div id="reactBarChart"></div>
       <div id="trendLineChart"></div>
       <div id="scorecardComponent"></div>
-      <div id="benchmarkComponent" style="width: 1400px;"></div>
+      <div id="benchmarkComponent" style="width: 1400px"></div>
     </div>
     <script
       crossorigin
@@ -148,15 +148,26 @@
         React.createElement(ScorecardComponent, {
           data: scoreCard.inputData,
           columns: scoreCard.columns,
+          metricColorMap: scoreCard.metricColorMap,
+          metricUnitMap: scoreCard.metricUnitMap,
+          metricTooltipData: scoreCard.metricTooltipData,
         }),
         document.querySelector("#scorecardComponent")
       );
 
+      // ReactDOM.render(
+      //   React.createElement(BenchmarkComponent, {
+      //     headers: benchmark.headers,
+      //     records: benchmark.records,
+      //     metricsMetadata: benchmark.metricsMetadata,
+      //   }),
+      //   document.querySelector("#benchmarkComponent")
+      // );
       ReactDOM.render(
         React.createElement(BenchmarkComponent, {
-          headers: benchmark.headers,
-          records: benchmark.records,
-          metricsMetadata: benchmark.metricsMetadata,
+          headers: benchmark2.headers,
+          records: benchmark2.records,
+          metricsMetadata: benchmark2.metricsMetadata,
         }),
         document.querySelector("#benchmarkComponent")
       );

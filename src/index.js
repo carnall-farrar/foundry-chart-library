@@ -8,11 +8,10 @@ import {
   addAccordion,
 } from "./sentenceTable";
 import { LikeButton } from "./likebutton";
-import { BarChart } from "./components/BarChart"
-import { TrendLineChart } from "./components/TrendLineChart"
-import { BenchmarkComponent } from "./components/BenchmarkComponent"
-import { ScorecardComponent } from "./components/ScorecardComponent"
-
+import { BarChart } from "./components/BarChart";
+import { TrendLineChart } from "./components/TrendLineChart";
+import { BenchmarkComponent } from "./components/BenchmarkComponent";
+import { ScorecardComponent } from "./components/ScorecardComponent";
 
 global.tabulate = tabulate;
 global.createExecTable = createExecTable;

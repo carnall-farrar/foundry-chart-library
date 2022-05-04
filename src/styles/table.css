@@ -1,102 +1,103 @@
 body {
-    font-family: -apple-system, "BlinkMacSystemFont", "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Open Sans", "Helvetica Neue", "Icons16", sans-serif;
+  font-family: -apple-system, "BlinkMacSystemFont", "Segoe UI", "Roboto",
+    "Oxygen", "Ubuntu", "Cantarell", "Open Sans", "Helvetica Neue", "Icons16",
+    sans-serif;
 }
 
 .mainTable table {
-    border-spacing: 0px !important;
+  border-spacing: 0px !important;
 }
 
 .main-table-border {
-    border-bottom: thin solid #CED9E0;
+  border-bottom: thin solid #ced9e0;
 }
 
-.mainTable td, th {
-    padding: .5rem;
-    vertical-align: center;
-    font-size: 12px;
-  }
+.mainTable td,
+th {
+  padding: 0.5rem;
+  vertical-align: center;
+  font-size: 12px;
+}
 
-.mainTable td:first-child { width: 12%;}
+.mainTable td:first-child {
+  width: 12%;
+}
 
 .mainTable td {
-    max-width: 120px;
-    min-width: 100px;
+  max-width: 120px;
+  min-width: 100px;
 }
 
 .mainTable thead tr {
-    background-color: #0E5A8A;
-	height:45px;
-    color: #ffffff;
-    text-align: left;
-	position: sticky;
-    top: 0;
+  background-color: #0e5a8a;
+  height: 45px;
+  color: #ffffff;
+  text-align: left;
+  position: sticky;
+  top: 0;
 }
-
-
 
 .mainTable tbody tr {
-	padding: 0rem;
-
+  padding: 0rem;
 }
 
-
 .box {
-    border: 1pt solid black;
+  border: 1pt solid black;
 }
 
 .table-geography {
-	cursor:pointer;
+  cursor: pointer;
 }
 
 .table-geography a {
-	visibility:hidden;
+  visibility: hidden;
 }
 
 .table-geography a:hover {
-	visibility:visible;
-	float:right;
+  visibility: visible;
+  float: right;
 }
 
 .table-geography:hover {
-	color: #0E5A8A;
-	font-weight:bold;
-	border-bottom: 1pt dashed black;
+  color: #0e5a8a;
+  font-weight: bold;
+  border-bottom: 1pt dashed black;
 }
 
 .dateCell {
-	text-align: center;
+  text-align: center;
 }
 
 .green {
-	background-color:#3DCC91;
-	font-weight:bold;
-	color: #0A6640;
+  background-color: #3dcc91;
+  font-weight: bold;
+  color: #0a6640;
 
-	text-align:center;
+  text-align: center;
 }
 
-.forecast-table-box{
-	text-align: center !important;
-	cursor:pointer !important;
-	color: #0E5A8A;
-	font-weight: bold;
+.forecast-table-box {
+  text-align: center !important;
+  cursor: pointer !important;
+  color: #0e5a8a;
+  font-weight: bold;
 }
 
-.forecast-table-box:hover{
-	font-size: 13px;
+.forecast-table-box:hover {
+  font-size: 13px;
 }
 
-.table-box{
-	text-align: center !important;
-    padding-top: 0.5rem !important;
-	height: 25px;
-	border-radius: 3px 3px;
-	cursor:pointer !important;
+.table-box {
+  text-align: center !important;
+  padding-top: 0.5rem !important;
+  height: 25px;
+  border-radius: 3px 3px;
+  cursor: pointer !important;
 }
 
 .table-box:hover {
-	box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-	filter: brightness(120%);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  filter: brightness(120%);
 }
 
 /* Show the tooltip text when you mouse over the tooltip container */
@@ -113,84 +114,80 @@ body {
   text-align: center;
   padding: 5px 0;
   border-radius: 6px;
- 
+
   /* Position the tooltip text - see examples below! */
   position: absolute;
   z-index: 1;
 }
 
-
-
 .amber {
-	background-color:#FFB366;
-	font-weight:bold;
-	color: #A66321;
-
+  background-color: #ffb366;
+  font-weight: bold;
+  color: #a66321;
 }
 
 .red {
-	background-color:#FF7373;
-	font-weight:bold;
-	color: #A82A2A;
-
+  background-color: #ff7373;
+  font-weight: bold;
+  color: #a82a2a;
 }
 
 .rawData {
-	background-color:#FFFFFF;
-	font-weight:bold;
-	color: #202B33;
-	border: thin solid #BFCCD6;
-	text-align: center;
-	cursor: pointer;
+  background-color: #ffffff;
+  font-weight: bold;
+  color: #202b33;
+  border: thin solid #bfccd6;
+  text-align: center;
+  cursor: pointer;
 }
 
 .pt-radio {
-	display: inline-block !important;
-	margin-left: 5px;
+  display: inline-block !important;
+  margin-left: 5px;
 }
 
 .hide-modal-charts {
-	display:none !important;
+  display: none !important;
 }
 
 // forecast styles
 
 .forecast-date {
-	color: #0E5A8A;
-	font-weight: bold;
-	font-size: 14px;
+  color: #0e5a8a;
+  font-weight: bold;
+  font-size: 14px;
 }
 
 .return-outside {
-	color: #48AFF0;
+  color: #48aff0;
 }
 
 .baseline-reached {
-	color: @green1;
+  color: @green1;
 }
 
 .no-data {
-	color: #BFCCD6;
+  color: #bfccd6;
 }
 
 .trending-away {
-	color: #FF7373
+  color: #ff7373;
 }
 
 .hide-confidence {
-	display: none
+  display: none;
 }
 
 .confidence {
-	color: #182026;
-	font-weight: normal;
-	font-size:11px;
-	font-style: italic;
+  color: #182026;
+  font-weight: normal;
+  font-size: 11px;
+  font-style: italic;
 }
 
 .high {
-	font-weight: bold;
+  font-weight: bold;
 }
 .low {
-	color: grey;
+  color: grey;
 }

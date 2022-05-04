@@ -1,9 +1,12 @@
 export default {
-  red_light: "#FA999C",
-  red_dark: "#AC2F33",
-  gray_dark: "#888888",
-  gray_light: "#D3D8DE",
+  red_light: "#e87e76",
+  red_dark: "#DA291C",
+  amber_light: "#f4b966",
+  amber_dark: "#ED8B00",
+  gray_dark: "#bdbdbd",
+  gray_light: "#e7e7e7",
+  green_light: "#66a390",
+  green_dark: "#006747",
   white: "#FFFFFF",
-  green_light: "#C1E1C1",
-  green_dark: "#0BDA51"
+  black: "#000",
 };
