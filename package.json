@@ -10,7 +10,7 @@
   "scripts": {
     "build": "webpack",
     "build:watch": "webpack --watch",
-    "start": "python -m http.server 3000",
+    "start": "python3 -m http.server 3000",
     "prepare": "husky install"
   },
   "lint-staged": {
