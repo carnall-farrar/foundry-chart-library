@@ -20,7 +20,7 @@ function drawSentences(ulId, inputData) {
             <span class="sentence-text">${row.sentenceNumber}</span>
           </div>
           <div class="sentence-content ${sentenceContentStyle}">
-            <span class="sentence-text">${row.sentenceContent}</span>
+            <div class="sentence-text">${row.sentenceContent}</div>
           </div>
         </div>
       `;
