@@ -1,0 +1,89 @@
+/* Sets the background color of the body to blue. Sets font to Rubik */
+body {
+    font-family: sans-serif;
+  }
+  
+  /* Aligns the heading text to the center. */
+  h1 {
+    text-align: center;
+  }
+  
+  /* Sets the width for the accordion. Sets the margin to 90px on the top and bottom and auto to the left and right */
+  
+  .accordion {
+    margin: auto;
+    color: black;
+    background-color: white;
+  }
+  
+  .accordion .container {
+    position: relative;
+    margin: 10px 10px;
+  }
+  
+  /* Positions the labels relative to the .container. Adds padding to the top and bottom and increases font size. Also makes its cursor a pointer */
+  
+  .accordion .label {
+    position: relative;
+    padding: 10px 0;
+    font-size: 12px;
+    color: #0e5a8a;
+    cursor: pointer;
+  }
+  
+  .accordion .label::before {
+    content: "+";
+    color: black;
+    position: absolute;
+    top: 50%;
+    right: -5px;
+    font-size: 16px;
+    transform: translateY(-50%);
+  }
+  
+  /* Hides the content (height: 0), decreases font size, justifies text and adds transition */
+  
+  .accordion .content {
+    position: relative;
+    background: white;
+    height: 0;
+    text-align: justify;
+    width: 780px;
+    overflow: hidden;
+    transition: 0.5s;
+  }
+  
+  .accordion-list {
+    font-size: 12px;
+    margin-left: 10px;
+    list-style-type: disc;
+  }
+  
+  .accordion-ul {
+    margin: 0;
+    padding-top: 0px;
+    padding-bottom: 5px;
+  }
+  
+  /* Adds a horizontal line between the contents */
+  
+  .accordion hr {
+    width: 100;
+    margin-left: 0;
+    border: 1px solid grey;
+  }
+  
+  /* Unhides the content part when active. Sets the height */
+  
+  .accordion .container.active .content {
+    width: 95%;
+    height: inherit;
+  }
+  
+  /* Changes from plus sign to negative sign once active */
+  
+  .accordion .container.active .label::before {
+    content: "-";
+    font-size: 30px;
+  }
+  
