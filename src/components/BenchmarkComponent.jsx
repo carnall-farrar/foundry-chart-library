@@ -88,7 +88,7 @@ const StyledPill = window.styled.div`
 const Pill = ({ value, isPositive, goodDirection, unit }) => {
   let displayValue = value;
 
-  if (typeof value === "number" && unit === "pourcentage") {
+  if (typeof value === "number" && unit === "percentage") {
     displayValue = `${value}%`;
   }
 
@@ -274,7 +274,7 @@ export const BenchmarkComponent = ({
 
                 if (
                   typeof value === "number" &&
-                  metaData.unit === "pourcentage"
+                  metaData.unit === "percentage"
                 ) {
                   displayValue = `${value}%`;
                 }

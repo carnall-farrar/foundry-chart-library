@@ -849,6 +849,261 @@ benchmark2 = {
     },
   ],
 };
+
+benchmarkV2 = {
+  "headers": {
+    "Activity": [
+      {
+        "key": "Completed pathways",
+        "value": "Completed pathways"
+      },
+      {
+        "key": "Value-Weighted Activity",
+        "value": "Value-Weighted Activity"
+      }
+    ],
+    "Long Waiters": [
+      {
+        "key": "104ww+ RTT",
+        "value": "104ww+ RTT"
+      },
+      {
+        "key": "78ww+ RTT",
+        "value": "78ww+ RTT"
+      }
+    ],
+    "Cancer": [
+      {
+        "key": "62+ days pathways",
+        "value": "62+ days pathways"
+      }
+    ],
+    "Diagnostics": [
+      {
+        "key": "Test activity",
+        "value": "Test activity"
+      },
+      {
+        "key": "Waiting <6 weeks tests/procedures",
+        "value": "Waiting <6 weeks tests/procedures"
+      }
+    ],
+    "Outpatients": [
+      {
+        "key": "Follow-up Reduction",
+        "value": "Follow-up Reduction"
+      }
+    ]
+  },
+  "metricsMetadata": {
+    "104ww+ RTT": {
+      "lastUpdate": "",
+      "goodDirection": 1,
+      "unit": "pourcentage",
+      "ambition": {
+        "value": "101",
+        "date": "February 10 2022"
+      },
+      "isAboveGood": true,
+      "previousMonthValue": 0,
+      "lastUpdated": "02-05-2022"
+    },
+    "78ww+ RTT": {
+      "lastUpdate": "",
+      "goodDirection": 1,
+      "unit": "pourcentage",
+      "ambition": {
+        "value": "101",
+        "date": "February 10 2022"
+      },
+      "isAboveGood": true,
+      "previousMonthValue": 0,
+      "lastUpdated": "02-05-2022"
+    },
+    "62+ days pathways": {
+      "lastUpdate": "",
+      "goodDirection": 1,
+      "unit": "pourcentage",
+      "ambition": {
+        "value": "101",
+        "date": "February 10 2022"
+      },
+      "isAboveGood": true,
+      "previousMonthValue": 0,
+      "lastUpdated": "02-05-2022"
+    },
+    "Completed pathways": {
+      "lastUpdate": "",
+      "goodDirection": 1,
+      "unit": "pourcentage",
+      "ambition": {
+        "value": "101",
+        "date": "February 10 2022"
+      },
+      "isAboveGood": true,
+      "previousMonthValue": 0,
+      "lastUpdated": "02-05-2022"
+    },
+    "Follow-up Reduction": {
+      "lastUpdate": "",
+      "goodDirection": 1,
+      "unit": "pourcentage",
+      "ambition": {
+        "value": "101",
+        "date": "February 10 2022"
+      },
+      "isAboveGood": true,
+      "previousMonthValue": 0,
+      "lastUpdated": "02-05-2022"
+    },
+    "Value-Weighted Activity": {
+      "lastUpdate": "",
+      "goodDirection": 1,
+      "unit": "pourcentage",
+      "ambition": {
+        "value": "101",
+        "date": "February 10 2022"
+      },
+      "isAboveGood": true,
+      "previousMonthValue": 0,
+      "lastUpdated": "02-05-2022"
+    },
+    "Test activity": {
+      "lastUpdate": "",
+      "goodDirection": 1,
+      "unit": "pourcentage",
+      "ambition": {
+        "value": "101",
+        "date": "February 10 2022"
+      },
+      "isAboveGood": true,
+      "previousMonthValue": 0,
+      "lastUpdated": "28-02-2022"
+    },
+    "Waiting <6 weeks tests/procedures": {
+      "lastUpdate": "",
+      "goodDirection": 1,
+      "unit": "pourcentage",
+      "ambition": {
+        "value": "101",
+        "date": "February 10 2022"
+      },
+      "isAboveGood": true,
+      "previousMonthValue": 0,
+      "lastUpdated": "18-04-2022"
+    }
+  },
+  "records": [
+    {
+      "region": "East of England",
+      "fixedPosition": 1,
+      "data": {
+        "104ww+ RTT": "1,116",
+        "78ww+ RTT": "13,504",
+        "62+ days pathways": "4,175",
+        "Completed pathways": 170,
+        "Follow-up Reduction": 15000000,
+        "Value-Weighted Activity": 180,
+        "Test activity": 4500000,
+        "Waiting <6 weeks tests/procedures": 8900000
+      }
+    },
+    {
+      "region": "England",
+      "fixedPosition": 0,
+      "data": {
+        "104ww+ RTT": "11,428",
+        "78ww+ RTT": "109,054",
+        "62+ days pathways": "27,083",
+        "Completed pathways": 180,
+        "Follow-up Reduction": 160000000,
+        "Value-Weighted Activity": 180,
+        "Test activity": 42000000,
+        "Waiting <6 weeks tests/procedures": 97000000
+      }
+    },
+    {
+      "region": "London",
+      "data": {
+        "104ww+ RTT": "535",
+        "78ww+ RTT": "7,025",
+        "62+ days pathways": "3,533",
+        "Completed pathways": 170,
+        "Follow-up Reduction": 37000000,
+        "Value-Weighted Activity": 190,
+        "Test activity": 7800000,
+        "Waiting <6 weeks tests/procedures": 16000000
+      }
+    },
+    {
+      "region": "Midlands",
+      "data": {
+        "104ww+ RTT": "3,407",
+        "78ww+ RTT": "38,291",
+        "62+ days pathways": "6,009",
+        "Completed pathways": 180,
+        "Follow-up Reduction": 25000000,
+        "Value-Weighted Activity": 180,
+        "Test activity": 7300000,
+        "Waiting <6 weeks tests/procedures": 21000000
+      }
+    },
+    {
+      "region": "North East and Yorkshire",
+      "data": {
+        "104ww+ RTT": "1,051",
+        "78ww+ RTT": "9,229",
+        "62+ days pathways": "3,660",
+        "Completed pathways": 190,
+        "Follow-up Reduction": 26000000,
+        "Value-Weighted Activity": 180,
+        "Test activity": 6500000,
+        "Waiting <6 weeks tests/procedures": 17000000
+      }
+    },
+    {
+      "region": "North West",
+      "data": {
+        "104ww+ RTT": "2,742",
+        "78ww+ RTT": "19,368",
+        "62+ days pathways": "4,052",
+        "Completed pathways": 170,
+        "Follow-up Reduction": 25000000,
+        "Value-Weighted Activity": 170,
+        "Test activity": 5900000,
+        "Waiting <6 weeks tests/procedures": 13000000
+      }
+    },
+    {
+      "region": "South East",
+      "data": {
+        "104ww+ RTT": "241",
+        "78ww+ RTT": "7,581",
+        "62+ days pathways": "2,804",
+        "Completed pathways": 180,
+        "Follow-up Reduction": 21000000,
+        "Value-Weighted Activity": 190,
+        "Test activity": 5900000,
+        "Waiting <6 weeks tests/procedures": 12000000
+      }
+    },
+    {
+      "region": "South West",
+      "data": {
+        "104ww+ RTT": "2,336",
+        "78ww+ RTT": "14,056",
+        "62+ days pathways": "2,850",
+        "Completed pathways": 200,
+        "Follow-up Reduction": 13000000,
+        "Value-Weighted Activity": 180,
+        "Test activity": 4000000,
+        "Waiting <6 weeks tests/procedures": 9000000
+      }
+    }
+  ]
+}
+
+
 tooltip = {
   "Value Weighted Activity": {
     "Metric Title": "",
