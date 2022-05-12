@@ -47,6 +47,9 @@
       <div id="scorecardComponent"></div>
       <div id="benchmarkComponent" style="width: 1400px"></div>
       <div id="loading"></div>
+      <br />
+      <br />
+      <h2>New sentence component</h2>
       <div id="newSentences"></div>
     </div>
     <script
@@ -83,7 +86,7 @@
       );
       timeseriesChart("#timeseries", timeSeries);
       barChart("#barChart", (width = 1000), (height = 200), (barPadding = 1));
-      buildSentenceComponent("#sentenceTable", sentences.dataIP);
+      buildSentenceComponent("#sentenceTable", sentenceNew.dataIP);
       addAccordion("#accordionRoot", accordionData);
     </script>
     <script>
