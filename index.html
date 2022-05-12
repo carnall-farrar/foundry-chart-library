@@ -47,6 +47,7 @@
       <div id="scorecardComponent"></div>
       <div id="benchmarkComponent" style="width: 1400px"></div>
       <div id="loading"></div>
+      <div id="newSentences"></div>
     </div>
     <script
       crossorigin
@@ -155,6 +156,14 @@
           metricTooltipData: scoreCard.metricTooltipData,
         }),
         document.querySelector("#scorecardComponent")
+      );
+
+      ReactDOM.render(
+        React.createElement(Sentences, {
+          headers: sentence34.headers,
+          records: sentence34.records,
+        }),
+        document.querySelector("#newSentences")
       );
 
       // ReactDOM.render(

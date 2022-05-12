@@ -13,6 +13,7 @@ import { TrendLineChart } from "./components/TrendLineChart";
 import { BenchmarkComponent } from "./components/BenchmarkComponent";
 import { ScorecardComponent } from "./components/ScorecardComponent";
 import { LoadingDots } from "./components/LoadingDots";
+import { Sentences } from "./components/Sentences";
 
 global.tabulate = tabulate;
 global.createExecTable = createExecTable;
@@ -27,3 +28,4 @@ global.TrendLineChart = TrendLineChart;
 global.BenchmarkComponent = BenchmarkComponent;
 global.ScorecardComponent = ScorecardComponent;
 global.LoadingDots = LoadingDots;
+global.Sentences = Sentences;
