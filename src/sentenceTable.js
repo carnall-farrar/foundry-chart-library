@@ -17,8 +17,8 @@ function drawSentences(ulId, inputData) {
       const sentenceContentStyle = index !== 1 ? 'topOrBottomSentence' : '';
       const html = `
         <div id=${row.sentenceId} class='sentence' style="display:flex; margin-bottom: 10px; margin-top: 10px; ${middleSentence}">
-          <div class="sentence-number ${sentenceNumberStyle}">
-            <span class="sentence-text">${row.cohort}</span>
+          <div class="sentence-number ${sentenceNumberStyle}" id=${row.sentenceNumber}>
+            <span class="sentence-text-cohort">${row.cohort}</span>
           </div>
           <div class="sentence-content ${sentenceContentStyle}">
             <span class="sentence-text">${row.sentenceContent}</span>
@@ -47,8 +47,8 @@ function scrollDown(id, data) {
   const currentSentences = document.querySelectorAll(
     'div.sentence-number.topOrBottomSentence'
   );
-  const firstItem = parseInt(currentSentences[0].textContent);
-  const secondItem = parseInt(currentSentences[1].textContent) + 1;
+  const firstItem = parseInt(currentSentences[0].id);
+  const secondItem = parseInt(currentSentences[1].id) + 1;
 
   const newData = data.slice(firstItem, secondItem);
   drawSentences(id, newData);
@@ -72,8 +72,8 @@ function scrollUp(id, data) {
   const currentSentences = document.querySelectorAll(
     'div.sentence-number.topOrBottomSentence'
   );
-  const firstItem = parseInt(currentSentences[0].textContent) - 2;
-  const secondItem = parseInt(currentSentences[1].textContent) - 1;
+  const firstItem = parseInt(currentSentences[0].id) - 2;
+  const secondItem = parseInt(currentSentences[1].id) - 1;
 
   if (secondItem === data.length - 1) {
     const arrowDown = document.querySelector('#scroll-down');
@@ -213,9 +213,7 @@ export function buildSentenceComponent(root, data) {
 }
 
 export function addAccordion(root, data) {
-  console.log('hello');
   d3.select(root).append('div').attr('class', 'accordion');
-  console.log({ data, root });
   data.forEach((item, index) => {
     const containerClass = index === 0 ? 'container active' : 'container';
     const container = d3

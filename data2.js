@@ -18,7 +18,7 @@ sentenceNew = {
     {
       "sentenceId": "8589934604",
       "sentenceNumber": 1,
-      "cohort": "White",
+      "cohort": "More deprived",
       "sentenceContent": `
       <div>
           <div>For 100 A&E attendances where the patient was living in a more deprived area, 34 would have resulted in waiting more than four hours. There would have been 31 if the patients were less deprived.</div> 
@@ -42,6 +42,17 @@ sentenceNew = {
     {
       "sentenceId": "34359738372",
       "sentenceNumber": 3,
+      "cohort": "White",
+      "sentenceContent":[
+        "For 100 A&E attendances where the patient was living in a more deprived area, 34 would have resulted in waiting more than four hours. There would have been 31 if the patients were less deprived.", 
+        "Closing the inequality gap between patients living in more and less deprived areas would have resulted in 13,434 fewer four hour wait breaches every year.", 
+        "41.2% of A&E patients living in more deprived areas have waited more than four hours in this system.",
+        "Based on the proportion of patients from this group affected, this system ranks 28 out of 42 systems, where 42 has the highest proportion."
+      ]
+    },
+    {
+      "sentenceId": "11234",
+      "sentenceNumber": 4,
       "cohort": "White",
       "sentenceContent":[
         "For 100 A&E attendances where the patient was living in a more deprived area, 34 would have resulted in waiting more than four hours. There would have been 31 if the patients were less deprived.", 
