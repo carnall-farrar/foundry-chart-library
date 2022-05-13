@@ -46,21 +46,8 @@ sentence34 = {
 sentenceNew = {
   "dataIP": [
     {
-      "sentenceId": "8589934604",
+      "sentenceId": "4352345",
       "sentenceNumber": 1,
-      "segment": "White",
-      "sentenceContent": `
-      <ul>
-          <li>For 100 A&E attendances where the patient was living in a more deprived area, 34 would have resulted in waiting more than four hours. There would have been 31 if the patients were less deprived.</li> 
-          <li>Closing the inequality gap between patients living in more and less deprived areas would have resulted in 13,434 fewer four hour wait breaches every year.</li>
-          <li>41.2% of A&E patients living in more deprived areas have waited more than four hours in this system.</li>
-          <li>Based on the proportion of patients from this group affected, this system ranks 28 out of 42 systems, where 42 has the highest proportion.</li>
-        </ul>
-      `
-    },
-    {
-      "sentenceId": "17179869190",
-      "sentenceNumber": 2,
       "segment": "White",
       "sentenceContent": [
         "For 100 A&E attendances where the patient was living in a more deprived area, 34 would have resulted in waiting more than four hours. There would have been 31 if the patients were less deprived.", 
@@ -70,7 +57,18 @@ sentenceNew = {
       ]
     },
     {
-      "sentenceId": "34359738372",
+      "sentenceId": "23452345234",
+      "sentenceNumber": 2,
+      "segment": "White",
+      "sentenceContent":[
+        "For 100 A&E attendances where the patient was living in a more deprived area, 34 would have resulted in waiting more than four hours. There would have been 31 if the patients were less deprived.", 
+        "Closing the inequality gap between patients living in more and less deprived areas would have resulted in 13,434 fewer four hour wait breaches every year.", 
+        "41.2% of A&E patients living in more deprived areas have waited more than four hours in this system.",
+        "Based on the proportion of patients from this group affected, this system ranks 28 out of 42 systems, where 42 has the highest proportion."
+      ]
+    },
+    {
+      "sentenceId": "5435345",
       "sentenceNumber": 3,
       "segment": "White",
       "sentenceContent":[

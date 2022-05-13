@@ -5,7 +5,7 @@ import './styles/accordion.css';
 
 function drawSentences(ulId, inputData) {
   const sentences = d3.select(ulId).selectAll('li').data(inputData);
-
+  
   sentences
     .enter()
     .append('li')
@@ -128,28 +128,29 @@ function backToSentences(data, sentenceId) {
         ? 3
         : sentenceNum + 1;
 
-  const inputData = data.slice(top, bottom);
+  const inputData = data.length <= 3 ? data : data.slice(top, bottom);
+  console.log({ inputData, top, bottom, data });
   drawSentences('#sentence-list', inputData);
   addSentenceClickEvents(inputData);
 
   const arrowDown = document.querySelector('#scroll-down');
   const arrowUp = document.querySelector('#scroll-up');
   if (data.length <= 3) {
-    d3.select('ul').style('padding-top', '10px');
-    d3.select('ul').style('padding-bottom', '10px');
+    d3.select('#sentence-list').style('padding-top', '10px');
+    d3.select('#sentence-list').style('padding-bottom', '10px');
   } else if (sentenceNum <= 3) {
     // show bottom only
     arrowDown.className = 'arrow down';
-    d3.select('ul').style('padding-top', '10px');
-    d3.select('ul').style('padding-bottom', '0px');
+    d3.select('#sentence-list').style('padding-top', '10px');
+    d3.select('#sentence-list').style('padding-bottom', '0px');
   } else if (sentenceNum === data.length) {
     // show top only
     arrowUp.className = 'arrow up';
-    d3.select('ul').style('padding-bottom', '10px');
+    d3.select('#sentence-list').style('padding-bottom', '10px');
   } else {
     arrowDown.className = 'arrow down';
     arrowUp.className = 'arrow up';
-    d3.select('ul').style('padding-bottom', '0px');
+    d3.select('#sentence-list').style('padding-bottom', '0px');
     // show both arrows
   }
 }
