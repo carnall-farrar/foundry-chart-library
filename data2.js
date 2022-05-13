@@ -18,18 +18,20 @@ sentenceNew = {
     {
       "sentenceId": "8589934604",
       "sentenceNumber": 1,
+      "cohort": "White",
       "sentenceContent": `
-      <ul>
-          <li>For 100 A&E attendances where the patient was living in a more deprived area, 34 would have resulted in waiting more than four hours. There would have been 31 if the patients were less deprived.</li> 
-          <li>Closing the inequality gap between patients living in more and less deprived areas would have resulted in 13,434 fewer four hour wait breaches every year.</li>
-          <li>41.2% of A&E patients living in more deprived areas have waited more than four hours in this system.</li>
-          <li>Based on the proportion of patients from this group affected, this system ranks 28 out of 42 systems, where 42 has the highest proportion.</li>
-        </ul>
+      <div>
+          <div>For 100 A&E attendances where the patient was living in a more deprived area, 34 would have resulted in waiting more than four hours. There would have been 31 if the patients were less deprived.</div> 
+          <div>Closing the inequality gap between patients living in more and less deprived areas would have resulted in 13,434 fewer four hour wait breaches every year.</div>
+          <div>41.2% of A&E patients living in more deprived areas have waited more than four hours in this system.</div>
+          <div>Based on the proportion of patients from this group affected, this system ranks 28 out of 42 systems, where 42 has the highest proportion.</div>
+        </div>
       `
     },
     {
       "sentenceId": "17179869190",
       "sentenceNumber": 2,
+      "cohort": "White",
       "sentenceContent": [
         "For 100 A&E attendances where the patient was living in a more deprived area, 34 would have resulted in waiting more than four hours. There would have been 31 if the patients were less deprived.", 
         "Closing the inequality gap between patients living in more and less deprived areas would have resulted in 13,434 fewer four hour wait breaches every year.", 
@@ -40,6 +42,7 @@ sentenceNew = {
     {
       "sentenceId": "34359738372",
       "sentenceNumber": 3,
+      "cohort": "White",
       "sentenceContent":[
         "For 100 A&E attendances where the patient was living in a more deprived area, 34 would have resulted in waiting more than four hours. There would have been 31 if the patients were less deprived.", 
         "Closing the inequality gap between patients living in more and less deprived areas would have resulted in 13,434 fewer four hour wait breaches every year.", 
