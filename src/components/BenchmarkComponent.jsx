@@ -142,6 +142,7 @@ export const BenchmarkComponent = ({
   records,
   metricsMetadata,
   onCellClick,
+  allSelected = false,
 }) => {
   if (records.length === 0) {
     return <LoadingDots />;
@@ -167,6 +168,9 @@ export const BenchmarkComponent = ({
   let sortedRecords = recordsToSort
     .filter((record) => record.data[sort.header] !== null)
     .sort((a, b) => {
+      if (sort.header === "Locations" && allSelected) {
+        return;
+      }
       const [aItem, bItem] =
         sort.header === "Locations"
           ? [a.region, b.region]
@@ -215,32 +219,36 @@ export const BenchmarkComponent = ({
                     <div style={{ flex: 9, maxWidth: 100 }}>
                       {subheader.value}
                     </div>
-                    <ChevronContainer
-                      onClick={() => {
-                        if (subheader.key === sort.header) {
-                          setSort({
-                            isAsc: !sort.isAsc,
-                            header: subheader.key,
-                          });
-                        } else {
-                          setSort({
-                            isAsc: sort.isAsc,
-                            header: subheader.key,
-                          });
-                        }
-                      }}
-                    >
-                      <Chevron
-                        fill="#666"
-                        direction={
-                          subheader.key === sort.header
-                            ? sort.isAsc
-                              ? "up"
-                              : "down"
-                            : "down"
-                        }
-                      />
-                    </ChevronContainer>
+                    {(subheader.key === "Locations" && allSelected === true) ? 
+                      (<></>) :
+                      (<ChevronContainer
+                          onClick={() => {
+                            if (subheader.key === sort.header) {
+                              setSort({
+                                isAsc: !sort.isAsc,
+                                header: subheader.key,
+                              });
+                            } else {
+                              setSort({
+                                isAsc: sort.isAsc,
+                                header: subheader.key,
+                              });
+                            }
+                          }}
+                        >
+                          <Chevron
+                            fill="#666"
+                            direction={
+                              subheader.key === sort.header
+                                ? sort.isAsc
+                                  ? "up"
+                                  : "down"
+                                : "down"
+                            }
+                          />
+                        </ChevronContainer>
+                      )
+                    }
                   </div>
                 </StyledSubHeaderCell>
               );

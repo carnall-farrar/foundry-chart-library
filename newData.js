@@ -545,7 +545,7 @@ benchmark2 = {
       },
     },
     {
-      region: "North West",
+      region: "Zorth West",
       data: {
         "Value Weighted Activity": 92,
         "IS Activity": null,
@@ -765,7 +765,7 @@ benchmarkV2 = {
       }
     },
     {
-      "region": "London",
+      "region": "Zondon",
       "data": {
         "104ww+ RTT": "535",
         "78ww+ RTT": "7,025",
