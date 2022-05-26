@@ -165,6 +165,14 @@ export const BenchmarkComponent = ({
     (record) => record.data[sort.header] === null
   );
 
+  const dealWithCommas = (entry) => {
+    if (typeof entry === "string") {
+      const string = entry.replace(/,/g, "");
+      return parseInt(string)
+    }
+    return entry
+  }
+
   let sortedRecords = recordsToSort
     .filter((record) => record.data[sort.header] !== null)
     .sort((a, b) => {
@@ -174,7 +182,8 @@ export const BenchmarkComponent = ({
       const [aItem, bItem] =
         sort.header === "Locations"
           ? [a.region, b.region]
-          : [a.data[sort.header], b.data[sort.header]];
+          : [dealWithCommas(a.data[sort.header]), dealWithCommas(b.data[sort.header])];
+      console.log({aItem, bItem});
       if (sort.isAsc) {
         return aItem > bItem ? 1 : -1;
       }

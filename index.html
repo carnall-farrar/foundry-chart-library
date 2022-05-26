@@ -45,6 +45,7 @@
       <div id="reactBarChart"></div>
       <div id="trendLineChart"></div>
       <div id="scorecardComponent"></div>
+      <h2>Benchmark component</h2><br />
       <div id="benchmarkComponent" style="width: 1400px"></div>
       <div id="loading"></div>
       <br />
@@ -179,11 +180,11 @@
       // );
       ReactDOM.render(
         React.createElement(BenchmarkComponent, {
-          headers: benchmarkV2.headers,
+          headers: benchmarkV2.headers, 
           // records: [],
           records: benchmarkV2.records,
           metricsMetadata: benchmarkV2.metricsMetadata,
-          allSelected: true
+          allSelected: false
         }),
         document.querySelector("#benchmarkComponent")
       );
