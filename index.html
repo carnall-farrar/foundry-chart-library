@@ -52,6 +52,9 @@
       <br />
       <h2>New sentence component</h2>
       <div id="newSentences"></div>
+      <br />
+      <h2>Line chart component</h2>
+      <div id="lineChart"></div>
     </div>
     <script
       crossorigin
@@ -187,6 +190,21 @@
           allSelected: false
         }),
         document.querySelector("#benchmarkComponent")
+      );
+
+      ReactDOM.render(
+        React.createElement(LineChart, {
+          width: 600,
+          height:300,
+          data: lineChart,
+          series: ['London', 'South West'],
+          colors: {
+            'London': '#184A90',
+            'South West': '#CD4246'
+          },
+          }
+        ),
+        document.querySelector("#lineChart")
       );
     </script>
   </body>

@@ -201,7 +201,7 @@ scoreCard = {
       "Performance Area": "Cancer",
       Metric: "Cancer 62 Days",
       "Data last updated": "February 10 2022",
-      "22/23 Ambition": { value: "=/> 101%", date: "February 10 2022" },
+      "22/23 Ambition": { value: "14266", date: "February 10 2022" },
       "April 22": "89%",
       "May 22": "101%",
       "June 22": "200%",
@@ -482,7 +482,7 @@ benchmark2 = {
         "Cancer 62 Days": 3442,
         "Diagnostic Test Activity": null,
       },
-    },
+    }, 
     {
       region: "England",
       fixedPosition: 0,
@@ -896,3 +896,27 @@ tooltip = {
     published_data: "",
   },
 };
+
+
+lineChart = [
+  {date: '2020-01-01', London: 100, 'South West': 90},
+  {date: '2020-02-01', London: 90, 'South West': 90},
+  {date: '2020-03-01', London: 92, 'South West': 90},
+  {date: '2020-04-01', London: 94, 'South West': 93},
+  {date: '2020-05-01', London: 97, 'South West': 94},
+  {date: '2020-06-01', London: 97, 'South West': 94},
+  {date: '2020-07-01', London: 98, 'South West': 95},
+  {date: '2020-08-01', London: 99, 'South West': 98},
+  {date: '2020-09-01', London: 100, 'South West': 103},
+  {date: '2020-10-01', London: 101, 'South West': 102},
+  {date: '2020-11-01', London: 103, 'South West': 101},
+  {date: '2020-12-01', London: 102, 'South West': 101},
+  {date: '2021-01-01', London: 101, 'South West': 103},
+  {date: '2021-01-08', London: 100, 'South West': 104},
+  {date: '2021-01-15', London: 99, 'South West': 106},
+  {date: '2021-01-22', London: 95, 'South West': 108},
+  {date: '2021-01-29', London: 94, 'South West': 109},
+  {date: '2021-02-04', London: 93, 'South West': 110},
+  {date: '2021-02-11', London: 92, 'South West': 108},
+  {date: '2021-02-17', London: 91, 'South West': 109},
+]

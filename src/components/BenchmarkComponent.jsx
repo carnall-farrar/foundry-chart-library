@@ -183,7 +183,6 @@ export const BenchmarkComponent = ({
         sort.header === "Locations"
           ? [a.region, b.region]
           : [dealWithCommas(a.data[sort.header]), dealWithCommas(b.data[sort.header])];
-      console.log({aItem, bItem});
       if (sort.isAsc) {
         return aItem > bItem ? 1 : -1;
       }
