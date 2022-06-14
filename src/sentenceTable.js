@@ -82,7 +82,6 @@ function scrollUp(id, data) {
   }
 
   const newData = data.slice(firstItem, secondItem);
-  console.log({ data, newData, firstItem, secondItem });
   drawSentences(id, newData);
 
   if (firstItem === 0) {
@@ -129,7 +128,6 @@ function backToSentences(data, sentenceId) {
         : sentenceNum + 1;
 
   const inputData = data.length <= 3 ? data : data.slice(top, bottom);
-  console.log({ inputData, top, bottom, data });
   drawSentences('#sentence-list', inputData);
   addSentenceClickEvents(inputData);
 
@@ -213,16 +211,13 @@ export function buildSentenceComponent(root, data) {
 }
 
 export function addAccordion(root, data) {
-  console.log('hello');
   d3.select(root).append('div').attr('class', 'accordion');
-  console.log({ data, root });
   data.forEach((item, index) => {
     const containerClass = index === 0 ? 'container active' : 'container';
     const container = d3
       .select('.accordion')
       .append('div')
       .attr('class', containerClass);
-    console.log({ container });
     container.append('div').attr('class', 'label').text(item.label);
 
     container.append('div').attr('class', 'content').html(item.body);

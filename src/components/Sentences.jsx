@@ -102,7 +102,6 @@ export const Sentences = ({
           <StyledBodyRow key={index}>
             {headers.flat().map((header, index) => {
               const value = record.sentenceContent[header];
-              console.log({value, record, header, headers});
               return (
                 <StyledBodyCell onClick={() => {
                   if (onCellClick) {

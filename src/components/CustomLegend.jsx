@@ -17,9 +17,7 @@ const LegendText = window.styled.span`
 
 export const renderCusomizedLegend = ({ payload }) => {
   const {colorMap, disabled, handleClick} = payload;
-  console.log({colorMap, disabled, handleClick});
   const test = colorMap.map((item, index) => item);
-  console.log({test});
   return (
     <LegendContainer>
       {colorMap.map(entry => {
@@ -30,7 +28,6 @@ export const renderCusomizedLegend = ({ payload }) => {
           paddingBottom: 10,
           color: active ? '#AAA' : '#000'
         };
-        console.log({entry, dataKey, color, active});
 
         return (
           <span

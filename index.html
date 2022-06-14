@@ -55,6 +55,9 @@
       <br />
       <h2>Line chart component</h2>
       <div id="lineChart"></div>
+      <br />
+      <h2>Popup component</h2>
+      <div id="popUpComponent"></div>
     </div>
     <script
       crossorigin
@@ -194,7 +197,6 @@
 
       ReactDOM.render(
         React.createElement(LineChart, {
-          width: 600,
           height:300,
           data: lineChart,
           series: ['London', 'South West'],
@@ -205,6 +207,20 @@
           }
         ),
         document.querySelector("#lineChart")
+      );
+      ReactDOM.render(
+        React.createElement(PopUpComponent, {
+          title: 'Test title',
+          height:300,
+          data: lineChart,
+          series: ['London', 'South West'],
+          colors: {
+            'London': '#184A90',
+            'South West': '#CD4246'
+          },
+          }
+        ),
+        document.querySelector("#popUpComponent")
       );
     </script>
   </body>

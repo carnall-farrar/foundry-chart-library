@@ -19,11 +19,10 @@ export const LineChartComponent = ({height, data, series, colors}) => {
     if (disabled.includes(key)) {
       setDisabled(disabled.filter(k => k !== key));
     } else {
-      console.log('clicked', disabled, key)
       setDisabled([...disabled, key]);
     }
   }
-
+  
   const dateFormatted = data.map(item => {
     return {
       ...item,
@@ -37,13 +36,20 @@ export const LineChartComponent = ({height, data, series, colors}) => {
       return keys.reduce((a, v) => ({...a, [v]: item[v]}), {})
     });
     setInputData(filteredData); 
-  }, [disabled]);
+  }, [disabled, data]);
 
   return (
     <ResponsiveContainer width = '95%' height = {height} >
       <LineChart width={width} height={height} data={inputData} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
         <CartesianGrid stroke="#DCE0E5" vertical={false}/>
-        {series.map((serie, index) => <Line type="monotone" dataKey={serie} stroke={colors[serie] ?? "#8F99A8"} />)}
+        {series.map((serie, index) => 
+          <Line 
+            type="monotone" 
+            dataKey={serie} 
+            stroke={colors[serie] ?? "#8F99A8"}
+            dot={false}
+            strokeWidth={2}
+          />)}
         <XAxis 
           dataKey="newDate" 
           tickFormatter = {(unixTime) => dayjs.unix(unixTime).format("D MMM YYYY")}
@@ -51,7 +57,9 @@ export const LineChartComponent = ({height, data, series, colors}) => {
           domain = {['auto', 'auto']}
         />
         <YAxis axisLine={false} tickLine={false}/>
-        <Tooltip />
+        <Tooltip 
+          labelFormatter={(value) => dayjs.unix(value).format("D MMM YYYY")}
+        />
         <Legend 
           layout="horizontal" 
           verticalAlign="top" 

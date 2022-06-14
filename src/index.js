@@ -15,6 +15,7 @@ import { ScorecardComponent } from "./components/ScorecardComponent";
 import { LoadingDots } from "./components/LoadingDots";
 import { Sentences } from "./components/Sentences";
 import { LineChartComponent } from "./components/LineChart";
+import { PopUpComponent } from "./components/PopUpComponent";
 
 global.tabulate = tabulate;
 global.createExecTable = createExecTable;
@@ -31,3 +32,4 @@ global.ScorecardComponent = ScorecardComponent;
 global.LoadingDots = LoadingDots;
 global.Sentences = Sentences;
 global.LineChart = LineChartComponent;
+global.PopUpComponent = PopUpComponent;

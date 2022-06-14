@@ -41,7 +41,7 @@ const Dots = window.styled.span`
 export const LoadingDots = () => {
   return (
     <LoadingWrapper>
-      <LoadingText>Loading table</LoadingText>
+      <LoadingText>Please select another geographical area</LoadingText>
       <Dots></Dots>
     </LoadingWrapper>
   );

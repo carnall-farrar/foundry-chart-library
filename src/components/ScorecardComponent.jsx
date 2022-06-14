@@ -123,7 +123,7 @@ const RatingCell = ({
   isAboveGood,
   isPercentage,
 }) => {
-  const isGreaterThanAmbition = rating > ambition;
+  const isGreaterThanAmbition = rating >= ambition;
   const ratingResult = getRatingResult(
     rating,
     previousMonthRating,
