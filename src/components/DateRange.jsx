@@ -5,8 +5,8 @@ export const DateRange = ({
   handleEndDate
 }) => {
   console.log('dates', {startDate, endDate});
-  const start = dayjs(startDate).format("YYYY-MM-DD");
-  const end = dayjs(endDate).format("YYYY-MM-DD");
+  const start = dayjs(startDate).format('YYYY-MM-DD');
+  const end = dayjs(endDate).format('YYYY-MM-DD');
   return (
     <div>
       <input type='date' value={start} onChange={handleStartDate}></input>
