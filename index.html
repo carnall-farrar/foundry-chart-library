@@ -210,14 +210,26 @@
       );
       ReactDOM.render(
         React.createElement(PopUpComponent, {
-          title: 'Test title',
-          height:300,
-          data: lineChart,
-          series: ['London', 'South West'],
-          colors: {
-            'London': '#184A90',
-            'South West': '#CD4246'
+          scorecard: {
+            height:300,
+            data: lineChartScorecard,
+            series: ['Monthly', 'Weekly'],
+            colors: {
+              'Monthly': '#184A90',
+              'Weekly': '#CD4246'
+            },
+            unit: 'percentage'
           },
+          benchmark: {
+            height:300,
+            data: lineChart,
+            series: ['London', 'South West'],
+            colors: {
+              'London': '#184A90',
+              'South West': '#CD4246'
+            },
+            unit: 'absolute'
+          }
           }
         ),
         document.querySelector("#popUpComponent")

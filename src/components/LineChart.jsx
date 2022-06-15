@@ -12,7 +12,7 @@ const {
 } = Recharts;
 
 
-export const LineChartComponent = ({height, data, series, colors}) => {
+export const LineChartComponent = ({height, data, series, colors, unit}) => {
   const [disabled, setDisabled] = React.useState([]);
   const [inputData, setInputData] = React.useState([]);
   const handleLegendClick = (key) => {
@@ -55,10 +55,26 @@ export const LineChartComponent = ({height, data, series, colors}) => {
           tickFormatter = {(unixTime) => dayjs.unix(unixTime).format("D MMM YYYY")}
           type='number'
           domain = {['auto', 'auto']}
+          style={{
+            fontSize: '12',
+            fontFamily: 'sans-serif',
+          }}
         />
-        <YAxis axisLine={false} tickLine={false}/>
+        <YAxis 
+          axisLine={false} 
+          tickLine={false}
+          tickFormatter={(v) => unit === 'percentage' ? `${v}%` : v}
+          style={{
+            fontSize: '12',
+            fontFamily: 'sans-serif',
+          }}
+        />
         <Tooltip 
           labelFormatter={(value) => dayjs.unix(value).format("D MMM YYYY")}
+          wrapperStyle={{
+            fontSize: '12',
+            fontFamily: 'sans-serif',
+          }}
         />
         <Legend 
           layout="horizontal" 
@@ -66,6 +82,10 @@ export const LineChartComponent = ({height, data, series, colors}) => {
           align="center"
           payload={{colorMap: Object.entries(colors), disabled, handleClick: handleLegendClick}}
           content={renderCusomizedLegend}
+          wrapperStyle={{
+            fontSize: '12',
+            fontFamily: 'sans-serif',
+          }}
         />
       </LineChart>
     </ResponsiveContainer>

@@ -920,3 +920,26 @@ lineChart = [
   {date: '2021-02-11', London: 92, 'South West': 108},
   {date: '2021-02-17', London: 91, 'South West': 109},
 ]
+
+lineChartScorecard = [
+  {date: '2020-01-01', Monthly: 1004, 'Weekly': null},
+  {date: '2020-02-01', Monthly: 905, 'Weekly': null},
+  {date: '2020-03-01', Monthly: 942, 'Weekly': null},
+  {date: '2020-04-01', Monthly: 954, 'Weekly': null},
+  {date: '2020-05-01', Monthly: 972, 'Weekly': null},
+  {date: '2020-06-01', Monthly: 976, 'Weekly': null},
+  {date: '2020-07-01', Monthly: 938, 'Weekly': null},
+  {date: '2020-08-01', Monthly: 919, 'Weekly': null},
+  {date: '2020-09-01', Monthly: 1005, 'Weekly': null},
+  {date: '2020-10-01', Monthly: 1101, 'Weekly': null},
+  {date: '2020-11-01', Monthly: 1203, 'Weekly': null},
+  {date: '2020-12-01', Monthly: 1402, 'Weekly': null},
+  {date: '2021-01-01', Monthly: 1501, 'Weekly': null},
+  {date: '2021-01-08', Monthly: null, 'Weekly': 1604},
+  {date: '2021-01-15', Monthly: null, 'Weekly': 1706},
+  {date: '2021-01-22', Monthly: null, 'Weekly': 1608},
+  {date: '2021-01-29', Monthly: null, 'Weekly': 1509},
+  {date: '2021-02-04', Monthly: null, 'Weekly': 1310},
+  {date: '2021-02-11', Monthly: null, 'Weekly': 1108},
+  {date: '2021-02-17', Monthly: null, 'Weekly': 1009},
+]

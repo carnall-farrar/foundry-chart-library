@@ -1,16 +1,67 @@
+const DateRangeElement = window.styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  align-items: center;
+`;
+
+const DatePicker = window.styled.input`
+  height: 24px;
+  font-size: 12;
+  font-family: 'sans-serif';
+  padding: 0px 15px;
+  border: thin solid #C5CBD3;
+  color: #738091;
+  background-color: #F6F7F9;
+  border-radius: 3px;
+  &::-webkit-calendar-picker-indicator {
+    filter: invert(54%) sepia(39%) saturate(173%) hue-rotate(174deg) brightness(85%) contrast(89%);
+  } 
+`;
+
+const Arrow = window.styled.div`
+  font-size: 20px;
+  font-family: 'sans-serif';
+  color: #738091;
+`;
+
+const ReloadButton = window.styled.div`
+  font-size: 30px;
+  font-family: 'sans-serif';
+  color: #738091;
+  padding-left: 10px;
+  cursor: pointer;
+  margin-bottom: 5px;
+`;
+
 export const DateRange = ({
   startDate, 
   handleStartDate,
   endDate,
-  handleEndDate
+  handleEndDate,
+  onReloadClick
 }) => {
   console.log('dates', {startDate, endDate});
   const start = dayjs(startDate).format('YYYY-MM-DD');
   const end = dayjs(endDate).format('YYYY-MM-DD');
   return (
-    <div>
-      <input type='date' value={start} onChange={handleStartDate}></input>
-      <input type='date' value={end} onChange={handleEndDate}></input>
-    </div>
+    <DateRangeElement>
+      <DatePicker 
+        type='date' 
+        value={start} 
+        min={start} 
+        max={end} 
+        onChange={handleStartDate}>  
+      </DatePicker>
+      <Arrow>&#8594;</Arrow>
+      <DatePicker 
+        type='date'
+        value={end} 
+        min={start} 
+        max={end} 
+        onChange={handleEndDate}>
+      </DatePicker>
+      <ReloadButton onClick={onReloadClick} >&#8634;</ReloadButton>
+    </DateRangeElement>
   );
 };
