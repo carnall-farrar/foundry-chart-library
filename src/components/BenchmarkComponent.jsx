@@ -143,6 +143,7 @@ export const BenchmarkComponent = ({
   metricsMetadata,
   onCellClick,
   allSelected = false,
+  ragRatings,
 }) => {
   if (records.length === 0) {
     return <LoadingDots />;
@@ -276,10 +277,14 @@ export const BenchmarkComponent = ({
             {Object.values(headers)
               .flat()
               .map(({ key }, index) => {
+                const geography = record.region
+                const rag = ragRatings[key][geography]
+                console.log({rag})
                 const value = record.data[key];
                 const metaData = metricsMetadata[key];
                 const ambition = metaData.ambition.value;
                 const isGreaterThanAmbition = value > ambition;
+                // Will need to create separate function to find rating result
                 const ratingResult = getRatingResult(
                   value,
                   metaData.previousMonthValue,

@@ -735,6 +735,88 @@ benchmarkV2 = {
       "lastUpdated": "18-04-2022"
     }
   },
+  "metricRagRatings": {
+    "62+ days pathways": {
+      "East of England": "Green",
+      "England": "Green",
+      "London": "Green",
+      "Midlands": "Green",
+      "North East and Yorkshire": "Green",
+      "North West": "Green",
+      "South East": "Green",
+      "South West": "Green"
+    },
+    "104ww+ RTT": {
+      "East of England": "Green",
+      "England": "Green",
+      "London": "Red",
+      "Midlands": "Green",
+      "North East and Yorkshire": "Green",
+      "North West": "Green",
+      "South East": "Red",
+      "South West": "Green"
+    },
+    "78ww+ RTT": {
+      "East of England": "Red",
+      "England": "Red",
+      "London": "Red",
+      "Midlands": "Red",
+      "North East and Yorkshire": "Red",
+      "North West": "Red",
+      "South East": "Red",
+      "South West": "Red"
+    },
+    "Completed pathways": {
+      "East of England": "Red",
+      "England": "Red",
+      "London": "Red",
+      "Midlands": "Red",
+      "North East and Yorkshire": "Amber",
+      "North West": "Amber",
+      "South East": "Red",
+      "South West": "Red"
+    },
+    "Follow-up Reduction": {
+      "East of England": "Red",
+      "England": "Red",
+      "London": "Red",
+      "Midlands": "Red",
+      "North East and Yorkshire": "Red",
+      "North West": "Red",
+      "South East": "Red",
+      "South West": "Green"
+    },
+    "Test activity": {
+      "East of England": "Amber",
+      "England": "Amber",
+      "London": "Amber",
+      "Midlands": "Amber",
+      "North East and Yorkshire": "Amber",
+      "North West": "Amber",
+      "South East": "Amber",
+      "South West": "Amber"
+    },
+    "Value-Weighted Activity": {
+      "East of England": "Amber",
+      "England": "Amber",
+      "London": "Amber",
+      "Midlands": "Amber",
+      "North East and Yorkshire": "Amber",
+      "North West": "Amber",
+      "South East": "Red",
+      "South West": "Red"
+    },
+    "Waiting <6 weeks tests/procedures": {
+      "East of England": "Red",
+      "England": "Red",
+      "London": "Red",
+      "Midlands": "Red",
+      "North East and Yorkshire": "Red",
+      "North West": "Red",
+      "South East": "Red",
+      "South West": "Amber"
+    }
+  },
   "records": [
     {
       "region": "East of England",
