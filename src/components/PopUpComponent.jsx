@@ -66,10 +66,8 @@ export const PopUpComponent = ({
   const [selectedTab, setSelectedTab] = React.useState(0);
   const handleStartDate = (e) => setStartDate(e.target.value);
   const handleEndDate = (e) => setEndDate(e.target.value);
-  console.log('hello from PopUpComponent', {scorecard, benchmark, rawData});
 
   React.useEffect(() => {
-    console.log({scorecard, benchmark, rawData});
     setRawData(selectedTab === 0 ? scorecard : benchmark);
     const dates = rawData.data.map(item => new Date(item.date));
     const start = Math.min(...dates);
