@@ -1,6 +1,5 @@
 import {LineChartComponent} from './LineChart';
 import {DateRange} from './DateRange';
-import { useEffect } from 'react/cjs/react.production.min';
 import { identity } from 'lodash';
 
 const PopUpSelection = window.styled.div`
