@@ -279,18 +279,19 @@ export const BenchmarkComponent = ({
               .map(({ key }, index) => {
                 const geography = record.region
                 const rag = ragRatings[key][geography]
-                console.log({rag})
                 const value = record.data[key];
                 const metaData = metricsMetadata[key];
                 const ambition = metaData.ambition.value;
                 const isGreaterThanAmbition = value > ambition;
                 // Will need to create separate function to find rating result
-                const ratingResult = getRatingResult(
-                  value,
-                  metaData.previousMonthValue,
-                  isGreaterThanAmbition,
-                  metaData.isAboveGood
-                );
+                const ratingConversion = {
+                  Red: 'bad',
+                  Amber: 'improving',
+                  Green: 'good'
+                };
+                
+                const ratingResult = ratingConversion[rag] ?? 'none'
+                console.log({ratingResult})
                 let displayValue = value;
 
                 if (

@@ -839,7 +839,7 @@ benchmarkV2 = {
         "104ww+ RTT": "11,428",
         "78ww+ RTT": "109,054",
         "62+ days pathways": "27,083",
-        "Completed pathways": 180,
+        "Completed pathways": null,
         "Follow-up Reduction": 160000000,
         "Value-Weighted Activity": 180,
         "Test activity": 42000000,
@@ -847,9 +847,9 @@ benchmarkV2 = {
       }
     },
     {
-      "region": "Zondon",
+      "region": "London",
       "data": {
-        "104ww+ RTT": "535",
+        "104ww+ RTT": null,
         "78ww+ RTT": "7,025",
         "62+ days pathways": "3,533",
         "Completed pathways": 170,
