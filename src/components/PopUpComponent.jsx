@@ -1,6 +1,5 @@
 import {LineChartComponent} from './LineChart';
 import {DateRange} from './DateRange';
-import { identity } from 'lodash';
 
 const PopUpSelection = window.styled.div`
   grid-row-start: 1;
@@ -61,33 +60,40 @@ export const PopUpComponent = ({
   const [endDate, setEndDate] = React.useState();
   const [rawStartDate, setRawStartDate] = React.useState();
   const [rawEndDate, setRawEndDate] = React.useState();
-  const [inputData, setInputData] = React.useState(rawData.data);
+  const [inputData, setInputData] = React.useState([]);
   const [selectedTab, setSelectedTab] = React.useState(0);
   const handleStartDate = (e) => setStartDate(e.target.value);
   const handleEndDate = (e) => setEndDate(e.target.value);
 
   React.useEffect(() => {
-    setRawData(selectedTab === 0 ? scorecard : benchmark);
-    const dates = rawData.data.map(item => new Date(item.date));
-    const start = Math.min(...dates);
-    const end = Math.max(...dates);
-    setStartDate(start);
-    setEndDate(end);
-    setRawStartDate(start);
-    setRawEndDate(end);
-  }, [selectedTab]);
+    setRawData(selectedTab === 0 ? scorecard : benchmark)
+  }, [scorecard, benchmark])
+  
+  React.useEffect(() => {
+    console.log({lengthL: Object.keys(rawData).length, datata: rawData});
+    if (rawData.data) {
+      const dates = rawData.data.map(item => new Date(item.date));
+      const start = Math.min(...dates);
+      const end = Math.max(...dates);
+      console.log({rawData, start, end});
+      setStartDate(start);
+      setEndDate(end);
+      setRawStartDate(start);
+      setRawEndDate(end);
+      setInputData(rawData.data);
+    }
+  }, [rawData]);
 
   React.useEffect(() => {
+    console.log('datesPopup', {rawData});
     if (startDate && endDate) {
       const filteredData = rawData.data.filter(item => {
         const date = new Date(item.date);
         return date >= new Date(startDate) && date <= new Date(endDate);
       });
       setInputData(filteredData);
-    } else {
-      setInputData(rawData.data);
     }
-  }, [startDate, endDate, rawData]);
+  }, [startDate, endDate]);
 
   const handleReloadClick = () => {
     setStartDate(rawStartDate);
@@ -97,10 +103,14 @@ export const PopUpComponent = ({
   const handleTabClick = () => {
     if (selectedTab === 0) {
       setSelectedTab(1);
-    } else (
-      setSelectedTab(0)
-    );
+      setRawData(benchmark);
+    } else {
+      setSelectedTab(0);
+      setRawData(scorecard);
+    }
   };
+
+  console.log('ipdata', {rawData, inputData, scorecard, benchmark});
 
   return (
     <div>
@@ -120,23 +130,30 @@ export const PopUpComponent = ({
             )}
           </PopUpTabs>
         </PopUpSelection>
-        <DateRangeContainer>
-          <DateRange 
-            startDate={startDate}
-            handleStartDate={handleStartDate}
-            endDate={endDate}
-            handleEndDate={handleEndDate}
-            onReloadClick={handleReloadClick}
-          />
-        </DateRangeContainer>
+        {rawData.data && (
+          <DateRangeContainer>
+            <DateRange 
+              startDate={startDate}
+              handleStartDate={handleStartDate}
+              endDate={endDate}
+              handleEndDate={handleEndDate}
+              onReloadClick={handleReloadClick}
+            />
+          </DateRangeContainer>
+        )}
       </TopBar>
-      <LineChartComponent
-        height={rawData.height}
-        data={inputData}
-        series={rawData.series}
-        colors={rawData.colors}
-        unit={rawData.unit}
-      />
+      {rawData.data ? (
+        <LineChartComponent
+          height={rawData.height ?? 300}
+          data={inputData}
+          series={rawData.series ?? []}
+          colors={rawData.colors ?? {}}
+          unit={rawData.unit ?? 'absolute'}
+        />
+      ) : (
+        <div>No data to display</div>
+      ) }
+      
     </div>
   );
 };

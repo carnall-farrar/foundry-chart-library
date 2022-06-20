@@ -212,24 +212,31 @@
       ReactDOM.render(
         React.createElement(PopUpComponent, {
           scorecard: {
-            height:300,
-            data: lineChartScorecard,
-            series: ['Monthly', 'Weekly'],
-            colors: {
-              'Monthly': '#184A90',
-              'Weekly': '#CD4246'
-            },
-            unit: 'percentage'
+            
           },
           benchmark: {
             height:300,
             data: lineChart,
-            series: ['London', 'South West'],
+            series: [
+      "Ambition",
+      "East of England",
+      "London",
+      "Midlands",
+      "North East and Yorkshire",
+      "North West",
+      "South East",
+      "South West"
+    ],
             colors: {
-              'London': '#184A90',
-              'South West': '#CD4246'
-            },
-            unit: 'absolute'
+      "East of England": "#330072",
+      "London": "#78BE20",
+      "Midlands": "#AE2573",
+      "North East and Yorkshire": "#184A90",
+      "North West": "#41B6E6",
+      "South East": "#ED8B00",
+      "South West": "#FAE100"
+    },
+    "unit": "absolute"
           }
           }
         ),
