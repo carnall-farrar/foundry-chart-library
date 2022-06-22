@@ -264,7 +264,7 @@ scoreCard = {
       Metric: "Outpatient Reduction",
       "Data last updated": "February 10 2022",
       "22/23 Ambition": "=/> 101%",
-      "April 22": "89%",
+      "April 22": {actuals: "89%", plan: '100%'},
       "May 22": "120%",
       "June 22": "",
       "July 22": "",

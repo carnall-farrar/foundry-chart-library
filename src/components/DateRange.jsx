@@ -8,7 +8,6 @@ const DateRangeElement = window.styled.div`
 const DatePicker = window.styled.input`
   height: 24px;
   font-size: 12;
-  font-family: 'sans-serif';
   padding: 0px 15px;
   border: thin solid #C5CBD3;
   color: #738091;
@@ -21,13 +20,11 @@ const DatePicker = window.styled.input`
 
 const Arrow = window.styled.div`
   font-size: 20px;
-  font-family: 'sans-serif';
   color: #738091;
 `;
 
 const ReloadButton = window.styled.div`
   font-size: 30px;
-  font-family: 'sans-serif';
   color: #738091;
   padding-left: 10px;
   cursor: pointer;

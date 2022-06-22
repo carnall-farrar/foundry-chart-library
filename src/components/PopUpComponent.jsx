@@ -12,7 +12,6 @@ const PopUpTabs = window.styled.div`
   display: flex;
   flex-direction: row;
   font-size: 13px;
-  font-family: 'sans-serif';
   padding-left: 25px;
 `;
 

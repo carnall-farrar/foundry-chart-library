@@ -68,7 +68,7 @@ export const LineChartComponent = (
             dataKey="newDate" 
             tickFormatter = {(unixTime) => dayjs.unix(unixTime).format("D MMM YYYY")}
             type='number'
-            domain = {['auto', 'auto']}
+            domain = {['dataMin', 'dataMax']}
             style={{
               fontSize: '12',
               fontFamily: 'sans-serif',

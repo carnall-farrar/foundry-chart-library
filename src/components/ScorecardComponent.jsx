@@ -118,6 +118,7 @@ const AmbitionCell = ({ date, value }) => {
 
 const RatingCell = ({
   rating,
+  plan,
   previousMonthRating,
   ambition,
   isAboveGood,
@@ -131,11 +132,15 @@ const RatingCell = ({
     isAboveGood
   );
   let value = isPercentage ? `${rating}%` : `${rating.toLocaleString()}`;
+  const planProcess = plan === '' ? '~' : plan
   return (
+    <>
+    {planProcess ?? <div>{planProcess}</div>}
     <DataCell ratingResult={ratingResult}>
       {/* {!!rating ? `${rating}${isPercentage ? "%" : ""}` : "~"} */}
       {!!rating ? value : "~"}
     </DataCell>
+    </>
   );
 };
 
@@ -255,10 +260,11 @@ export const ScorecardComponent = ({
 
             {colIndex >= ratingStartIndex && (
               <RatingCell
-                rating={Number(cellData.replace("%", ""))}
+                rating={cellData.actuals ? Number(cellData.actuals.replace("%", "")) : Number(cellData.replace("%", ""))}
+                plan={cellData.plan ?? undefined}
                 previousMonthRating={
                   colIndex > ratingStartIndex
-                    ? Number(rowEntries[colIndex - 1][1].replace("%", ""))
+                    ? Number(rowEntries[colIndex - 1][1].replace("%", "")) // Finn add conditional logic here
                     : undefined
                 }
                 ambition={ambitionValue}
@@ -267,7 +273,7 @@ export const ScorecardComponent = ({
               />
             )}
           </StyledTd>
-        ))}
+  ))}
         <StyledTd shouldHaveBorder={shouldHaveBorder}>
           <TrendBarChart
             data={trendValue.map((val) => ({
