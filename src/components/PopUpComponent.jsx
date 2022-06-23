@@ -1,5 +1,5 @@
-import {LineChartComponent} from './LineChart';
-import {DateRange} from './DateRange';
+import { LineChartComponent } from "./LineChart";
+import { DateRange } from "./DateRange";
 
 const PopUpSelection = window.styled.div`
   grid-row-start: 1;
@@ -50,10 +50,7 @@ const DateRangeContainer = window.styled.div`
   justify-self: end;
 `;
 
-export const PopUpComponent = ({
-  scorecard,
-  benchmark
-}) => {
+export const PopUpComponent = ({ scorecard, benchmark }) => {
   const [rawData, setRawData] = React.useState(scorecard);
   const [startDate, setStartDate] = React.useState();
   const [endDate, setEndDate] = React.useState();
@@ -65,16 +62,16 @@ export const PopUpComponent = ({
   const handleEndDate = (e) => setEndDate(e.target.value);
 
   React.useEffect(() => {
-    setRawData(selectedTab === 0 ? scorecard : benchmark)
-  }, [scorecard, benchmark])
-  
+    setRawData(selectedTab === 0 ? scorecard : benchmark);
+  }, [scorecard, benchmark]);
+
   React.useEffect(() => {
-    console.log({lengthL: Object.keys(rawData).length, datata: rawData});
+    console.log({ lengthL: Object.keys(rawData).length, datata: rawData });
     if (rawData.data) {
-      const dates = rawData.data.map(item => new Date(item.date));
+      const dates = rawData.data.map((item) => new Date(item.date));
       const start = Math.min(...dates);
       const end = Math.max(...dates);
-      console.log({rawData, start, end});
+      console.log({ rawData, start, end });
       setStartDate(start);
       setEndDate(end);
       setRawStartDate(start);
@@ -84,9 +81,9 @@ export const PopUpComponent = ({
   }, [rawData]);
 
   React.useEffect(() => {
-    console.log('datesPopup', {rawData});
+    console.log("datesPopup", { rawData });
     if (startDate && endDate) {
-      const filteredData = rawData.data.filter(item => {
+      const filteredData = rawData.data.filter((item) => {
         const date = new Date(item.date);
         return date >= new Date(startDate) && date <= new Date(endDate);
       });
@@ -109,7 +106,7 @@ export const PopUpComponent = ({
     }
   };
 
-  console.log('ipdata', {rawData, inputData, scorecard, benchmark});
+  console.log("ipdata", { rawData, inputData, scorecard, benchmark });
 
   return (
     <div>
@@ -118,25 +115,35 @@ export const PopUpComponent = ({
           <PopUpTabs>
             {selectedTab === 0 ? (
               <>
-                <SelectionItemActive onClick={handleTabClick}>Trend vs Ambition</SelectionItemActive>
-                <SelectionItem onClick={handleTabClick}>Benchmark chart</SelectionItem>
+                <SelectionItemActive onClick={handleTabClick}>
+                  Trend vs Ambition
+                </SelectionItemActive>
+                <SelectionItem onClick={handleTabClick}>
+                  Benchmark chart
+                </SelectionItem>
               </>
             ) : (
               <>
-                <SelectionItem onClick={handleTabClick}>Trend vs Ambition</SelectionItem>
-                <SelectionItemActive onClick={handleTabClick}>Benchmark chart</SelectionItemActive>
+                <SelectionItem onClick={handleTabClick}>
+                  Trend vs Ambition
+                </SelectionItem>
+                <SelectionItemActive onClick={handleTabClick}>
+                  Benchmark chart
+                </SelectionItemActive>
               </>
             )}
           </PopUpTabs>
         </PopUpSelection>
         {rawData.data && (
           <DateRangeContainer>
-            <DateRange 
+            <DateRange
               startDate={startDate}
               handleStartDate={handleStartDate}
               endDate={endDate}
               handleEndDate={handleEndDate}
               onReloadClick={handleReloadClick}
+              rawStartDate={rawStartDate}
+              rawEndDate={rawEndDate}
             />
           </DateRangeContainer>
         )}
@@ -147,12 +154,11 @@ export const PopUpComponent = ({
           data={inputData}
           series={rawData.series ?? []}
           colors={rawData.colors ?? {}}
-          unit={rawData.unit ?? 'absolute'}
+          unit={rawData.unit ?? "absolute"}
         />
       ) : (
         <div>No data to display</div>
-      ) }
-      
+      )}
     </div>
   );
 };
