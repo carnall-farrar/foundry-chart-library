@@ -1,6 +1,11 @@
 import { Chevron } from "../icons";
 import { getRatingResult } from "../utils";
-import { DataCell } from "./ScorecardComponent";
+import {
+  DataCell,
+  PlanCell,
+  TooltipText,
+  TooltipBox,
+} from "./ScorecardComponent";
 import { LoadingDots } from "./LoadingDots";
 const StyledHeader = window.styled.tr``;
 
@@ -169,10 +174,10 @@ export const BenchmarkComponent = ({
   const dealWithCommas = (entry) => {
     if (typeof entry === "string") {
       const string = entry.replace(/,/g, "");
-      return parseInt(string)
+      return parseInt(string);
     }
-    return entry
-  }
+    return entry;
+  };
 
   let sortedRecords = recordsToSort
     .filter((record) => record.data[sort.header] !== null)
@@ -183,7 +188,10 @@ export const BenchmarkComponent = ({
       const [aItem, bItem] =
         sort.header === "Locations"
           ? [a.region, b.region]
-          : [dealWithCommas(a.data[sort.header]), dealWithCommas(b.data[sort.header])];
+          : [
+              dealWithCommas(a.data[sort.header]),
+              dealWithCommas(b.data[sort.header]),
+            ];
       if (sort.isAsc) {
         return aItem > bItem ? 1 : -1;
       }
@@ -228,36 +236,36 @@ export const BenchmarkComponent = ({
                     <div style={{ flex: 9, maxWidth: 100 }}>
                       {subheader.value}
                     </div>
-                    {(subheader.key === "Locations" && allSelected === true) ? 
-                      (<></>) :
-                      (<ChevronContainer
-                          onClick={() => {
-                            if (subheader.key === sort.header) {
-                              setSort({
-                                isAsc: !sort.isAsc,
-                                header: subheader.key,
-                              });
-                            } else {
-                              setSort({
-                                isAsc: sort.isAsc,
-                                header: subheader.key,
-                              });
-                            }
-                          }}
-                        >
-                          <Chevron
-                            fill="#666"
-                            direction={
-                              subheader.key === sort.header
-                                ? sort.isAsc
-                                  ? "up"
-                                  : "down"
+                    {subheader.key === "Locations" && allSelected === true ? (
+                      <></>
+                    ) : (
+                      <ChevronContainer
+                        onClick={() => {
+                          if (subheader.key === sort.header) {
+                            setSort({
+                              isAsc: !sort.isAsc,
+                              header: subheader.key,
+                            });
+                          } else {
+                            setSort({
+                              isAsc: sort.isAsc,
+                              header: subheader.key,
+                            });
+                          }
+                        }}
+                      >
+                        <Chevron
+                          fill="#666"
+                          direction={
+                            subheader.key === sort.header
+                              ? sort.isAsc
+                                ? "up"
                                 : "down"
-                            }
-                          />
-                        </ChevronContainer>
-                      )
-                    }
+                              : "down"
+                          }
+                        />
+                      </ChevronContainer>
+                    )}
                   </div>
                 </StyledSubHeaderCell>
               );
@@ -277,21 +285,30 @@ export const BenchmarkComponent = ({
             {Object.values(headers)
               .flat()
               .map(({ key }, index) => {
-                const geography = record.region
-                const rag = ragRatings[key][geography]
-                const value = record.data[key];
+                const geography = record.region;
+                const rag = ragRatings[key][geography];
+                const plan =
+                  record.data[key] === null
+                    ? record.data[key]
+                    : record.data[key].plan ?? undefined;
+                const value =
+                  (typeof record.data[key] === "string") |
+                  (typeof record.data[key] === "number") |
+                  (record.data[key] === null)
+                    ? record.data[key]
+                    : typeof record.data[key] === "object"
+                    ? record.data[key].actuals
+                    : undefined;
                 const metaData = metricsMetadata[key];
-                const ambition = metaData.ambition.value;
-                const isGreaterThanAmbition = value > ambition;
                 // Will need to create separate function to find rating result
                 const ratingConversion = {
-                  Red: 'bad',
-                  Amber: 'improving',
-                  Green: 'good'
+                  Red: "bad",
+                  Amber: "improving",
+                  Green: "good",
                 };
-                
-                const ratingResult = ratingConversion[rag] ?? 'none'
-                console.log({ratingResult})
+
+                const ratingResult = ratingConversion[rag] ?? "none";
+                console.log({ ratingResult });
                 let displayValue = value;
 
                 if (
@@ -310,22 +327,13 @@ export const BenchmarkComponent = ({
                     onClick={() => onCellClick(record.region, key)}
                     key={`${record.region}${index}`}
                   >
+                    <PlanCell>
+                      <TooltipText>{plan}</TooltipText>
+                      <TooltipBox>Plan</TooltipBox>
+                    </PlanCell>
                     <DataCell ratingResult={ratingResult}>
                       {displayValue}
                     </DataCell>
-                    {/* <Pill
-                        value={value}
-                        unit={metricsMetadata[key].unit}
-                        // goodDirection={metricsMetadata[key].goodDirection}
-                        // isPositive={isValuePositive(
-                        //   record.data[key],
-                        //   average(
-                        //     sortedRecords.map((r) => r.data[key]).filter(Boolean)
-                        //   ),
-                        //   metricsMetadata[key].goodDirection
-                        // )}
-                        // ambition={metricsMetadata[key].ambition.value}
-                      /> */}
                   </StyledBodyCellData>
                 );
               })}

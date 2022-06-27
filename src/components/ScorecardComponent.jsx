@@ -104,7 +104,40 @@ export const DataCell = window.styled.div`
     &:hover {
       box-shadow: 0 5px 15px rgba(0,0,0,0.3);
 	    filter: brightness(120%);
-  }
+  };
+`;
+
+export const TooltipText = window.styled.div`
+  background: transparent;
+  color: black;
+  text-align: center;
+  cursor: pointer;
+`;
+
+export const TooltipBox = window.styled.div`
+  position: absolute;
+  visibility: hidden;
+  color: #184A90;
+  background-color: white;
+  width: 40px;
+  padding: 3px 3px;
+  border: thin solid #184A90;
+  border-radius: 5px;
+  margin-left: 10px;
+  margin-top: -40px;
+`;
+
+export const PlanCell = window.styled.div`
+    color: grey;
+    alignItems: center;
+    display: inline-block;
+    justify-content: center;
+    cursor: pointer;
+    & ${TooltipText}:hover + ${TooltipBox} {
+      visibility: visible;
+      &:before {
+        border-color: #184A90;
+    }
 `;
 
 const AmbitionCell = ({ date, value }) => {
@@ -132,14 +165,19 @@ const RatingCell = ({
     isAboveGood
   );
   let value = isPercentage ? `${rating}%` : `${rating.toLocaleString()}`;
-  const planProcess = plan === '' ? '~' : plan
+  const planProcess = plan === "" ? "~" : plan;
   return (
     <>
-    {planProcess ?? <div>{planProcess}</div>}
-    <DataCell ratingResult={ratingResult}>
-      {/* {!!rating ? `${rating}${isPercentage ? "%" : ""}` : "~"} */}
-      {!!rating ? value : "~"}
-    </DataCell>
+      {planProcess ? (
+        <PlanCell>
+          <TooltipText>{planProcess}</TooltipText>
+          <TooltipBox>Plan</TooltipBox>
+        </PlanCell>
+      ) : null}
+      <DataCell ratingResult={ratingResult}>
+        {/* {!!rating ? `${rating}${isPercentage ? "%" : ""}` : "~"} */}
+        {!!rating ? value : "~"}
+      </DataCell>
     </>
   );
 };
@@ -179,7 +217,7 @@ export const ScorecardComponent = ({
   spacing,
 }) => {
   if (data.length === 0) {
-    return <LoadingDots />
+    return <LoadingDots />;
   }
   const headerSpans = React.useMemo(
     () =>
@@ -260,20 +298,34 @@ export const ScorecardComponent = ({
 
             {colIndex >= ratingStartIndex && (
               <RatingCell
-                rating={cellData.actuals ? Number(cellData.actuals.replace("%", "")) : Number(cellData.replace("%", ""))}
+                rating={
+                  cellData.actuals
+                    ? Number(cellData.actuals.replace("%", ""))
+                    : Number(cellData.replace("%", ""))
+                }
                 plan={cellData.plan ?? undefined}
                 previousMonthRating={
-                  colIndex > ratingStartIndex
+                  colIndex > ratingStartIndex &&
+                  typeof rowEntries[colIndex - 1][1] === "string"
                     ? Number(rowEntries[colIndex - 1][1].replace("%", "")) // Finn add conditional logic here
+                    : colIndex > ratingStartIndex &&
+                      typeof rowEntries[colIndex - 1][1] === "object"
+                    ? Number(
+                        rowEntries[colIndex - 1][1].actuals.replace("%", "")
+                      )
                     : undefined
                 }
-                ambition={ambitionValue}
+                ambition={
+                  cellData.plan
+                    ? Number(cellData.plan.replace("%", ""))
+                    : ambitionValue
+                }
                 isAboveGood={isAboveGood}
                 isPercentage={metricUnitMap[metric] === "percentage"}
               />
             )}
           </StyledTd>
-  ))}
+        ))}
         <StyledTd shouldHaveBorder={shouldHaveBorder}>
           <TrendBarChart
             data={trendValue.map((val) => ({

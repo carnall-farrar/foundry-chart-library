@@ -32,33 +32,37 @@ const ReloadButton = window.styled.div`
 `;
 
 export const DateRange = ({
-  startDate, 
+  startDate,
   handleStartDate,
   endDate,
   handleEndDate,
-  onReloadClick
+  onReloadClick,
+  rawStartDate,
+  rawEndDate,
 }) => {
-  console.log('dates', {startDate, endDate});
-  const start = dayjs(startDate).format('YYYY-MM-DD');
-  const end = dayjs(endDate).format('YYYY-MM-DD');
+  console.log("dates", { startDate, endDate });
+  const start = dayjs(startDate).format("YYYY-MM-DD");
+  const end = dayjs(endDate).format("YYYY-MM-DD");
+  const rawStart = dayjs(rawStartDate).format("YYYY-MM-DD");
+  const rawEnd = dayjs(rawEndDate).format("YYYY-MM-DD");
   return (
     <DateRangeElement>
-      <DatePicker 
-        type='date' 
-        value={start} 
-        min={start} 
-        max={end} 
-        onChange={handleStartDate}>  
-      </DatePicker>
+      <DatePicker
+        type="date"
+        value={start}
+        min={rawStart}
+        max={end}
+        onChange={handleStartDate}
+      ></DatePicker>
       <Arrow>&#8594;</Arrow>
-      <DatePicker 
-        type='date'
-        value={end} 
-        min={start} 
-        max={end} 
-        onChange={handleEndDate}>
-      </DatePicker>
-      <ReloadButton onClick={onReloadClick} >&#8634;</ReloadButton>
+      <DatePicker
+        type="date"
+        value={end}
+        min={start}
+        max={rawEnd}
+        onChange={handleEndDate}
+      ></DatePicker>
+      <ReloadButton onClick={onReloadClick}>&#8634;</ReloadButton>
     </DateRangeElement>
   );
 };
