@@ -66,7 +66,6 @@ export const PopUpComponent = ({ scorecard, benchmark }) => {
   }, [scorecard, benchmark]);
 
   React.useEffect(() => {
-    console.log({ lengthL: Object.keys(rawData).length, datata: rawData });
     if (rawData.data) {
       const dates = rawData.data.map((item) => new Date(item.date));
       const start = Math.min(...dates);
@@ -81,7 +80,6 @@ export const PopUpComponent = ({ scorecard, benchmark }) => {
   }, [rawData]);
 
   React.useEffect(() => {
-    console.log("datesPopup", { rawData });
     if (startDate && endDate) {
       const filteredData = rawData.data.filter((item) => {
         const date = new Date(item.date);
