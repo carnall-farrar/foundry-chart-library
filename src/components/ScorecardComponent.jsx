@@ -162,7 +162,8 @@ const RatingCell = ({
     rating,
     previousMonthRating,
     isGreaterThanAmbition,
-    isAboveGood
+    isAboveGood,
+    plan
   );
   let value = isPercentage ? `${rating}%` : `${rating.toLocaleString()}`;
   const planProcess = plan === "" ? "~" : plan;
