@@ -308,7 +308,6 @@ export const BenchmarkComponent = ({
                 };
 
                 const ratingResult = ratingConversion[rag] ?? "none";
-                console.log({ ratingResult });
                 let displayValue = value;
 
                 if (
@@ -327,10 +326,12 @@ export const BenchmarkComponent = ({
                     onClick={() => onCellClick(record.region, key)}
                     key={`${record.region}${index}`}
                   >
-                    <PlanCell>
-                      <TooltipText>{plan}</TooltipText>
-                      <TooltipBox>Plan</TooltipBox>
-                    </PlanCell>
+                    {plan ? (
+                      <PlanCell>
+                        <TooltipText>{plan}</TooltipText>
+                        <TooltipBox>Plan</TooltipBox>
+                      </PlanCell>
+                    ) : null}
                     <DataCell ratingResult={ratingResult}>
                       {displayValue}
                     </DataCell>
