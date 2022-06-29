@@ -326,15 +326,15 @@ export const BenchmarkComponent = ({
                     onClick={() => onCellClick(record.region, key)}
                     key={`${record.region}${index}`}
                   >
+                    <DataCell ratingResult={ratingResult}>
+                      {displayValue}
+                    </DataCell>
                     {plan ? (
                       <PlanCell>
                         <TooltipText>{plan}</TooltipText>
                         <TooltipBox>Plan</TooltipBox>
                       </PlanCell>
                     ) : null}
-                    <DataCell ratingResult={ratingResult}>
-                      {displayValue}
-                    </DataCell>
                   </StyledBodyCellData>
                 );
               })}
