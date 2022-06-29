@@ -12,6 +12,7 @@ export const RatingCellBgColorMap = {
   [RatingResult.good]: Colors.green_dark,
   [RatingResult.improving]: Colors.amber_dark,
   [RatingResult.bad]: Colors.red_dark,
+  [RatingResult.noPlan]: Colors.blue,
 };
 
 export const RatingCellColorMap = {
@@ -19,16 +20,21 @@ export const RatingCellColorMap = {
   [RatingResult.good]: Colors.white,
   [RatingResult.improving]: Colors.black,
   [RatingResult.bad]: Colors.black,
+  [RatingResult.noPlan]: Colors.blue,
 };
 
 export const getRatingResult = (
   rating,
   previousMonthRating,
   isAboveAmbition,
-  isAboveGood
+  isAboveGood,
+  plan
 ) => {
   if (!rating) {
     return RatingResult.none;
+  }
+  if (plan === "") {
+    return RatingResult.noPlan;
   }
   if (isAboveGood) {
     if (isAboveAmbition) {
