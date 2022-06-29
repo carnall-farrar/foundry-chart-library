@@ -45,7 +45,8 @@
       <div id="reactBarChart"></div>
       <div id="trendLineChart"></div>
       <div id="scorecardComponent"></div>
-      <h2>Benchmark component</h2><br />
+      <h2>Benchmark component</h2>
+      <br />
       <div id="benchmarkComponent" style="width: 1400px"></div>
       <div id="loading"></div>
       <br />
@@ -186,60 +187,57 @@
       // );
       ReactDOM.render(
         React.createElement(BenchmarkComponent, {
-          headers: benchmarkV2.headers, 
+          headers: benchmarkV2.headers,
           // records: [],
           records: benchmarkV2.records,
           metricsMetadata: benchmarkV2.metricsMetadata,
           allSelected: false,
-          ragRatings: benchmarkV2.metricRagRatings
+          ragRatings: benchmarkV2.metricRagRatings,
         }),
         document.querySelector("#benchmarkComponent")
       );
 
       ReactDOM.render(
         React.createElement(LineChart, {
-          height:300,
+          height: 300,
           data: lineChart,
-          series: ['London', 'South West'],
+          series: ["London", "South West"],
           colors: {
-            'London': '#184A90',
-            'South West': '#CD4246'
+            London: "#184A90",
+            "South West": "#CD4246",
           },
-          }
-        ),
+        }),
         document.querySelector("#lineChart")
       );
       ReactDOM.render(
         React.createElement(PopUpComponent, {
-          scorecard: {
-            
-          },
+          scorecard: {},
           benchmark: {
-            height:300,
+            height: 300,
             data: lineChart,
             series: [
-      "Ambition",
-      "East of England",
-      "London",
-      "Midlands",
-      "North East and Yorkshire",
-      "North West",
-      "South East",
-      "South West"
-    ],
+              "Ambition",
+              "East of England",
+              "London",
+              "Midlands",
+              "North East and Yorkshire",
+              "North West",
+              "South East",
+              "South West",
+            ],
             colors: {
-      "East of England": "#330072",
-      "London": "#78BE20",
-      "Midlands": "#AE2573",
-      "North East and Yorkshire": "#184A90",
-      "North West": "#41B6E6",
-      "South East": "#ED8B00",
-      "South West": "#FAE100"
-    },
-    "unit": "absolute"
-          }
-          }
-        ),
+              "East of England": "#330072",
+              London: "#78BE20",
+              Midlands: "#AE2573",
+              "North East and Yorkshire": "#184A90",
+              "North West": "#41B6E6",
+              "South East": "#ED8B00",
+              "South West": "#FAE100",
+            },
+            unit: "absolute",
+          },
+          benchmarkOff: true,
+        }),
         document.querySelector("#popUpComponent")
       );
     </script>

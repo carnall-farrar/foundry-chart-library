@@ -50,7 +50,11 @@ const DateRangeContainer = window.styled.div`
   justify-self: end;
 `;
 
-export const PopUpComponent = ({ scorecard, benchmark }) => {
+export const PopUpComponent = ({
+  scorecard,
+  benchmark,
+  benchmarkOff = false,
+}) => {
   const [rawData, setRawData] = React.useState(scorecard);
   const [startDate, setStartDate] = React.useState();
   const [endDate, setEndDate] = React.useState();
@@ -104,14 +108,16 @@ export const PopUpComponent = ({ scorecard, benchmark }) => {
     }
   };
 
-  console.log("ipdata", { rawData, inputData, scorecard, benchmark });
-
   return (
     <div>
       <TopBar>
         <PopUpSelection>
           <PopUpTabs>
-            {selectedTab === 0 ? (
+            {benchmarkOff ? (
+              <SelectionItemActive onClick={handleTabClick}>
+                Trend vs Ambition
+              </SelectionItemActive>
+            ) : selectedTab === 0 ? (
               <>
                 <SelectionItemActive onClick={handleTabClick}>
                   Trend vs Ambition

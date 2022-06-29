@@ -168,16 +168,16 @@ const RatingCell = ({
   const planProcess = plan === "" ? "~" : plan;
   return (
     <>
+      <DataCell ratingResult={ratingResult}>
+        {/* {!!rating ? `${rating}${isPercentage ? "%" : ""}` : "~"} */}
+        {!!rating ? value : "~"}
+      </DataCell>
       {planProcess ? (
         <PlanCell>
           <TooltipText>{planProcess}</TooltipText>
           <TooltipBox>Plan</TooltipBox>
         </PlanCell>
       ) : null}
-      <DataCell ratingResult={ratingResult}>
-        {/* {!!rating ? `${rating}${isPercentage ? "%" : ""}` : "~"} */}
-        {!!rating ? value : "~"}
-      </DataCell>
     </>
   );
 };
