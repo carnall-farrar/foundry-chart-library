@@ -777,8 +777,8 @@ benchmarkV2 = {
       "South West": "Red",
     },
     "Follow-up Reduction": {
-      "East of England": "Red",
-      England: "Red",
+      "East of England": "Blue",
+      England: "Blue",
       London: "Red",
       Midlands: "Red",
       "North East and Yorkshire": "Red",

@@ -5,6 +5,7 @@ export const RatingResult = {
   good: "good",
   improving: "improving",
   bad: "bad",
+  noPlan: "noPlan",
 };
 
 export const RatingCellBgColorMap = {

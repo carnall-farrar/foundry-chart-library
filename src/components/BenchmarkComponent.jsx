@@ -305,9 +305,11 @@ export const BenchmarkComponent = ({
                   Red: "bad",
                   Amber: "improving",
                   Green: "good",
+                  Blue: "noPlan",
                 };
 
                 const ratingResult = ratingConversion[rag] ?? "none";
+                console.log({ ratingResult });
                 let displayValue = value;
 
                 if (
