@@ -19,6 +19,8 @@ export const TrendBarChart = ({
   height,
   cellData,
   isAboveGood,
+  planData,
+  planSelected = false,
 }) => {
   const dateFormatter = (item) => dayjs(item).format("MMM D, YYYY");
   const filteredData = data.map((i) =>
@@ -47,6 +49,15 @@ export const TrendBarChart = ({
     return null;
   }
 
+  const findPlan = (date) => {
+    const compDate = new Date(date);
+    const plan = planData.filter((p) => {
+      const planDate = new Date(p.date);
+      return compDate.toDateString() === planDate.toDateString();
+    });
+    return plan.length > 0 ? plan[0].plan : null;
+  };
+
   return (
     <BarChart width={width} height={height} data={filteredData}>
       <Tooltip
@@ -64,12 +75,15 @@ export const TrendBarChart = ({
         {data.map((entry, index) => {
           const currentValue = entry.value;
           const previousValue = index > 0 && data[index - 1].value;
-          const isGreaterThanAmbition = currentValue > ambition;
+          const comparison = planSelected ? findPlan(entry.date) : ambition;
+          const isGreaterThanAmbition = currentValue >= comparison;
+          const isBlue = comparison ?? "";
           const ratingResult = getRatingResult(
             currentValue,
             previousValue,
             isGreaterThanAmbition,
-            isAboveGood
+            isAboveGood,
+            isBlue
           );
           return <Cell fill={RatingCellBgColorMap[ratingResult]} />;
         })}

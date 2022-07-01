@@ -213,6 +213,8 @@ export const ScorecardComponent = ({
   metricColorMap,
   metricUnitMap,
   metricTooltipData,
+  plans,
+  planSelected = false,
   prog,
   showHeaders,
   spacing,
@@ -239,6 +241,8 @@ export const ScorecardComponent = ({
 
   const renderRow = (rowData, rowIndex) => {
     const values = Object.values(rowData);
+    const planData = plans[rowData["Metric"]] ?? "";
+    console.log("plans", planData, rowData["Metric"]);
     const trendValue = values.at(-1);
     const headerValue = values.at(0);
     const metricValue = values.at(1);
@@ -338,6 +342,8 @@ export const ScorecardComponent = ({
             isAboveGood={isAboveGood}
             width={130}
             height={50}
+            planSelected={planSelected}
+            planData={planData}
           />
         </StyledTd>
       </>
