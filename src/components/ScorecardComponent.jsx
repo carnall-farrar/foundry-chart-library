@@ -111,20 +111,36 @@ export const TooltipText = window.styled.div`
   background: transparent;
   color: black;
   text-align: center;
-  cursor: pointer;
+  cursor: default;
 `;
 
 export const TooltipBox = window.styled.div`
   position: absolute;
   visibility: hidden;
-  color: #184A90;
-  background-color: white;
-  width: 40px;
-  padding: 3px 3px;
-  border: thin solid #184A90;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 2px;
+  width: 2rem;
   border-radius: 5px;
-  margin-left: 10px;
-  margin-top: -40px;
+  color:  white;
+  margin-left: 45px;
+  margin-top: -18px;
+  background-color: grey;
+  border: thin solid grey;
+  cursor: default;
+  &:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 0;
+    height: 0;
+    border: 5px solid transparent;
+    border-right-color: grey;
+    border-left: 0;
+    margin-top: -5px;
+    margin-left: -5px;
+  }
 `;
 
 export const PlanCell = window.styled.div`
@@ -132,11 +148,11 @@ export const PlanCell = window.styled.div`
     alignItems: center;
     display: inline-block;
     justify-content: center;
-    cursor: pointer;
+    cursor: default;
     & ${TooltipText}:hover + ${TooltipBox} {
       visibility: visible;
       &:before {
-        border-color: #184A90;
+        border-color: #215DB0;
     }
 `;
 
@@ -157,7 +173,7 @@ const RatingCell = ({
   isAboveGood,
   isPercentage,
 }) => {
-  const isGreaterThanAmbition = rating >= ambition;
+  const isGreaterThanAmbition = rating > ambition;
   const ratingResult = getRatingResult(
     rating,
     previousMonthRating,
@@ -171,7 +187,7 @@ const RatingCell = ({
     <>
       <DataCell ratingResult={ratingResult}>
         {/* {!!rating ? `${rating}${isPercentage ? "%" : ""}` : "~"} */}
-        {!!rating ? value : "~"}
+        {rating.length > 0 ? value : "~"}
       </DataCell>
       {planProcess ? (
         <PlanCell>
@@ -242,7 +258,6 @@ export const ScorecardComponent = ({
   const renderRow = (rowData, rowIndex) => {
     const values = Object.values(rowData);
     const planData = plans[rowData["Metric"]] ?? "";
-    console.log("plans", planData, rowData["Metric"]);
     const trendValue = values.at(-1);
     const headerValue = values.at(0);
     const metricValue = values.at(1);
@@ -305,8 +320,8 @@ export const ScorecardComponent = ({
               <RatingCell
                 rating={
                   cellData.actuals
-                    ? Number(cellData.actuals.replace("%", ""))
-                    : Number(cellData.replace("%", ""))
+                    ? cellData.actuals.replace("%", "")
+                    : cellData.replace("%", "")
                 }
                 plan={cellData.plan ?? undefined}
                 previousMonthRating={
