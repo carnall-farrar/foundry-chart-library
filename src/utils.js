@@ -31,7 +31,8 @@ export const getRatingResult = (
   isAboveGood,
   plan
 ) => {
-  if (!rating) {
+  const newRating = rating === "" ? null : Number(rating);
+  if (newRating === null) {
     return RatingResult.none;
   }
   if (plan === "") {
