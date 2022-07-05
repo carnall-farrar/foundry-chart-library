@@ -181,13 +181,12 @@ const RatingCell = ({
     isAboveGood,
     plan
   );
-  let value = isPercentage ? `${rating}%` : `${rating.toLocaleString()}`;
+  const value = isPercentage ? `${rating}%` : `${rating.toLocaleString()}`;
   const planProcess = plan === "" ? "~" : plan;
   return (
     <>
       <DataCell ratingResult={ratingResult}>
-        {/* {!!rating ? `${rating}${isPercentage ? "%" : ""}` : "~"} */}
-        {rating.length > 0 ? value : "~"}
+        {rating.length === 0 ? "~" : value}
       </DataCell>
       {planProcess ? (
         <PlanCell>
@@ -319,7 +318,7 @@ export const ScorecardComponent = ({
             {colIndex >= ratingStartIndex && (
               <RatingCell
                 rating={
-                  cellData.actuals
+                  typeof cellData === "object"
                     ? cellData.actuals.replace("%", "")
                     : cellData.replace("%", "")
                 }
@@ -330,16 +329,10 @@ export const ScorecardComponent = ({
                     ? Number(rowEntries[colIndex - 1][1].replace("%", "")) // Finn add conditional logic here
                     : colIndex > ratingStartIndex &&
                       typeof rowEntries[colIndex - 1][1] === "object"
-                    ? Number(
-                        rowEntries[colIndex - 1][1].actuals.replace("%", "")
-                      )
+                    ? Number("1")
                     : undefined
                 }
-                ambition={
-                  cellData.plan
-                    ? Number(cellData.plan.replace("%", ""))
-                    : ambitionValue
-                }
+                ambition={cellData.plan ? Number("") : ambitionValue}
                 isAboveGood={isAboveGood}
                 isPercentage={metricUnitMap[metric] === "percentage"}
               />
