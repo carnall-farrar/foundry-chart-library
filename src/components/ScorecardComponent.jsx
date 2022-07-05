@@ -85,8 +85,6 @@ const MetricTooltip = window.styled.div`
     z-index: 1;
 `;
 
-// color:  ${({ ratingResult }) => RatingCellColorMap[ratingResult]};
-
 export const DataCell = window.styled.div`
     margin: auto;
     background-color: ${({ ratingResult }) =>
@@ -115,8 +113,10 @@ export const TooltipText = window.styled.div`
 `;
 
 export const TooltipBox = window.styled.div`
-  position: absolute;
+  position: relative;
   visibility: hidden;
+  left: 9px;
+  pointer-events: none;
   align-items: center;
   justify-content: center;
   padding: 2px 2px;
@@ -146,6 +146,7 @@ export const TooltipBox = window.styled.div`
 export const PlanCell = window.styled.div`
     color: grey;
     alignItems: center;
+    width: 55%;
     display: inline-block;
     justify-content: center;
     cursor: default;
