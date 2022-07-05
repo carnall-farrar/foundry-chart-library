@@ -103,7 +103,6 @@ export const DataCell = window.styled.div`
     cursor: pointer;
     &:hover {
       box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-	    filter: brightness(120%);
       filter: brightness(120%);
   };
 `;
@@ -172,7 +171,6 @@ const RatingCell = ({
   previousMonthRating,
   ambition,
   isAboveGood,
-  isPercentage,
   isPercentage,
 }) => {
   const isGreaterThanAmbition = rating > ambition;
