@@ -50,27 +50,24 @@ scoreCard = {
     },
   },
   metricColorMap: {
-    "Value Weighted Activity": "aboveGood",
-    "IS Activity": "aboveGood",
+    "62+ days pathways": "belowGood",
+    "Follow-up Reduction": "belowGood",
+    "Test activity": "aboveGood",
+    "Waiting <6 weeks tests/procedures": "aboveGood",
+    "Value-Weighted Activity": "aboveGood",
+    "104ww+ RTT": "belowGood",
+    "78ww+ RTT": "belowGood",
     "Completed pathways": "aboveGood",
-    "78ww": "belowGood",
-    "104ww": "belowGood",
-    "Outpatient Reduction": "aboveGood",
-    "Wait to First Outpatient": "belowGood",
-    "Cancer 62 Days": "belowGood",
-    "Diagnostic Test Activity": "aboveGood",
   },
   metricUnitMap: {
-    "Value Weighted Activity": "percentage",
-    "IS Activity": "percentage",
+    "104ww+ RTT": "absolute",
+    "78ww+ RTT": "absolute",
+    "62+ days pathways": "absolute",
+    "Follow-up Reduction": "percentage",
+    "Test activity": "percentage",
+    "Waiting <6 weeks tests/procedures": "percentage",
+    "Value-Weighted Activity": "percentage",
     "Completed pathways": "percentage",
-    "52ww": "absolute",
-    "78ww": "absolute",
-    "104ww": "absolute",
-    "Outpatient Reduction": "percentage",
-    "Wait to First Outpatient": "percentage",
-    "Cancer 62 Days": "absolute",
-    "Diagnostic Test Activity": "percentage",
   },
   inputData: [
     {
@@ -81,18 +78,54 @@ scoreCard = {
         value: "104%",
         date: "(Mar 23)",
       },
-      "Mar 22": "89%",
-      "Apr 22": "91%",
-      "May 22": "96%",
-      "Jun 22": "96%",
-      "Jul 22": "",
-      "Aug 22": "",
-      "Sep 22": "",
-      "Oct 22": "",
-      "Nov 22": "",
-      "Dec 22": "",
-      "Jan 23": "",
-      "Feb 23": "",
+      "Mar 22": {
+        actuals: "89%",
+        plan: "",
+      },
+      "Apr 22": {
+        actuals: "91%",
+        plan: "104.7%",
+      },
+      "May 22": {
+        actuals: "96%",
+        plan: "103.3%",
+      },
+      "Jun 22": {
+        actuals: "96%",
+        plan: "105.6%",
+      },
+      "Jul 22": {
+        actuals: "",
+        plan: "",
+      },
+      "Aug 22": {
+        actuals: "",
+        plan: "",
+      },
+      "Sep 22": {
+        actuals: "",
+        plan: "",
+      },
+      "Oct 22": {
+        actuals: "",
+        plan: "",
+      },
+      "Nov 22": {
+        actuals: "",
+        plan: "",
+      },
+      "Dec 22": {
+        actuals: "",
+        plan: "",
+      },
+      "Jan 23": {
+        actuals: "",
+        plan: "",
+      },
+      "Feb 23": {
+        actuals: "",
+        plan: "",
+      },
       "Latest 6 period chart": [
         {
           week: "22 May 22",
@@ -123,28 +156,60 @@ scoreCard = {
     {
       "Performance Area": "Activity",
       Metric: "Completed pathways",
-      "Data last updated": "19-06-2022",
+      "Data last updated": "26-06-2022",
       "22/23 Ambition": {
         value: "110%",
         date: "(Mar 23)",
       },
-      "Mar 22": "95%",
-      "Apr 22": "96%",
-      "May 22": "100%",
-      "Jun 22": "98%",
-      "Jul 22": "",
-      "Aug 22": "",
-      "Sep 22": "",
-      "Oct 22": "",
-      "Nov 22": "",
-      "Dec 22": "",
-      "Jan 23": "",
-      "Feb 23": "",
+      "Mar 22": {
+        actuals: "95%",
+        plan: "",
+      },
+      "Apr 22": {
+        actuals: "96%",
+        plan: "107.6%",
+      },
+      "May 22": {
+        actuals: "100%",
+        plan: "105.8%",
+      },
+      "Jun 22": {
+        actuals: "95%",
+        plan: "107.7%",
+      },
+      "Jul 22": {
+        actuals: "",
+        plan: "",
+      },
+      "Aug 22": {
+        actuals: "",
+        plan: "",
+      },
+      "Sep 22": {
+        actuals: "",
+        plan: "",
+      },
+      "Oct 22": {
+        actuals: "",
+        plan: "",
+      },
+      "Nov 22": {
+        actuals: "",
+        plan: "",
+      },
+      "Dec 22": {
+        actuals: "",
+        plan: "",
+      },
+      "Jan 23": {
+        actuals: "",
+        plan: "",
+      },
+      "Feb 23": {
+        actuals: "",
+        plan: "",
+      },
       "Latest 6 period chart": [
-        {
-          week: "15 May 22",
-          value: 94,
-        },
         {
           week: "22 May 22",
           value: 97,
@@ -165,33 +230,69 @@ scoreCard = {
           week: "19 Jun 22",
           value: 98,
         },
+        {
+          week: "26 Jun 22",
+          value: 95,
+        },
       ],
     },
     {
       "Performance Area": "Long Waiters",
       Metric: "78ww+ RTT",
-      "Data last updated": "19-06-2022",
+      "Data last updated": "26-06-2022",
       "22/23 Ambition": {
         value: "0",
         date: "(Mar 23)",
       },
-      "Mar 22": "62754",
-      "Apr 22": "62371",
-      "May 22": "59612",
-      "Jun 22": "59070",
-      "Jul 22": "0",
-      "Aug 22": "",
-      "Sep 22": "",
-      "Oct 22": "",
-      "Nov 22": "",
-      "Dec 22": "",
-      "Jan 23": "",
-      "Feb 23": "",
+      "Mar 22": {
+        actuals: "62754",
+        plan: "",
+      },
+      "Apr 22": {
+        actuals: "62371",
+        plan: "62980",
+      },
+      "May 22": {
+        actuals: "59612",
+        plan: "60048",
+      },
+      "Jun 22": {
+        actuals: "56416",
+        plan: "56069",
+      },
+      "Jul 22": {
+        actuals: "",
+        plan: "",
+      },
+      "Aug 22": {
+        actuals: "",
+        plan: "",
+      },
+      "Sep 22": {
+        actuals: "",
+        plan: "",
+      },
+      "Oct 22": {
+        actuals: "",
+        plan: "",
+      },
+      "Nov 22": {
+        actuals: "",
+        plan: "",
+      },
+      "Dec 22": {
+        actuals: "",
+        plan: "",
+      },
+      "Jan 23": {
+        actuals: "",
+        plan: "",
+      },
+      "Feb 23": {
+        actuals: "",
+        plan: "",
+      },
       "Latest 6 period chart": [
-        {
-          week: "15 May 22",
-          value: 61636,
-        },
         {
           week: "22 May 22",
           value: 60621,
@@ -212,33 +313,69 @@ scoreCard = {
           week: "19 Jun 22",
           value: 59070,
         },
+        {
+          week: "26 Jun 22",
+          value: 56416,
+        },
       ],
     },
     {
       "Performance Area": "Long Waiters",
       Metric: "104ww+ RTT",
-      "Data last updated": "19-06-2022",
+      "Data last updated": "26-06-2022",
       "22/23 Ambition": {
         value: "0",
         date: "(Jun 22)",
       },
-      "Mar 22": "16796",
-      "Apr 22": "12717",
-      "May 22": "8021",
-      "Jun 22": "5652",
-      "Jul 22": "",
-      "Aug 22": "",
-      "Sep 22": "",
-      "Oct 22": "",
-      "Nov 22": "",
-      "Dec 22": "",
-      "Jan 23": "",
-      "Feb 23": "",
+      "Mar 22": {
+        actuals: "16796",
+        plan: "",
+      },
+      "Apr 22": {
+        actuals: "12717",
+        plan: "12554",
+      },
+      "May 22": {
+        actuals: "8021",
+        plan: "7517",
+      },
+      "Jun 22": {
+        actuals: "4522",
+        plan: "1875",
+      },
+      "Jul 22": {
+        actuals: "",
+        plan: "",
+      },
+      "Aug 22": {
+        actuals: "",
+        plan: "",
+      },
+      "Sep 22": {
+        actuals: "",
+        plan: "",
+      },
+      "Oct 22": {
+        actuals: "",
+        plan: "",
+      },
+      "Nov 22": {
+        actuals: "",
+        plan: "",
+      },
+      "Dec 22": {
+        actuals: "",
+        plan: "",
+      },
+      "Jan 23": {
+        actuals: "",
+        plan: "",
+      },
+      "Feb 23": {
+        actuals: "",
+        plan: "",
+      },
       "Latest 6 period chart": [
-        {
-          week: "15 May 22",
-          value: 10247,
-        },
         {
           week: "22 May 22",
           value: 9146,
@@ -259,6 +396,10 @@ scoreCard = {
           week: "19 Jun 22",
           value: 5652,
         },
+        {
+          week: "26 Jun 22",
+          value: 4522,
+        },
       ],
     },
     {
@@ -269,34 +410,66 @@ scoreCard = {
         value: "75%",
         date: "(Mar 23)",
       },
-      "Mar 22": { actuals: "", plan: "100%" },
-      "Apr 22": "95%",
-      "May 22": "85%",
-      "Jun 22": "",
-      "Jul 22": "",
-      "Aug 22": "",
-      "Sep 22": "",
-      "Oct 22": "",
-      "Nov 22": "",
-      "Dec 22": "",
-      "Jan 23": "",
-      "Feb 23": "",
+      "Mar 22": {
+        actuals: "97%",
+        plan: "",
+      },
+      "Apr 22": {
+        actuals: "95%",
+        plan: "",
+      },
+      "May 22": {
+        actuals: "106%",
+        plan: "",
+      },
+      "Jun 22": {
+        actuals: "91%",
+        plan: "",
+      },
+      "Jul 22": {
+        actuals: "",
+        plan: "",
+      },
+      "Aug 22": {
+        actuals: "",
+        plan: "",
+      },
+      "Sep 22": {
+        actuals: "",
+        plan: "",
+      },
+      "Oct 22": {
+        actuals: "",
+        plan: "",
+      },
+      "Nov 22": {
+        actuals: "",
+        plan: "",
+      },
+      "Dec 22": {
+        actuals: "",
+        plan: "",
+      },
+      "Jan 23": {
+        actuals: "",
+        plan: "",
+      },
+      "Feb 23": {
+        actuals: "",
+        plan: "",
+      },
       "Latest 6 period chart": [
-        {
-          week: "15 May 22",
-          value: 98,
-        },
         {
           week: "22 May 22",
           value: 97,
         },
         {
           week: "29 May 22",
-          value: 85,
+          value: 106,
         },
         {
           week: "05 Jun 22",
-          value: 163,
+          value: 97,
         },
         {
           week: "12 Jun 22",
@@ -304,6 +477,10 @@ scoreCard = {
         },
         {
           week: "19 Jun 22",
+          value: 97,
+        },
+        {
+          week: "26 Jun 22",
           value: 91,
         },
       ],
@@ -316,18 +493,54 @@ scoreCard = {
         value: "14,266",
         date: "(Mar 23)",
       },
-      "Mar 22": "21285",
-      "Apr 22": "25685",
-      "May 22": "26948",
-      "Jun 22": "28217",
-      "Jul 22": "",
-      "Aug 22": "",
-      "Sep 22": "",
-      "Oct 22": "",
-      "Nov 22": "",
-      "Dec 22": "",
-      "Jan 23": "",
-      "Feb 23": "",
+      "Mar 22": {
+        actuals: "21285",
+        plan: "",
+      },
+      "Apr 22": {
+        actuals: "25685",
+        plan: "23722",
+      },
+      "May 22": {
+        actuals: "26948",
+        plan: "22748",
+      },
+      "Jun 22": {
+        actuals: "28217",
+        plan: "21651",
+      },
+      "Jul 22": {
+        actuals: "",
+        plan: "",
+      },
+      "Aug 22": {
+        actuals: "",
+        plan: "",
+      },
+      "Sep 22": {
+        actuals: "",
+        plan: "",
+      },
+      "Oct 22": {
+        actuals: "",
+        plan: "",
+      },
+      "Nov 22": {
+        actuals: "",
+        plan: "",
+      },
+      "Dec 22": {
+        actuals: "",
+        plan: "",
+      },
+      "Jan 23": {
+        actuals: "",
+        plan: "",
+      },
+      "Feb 23": {
+        actuals: "",
+        plan: "",
+      },
       "Latest 6 period chart": [
         {
           week: "15 May 22",
@@ -358,28 +571,60 @@ scoreCard = {
     {
       "Performance Area": "Diagnostics",
       Metric: "Test activity",
-      "Data last updated": "19-06-2022",
+      "Data last updated": "26-06-2022",
       "22/23 Ambition": {
         value: "120%",
         date: "(Mar 23)",
       },
-      "Mar 22": "94%",
-      "Apr 22": "97%",
-      "May 22": "89%",
-      "Jun 22": "88%",
-      "Jul 22": "",
-      "Aug 22": "",
-      "Sep 22": "",
-      "Oct 22": "",
-      "Nov 22": "",
-      "Dec 22": "",
-      "Jan 23": "",
-      "Feb 23": "",
+      "Mar 22": {
+        actuals: "94%",
+        plan: "",
+      },
+      "Apr 22": {
+        actuals: "92%",
+        plan: "",
+      },
+      "May 22": {
+        actuals: "89%",
+        plan: "",
+      },
+      "Jun 22": {
+        actuals: "88%",
+        plan: "",
+      },
+      "Jul 22": {
+        actuals: "",
+        plan: "",
+      },
+      "Aug 22": {
+        actuals: "",
+        plan: "",
+      },
+      "Sep 22": {
+        actuals: "",
+        plan: "",
+      },
+      "Oct 22": {
+        actuals: "",
+        plan: "",
+      },
+      "Nov 22": {
+        actuals: "",
+        plan: "",
+      },
+      "Dec 22": {
+        actuals: "",
+        plan: "",
+      },
+      "Jan 23": {
+        actuals: "",
+        plan: "",
+      },
+      "Feb 23": {
+        actuals: "",
+        plan: "",
+      },
       "Latest 6 period chart": [
-        {
-          week: "15 May 22",
-          value: 90,
-        },
         {
           week: "22 May 22",
           value: 89,
@@ -390,7 +635,7 @@ scoreCard = {
         },
         {
           week: "05 Jun 22",
-          value: 118,
+          value: 117,
         },
         {
           week: "12 Jun 22",
@@ -398,6 +643,10 @@ scoreCard = {
         },
         {
           week: "19 Jun 22",
+          value: 90,
+        },
+        {
+          week: "26 Jun 22",
           value: 88,
         },
       ],
@@ -410,18 +659,54 @@ scoreCard = {
         value: "95%",
         date: "(Mar 25)",
       },
-      "Mar 22": "75%",
-      "Apr 22": "68%",
-      "May 22": "70%",
-      "Jun 22": "70%",
-      "Jul 22": "",
-      "Aug 22": "",
-      "Sep 22": "",
-      "Oct 22": "",
-      "Nov 22": "",
-      "Dec 22": "",
-      "Jan 23": "",
-      "Feb 23": "",
+      "Mar 22": {
+        actuals: "75%",
+        plan: "",
+      },
+      "Apr 22": {
+        actuals: "68%",
+        plan: "",
+      },
+      "May 22": {
+        actuals: "70%",
+        plan: "",
+      },
+      "Jun 22": {
+        actuals: "70%",
+        plan: "",
+      },
+      "Jul 22": {
+        actuals: "",
+        plan: "",
+      },
+      "Aug 22": {
+        actuals: "",
+        plan: "",
+      },
+      "Sep 22": {
+        actuals: "",
+        plan: "",
+      },
+      "Oct 22": {
+        actuals: "",
+        plan: "",
+      },
+      "Nov 22": {
+        actuals: "",
+        plan: "",
+      },
+      "Dec 22": {
+        actuals: "",
+        plan: "",
+      },
+      "Jan 23": {
+        actuals: "",
+        plan: "",
+      },
+      "Feb 23": {
+        actuals: "",
+        plan: "",
+      },
       "Latest 6 period chart": [
         {
           week: "22 May 22",

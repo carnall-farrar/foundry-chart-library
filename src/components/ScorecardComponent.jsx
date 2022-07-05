@@ -174,13 +174,16 @@ const RatingCell = ({
   isPercentage,
 }) => {
   const isGreaterThanAmbition = rating > ambition;
+  const formatPrevious =
+    isPercentage && plan ? previousMonthRating * 100 : previousMonthRating;
   const ratingResult = getRatingResult(
     rating,
-    previousMonthRating,
+    formatPrevious,
     isGreaterThanAmbition,
     isAboveGood,
     plan
   );
+  console.log({ ratingResult, plan, isAboveGood, previousMonthRating });
   const value = isPercentage ? `${rating}%` : `${rating.toLocaleString()}`;
   const planProcess = plan === "" ? "~" : plan;
   return (
@@ -322,7 +325,7 @@ export const ScorecardComponent = ({
                     ? cellData.actuals.replace("%", "")
                     : cellData.replace("%", "")
                 }
-                plan={cellData.plan ?? undefined}
+                plan={cellData.plan.replace("%", "") ?? undefined}
                 previousMonthRating={
                   colIndex > ratingStartIndex &&
                   typeof rowEntries[colIndex - 1][1] === "string"
