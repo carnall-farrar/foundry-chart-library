@@ -55,7 +55,9 @@ export const TrendBarChart = ({
       const planDate = new Date(p.date);
       return compDate.toDateString() === planDate.toDateString();
     });
-    return plan.length > 0 ? plan[0].plan : null;
+
+    const result = plan.length > 0 ? plan[0].plan : null;
+    return isPercentage && result !== null ? result * 100 : result;
   };
 
   return (

@@ -174,11 +174,10 @@ const RatingCell = ({
   isPercentage,
 }) => {
   const isGreaterThanAmbition = rating > ambition;
-  const formatPrevious =
-    isPercentage && plan ? previousMonthRating * 100 : previousMonthRating;
+
   const ratingResult = getRatingResult(
     rating,
-    formatPrevious,
+    previousMonthRating,
     isGreaterThanAmbition,
     isAboveGood,
     plan
@@ -341,10 +340,16 @@ export const ScorecardComponent = ({
                     ? Number(rowEntries[colIndex - 1][1].replace("%", "")) // Finn add conditional logic here
                     : colIndex > ratingStartIndex &&
                       typeof rowEntries[colIndex - 1][1] === "object"
-                    ? Number("1")
+                    ? Number(
+                        rowEntries[colIndex - 1][1].actuals.replace("%", "")
+                      )
                     : undefined
                 }
-                ambition={cellData.plan ? Number("") : ambitionValue}
+                ambition={
+                  cellData.plan
+                    ? Number(cellData.plan.replace("%", ""))
+                    : ambitionValue
+                }
                 isAboveGood={isAboveGood}
                 isPercentage={metricUnitMap[metric] === "percentage"}
               />
