@@ -104,6 +104,7 @@ export const DataCell = window.styled.div`
     &:hover {
       box-shadow: 0 5px 15px rgba(0,0,0,0.3);
 	    filter: brightness(120%);
+      filter: brightness(120%);
   };
 `;
 
@@ -172,6 +173,7 @@ const RatingCell = ({
   ambition,
   isAboveGood,
   isPercentage,
+  isPercentage,
 }) => {
   const isGreaterThanAmbition = rating > ambition;
   const ratingResult = getRatingResult(
@@ -181,8 +183,18 @@ const RatingCell = ({
     isAboveGood,
     plan
   );
-  const value = isPercentage ? `${rating}%` : `${rating.toLocaleString()}`;
-  const planProcess = plan === "" ? "~" : plan;
+
+  const formatData = (input) => {
+    if (isPercentage) {
+      return `${input}%`;
+    } else {
+      return `${Number(input).toLocaleString()}`;
+    }
+  };
+
+  const value = formatData(rating);
+  const planProcess =
+    plan === "" || plan === undefined ? "~" : formatData(plan);
   return (
     <>
       <DataCell ratingResult={ratingResult}>
