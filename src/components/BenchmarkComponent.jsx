@@ -307,21 +307,17 @@ export const BenchmarkComponent = ({
                   Green: "good",
                   Blue: "noPlan",
                 };
-
                 const ratingResult = ratingConversion[rag] ?? "none";
-                console.log({ ratingResult });
-                let displayValue = value;
 
-                if (
-                  typeof value === "number" &&
-                  metaData.unit === "percentage"
-                ) {
-                  displayValue = `${value}%`;
-                }
-
-                if (value === null) {
-                  displayValue = "~";
-                }
+                const getDisplayValue = (val) => {
+                  if (metaData.unit === "percentage") {
+                    return `${val}%`;
+                  } else if (val === null) {
+                    return "~";
+                  } else {
+                    return Number(val).toLocaleString();
+                  }
+                };
 
                 return (
                   <StyledBodyCellData
@@ -329,11 +325,11 @@ export const BenchmarkComponent = ({
                     key={`${record.region}${index}`}
                   >
                     <DataCell ratingResult={ratingResult}>
-                      {displayValue}
+                      {getDisplayValue(value)}
                     </DataCell>
                     {plan ? (
                       <PlanCell>
-                        <TooltipText>{plan}</TooltipText>
+                        <TooltipText>{getDisplayValue(plan)}</TooltipText>
                         <TooltipBox>Plan</TooltipBox>
                       </PlanCell>
                     ) : null}
