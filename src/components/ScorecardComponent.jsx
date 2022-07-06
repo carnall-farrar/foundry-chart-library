@@ -185,6 +185,9 @@ const RatingCell = ({
   );
 
   const formatData = (input) => {
+    if (input === undefined) {
+      return undefined;
+    }
     if (isPercentage) {
       return `${input}%`;
     } else {
@@ -193,8 +196,7 @@ const RatingCell = ({
   };
 
   const value = formatData(rating);
-  const planProcess =
-    plan === "" || plan === undefined ? "~" : formatData(plan);
+  const planProcess = plan === "" ? "~" : formatData(plan);
   return (
     <>
       <DataCell ratingResult={ratingResult}>
@@ -334,7 +336,11 @@ export const ScorecardComponent = ({
                     ? cellData.actuals.replace("%", "")
                     : cellData.replace("%", "")
                 }
-                plan={cellData.plan.replace("%", "") ?? undefined}
+                plan={
+                  cellData.plan || cellData.plan === ""
+                    ? cellData.plan.replace("%", "")
+                    : undefined
+                }
                 previousMonthRating={
                   colIndex > ratingStartIndex &&
                   typeof rowEntries[colIndex - 1][1] === "string"
