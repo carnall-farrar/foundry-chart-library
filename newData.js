@@ -1283,10 +1283,10 @@ benchmarkV2 = {
     {
       region: "North West",
       data: {
-        "62+ days pathways": 4160,
-        "104ww+ RTT": 788,
+        "62+ days pathways": null,
+        "104ww+ RTT": null,
         "78ww+ RTT": 10528,
-        "Completed pathways": 96,
+        "Completed pathways": null,
         "Follow-up Reduction": 98,
         "Test activity": 91,
         "Value-Weighted Activity": 94,

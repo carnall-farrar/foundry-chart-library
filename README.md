@@ -20,3 +20,9 @@ The repo uses webpack to bundle the javascript components into a single minified
 ## React components
 
 https://carnall-farrar.github.io/foundry-chart-library/
+
+## Contact
+
+This library was first developed by Carnall Farrar.
+
+If you have any questions about the repo please get in touch with Will Browne at will.browne@carnallfarrar.com

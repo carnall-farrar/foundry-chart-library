@@ -113,7 +113,8 @@ export const TooltipText = window.styled.div`
 `;
 
 export const TooltipBox = window.styled.div`
-  position: relative;
+  position: absolute;
+  overflow:visible
   visibility: hidden;
   left: 9px;
   pointer-events: none;
@@ -144,6 +145,10 @@ export const TooltipBox = window.styled.div`
 `;
 
 export const PlanCell = window.styled.div`
+    background: transparent;
+    color: black;
+    text-align: center;
+    cursor: default;
     color: grey;
     alignItems: center;
     width: 55%;
@@ -202,12 +207,7 @@ const RatingCell = ({
       <DataCell ratingResult={ratingResult}>
         {rating.length === 0 ? "~" : value}
       </DataCell>
-      {planProcess ? (
-        <PlanCell>
-          <TooltipText>{planProcess}</TooltipText>
-          <TooltipBox>Plan</TooltipBox>
-        </PlanCell>
-      ) : null}
+      {planProcess ? <PlanCell>{planProcess}</PlanCell> : null}
     </>
   );
 };

@@ -310,10 +310,11 @@ export const BenchmarkComponent = ({
                 const ratingResult = ratingConversion[rag] ?? "none";
 
                 const getDisplayValue = (val) => {
+                  if (val === null || val === "~") {
+                    return "~";
+                  }
                   if (metaData.unit === "percentage") {
                     return `${val}%`;
-                  } else if (val === null) {
-                    return "~";
                   } else {
                     return Number(val).toLocaleString();
                   }
@@ -327,12 +328,7 @@ export const BenchmarkComponent = ({
                     <DataCell ratingResult={ratingResult}>
                       {getDisplayValue(value)}
                     </DataCell>
-                    {plan ? (
-                      <PlanCell>
-                        <TooltipText>{getDisplayValue(plan)}</TooltipText>
-                        <TooltipBox>Plan</TooltipBox>
-                      </PlanCell>
-                    ) : null}
+                    {plan ? <PlanCell>{getDisplayValue(plan)}</PlanCell> : null}
                   </StyledBodyCellData>
                 );
               })}
